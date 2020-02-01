@@ -1,0 +1,77 @@
+@import 'styles/colors';
+@import 'styles/mixins';
+
+$imageWidth: .33;
+
+.root {
+  position: relative;
+  display: flex;
+  background-color: $cardBgColor;
+  height: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 15px;
+  box-shadow: inset 0 0 16px 2px rgba(6, 6, 6, 0.7);
+  color: whitesmoke;
+  .image {
+    width: percentage($imageWidth);
+    background-color: #8c8c8c;
+    border-radius: 5px;
+    // TODO: make global mixin
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 50%;
+      height: 50%;
+      color: #232323;
+    }
+  }
+  .content {
+    flex: 1;
+    position: relative;
+    .wrapper {
+      & > * {
+        box-sizing: border-box;
+      }
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      padding-left: 15px;
+      .title {
+        flex: 1;
+        font-weight: normal;
+        text-align: center;
+        vertical-align: center;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .overviewWrap {
+        flex: 2.7;
+        position: relative;
+        overflow: hidden;
+        .overview {
+          font-size: .85em;
+          margin: 0;
+          @include multiLineYou(5);
+        }
+      }
+      .info {
+        flex: 1.3;
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+    }
+  }
+}

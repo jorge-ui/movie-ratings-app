@@ -9,6 +9,20 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="movie-ratings-app" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="Sass File" />
+        <option value="SCSS File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
@@ -21,21 +35,56 @@
     </option>
   </component>
   <component name="ProjectId" id="1WpDPUU1g1YxFFCQ4SAdf9y8pfy" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript JSX" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/redux/movies" />
+    <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Program Files\nodejs\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="ts.external.directory.path" value="D:\Development\JavaScript\WebStorm\movie-ratings-app\node_modules\typescript\lib" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux\movies" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\util" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types\AppActions.ts" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchError.ts" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchData.ts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\styles" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="node -v" />
+    </option>
   </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
@@ -51,6 +100,10 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Debug Application" />
+      <item itemvalue="npm.npm start" />
+    </list>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -70,6 +123,7 @@
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="" />
+      <changelist id="de75be24-7b63-4021-ab6e-a8431e90edcf" name="Staged" comment="" />
       <created>1579837618480</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -83,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579841945871</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Initial Commit">
+      <created>1579842524025</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1579842524025</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,18 +165,29 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="LOCAL_CHANGES_DETAILS_PREVIEW_SHOWN" value="false" />
     <MESSAGE value="Initial Commit" />
     <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2281" y="92" key="#Inspections" timestamp="1580248170878">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2281" y="92" key="#Inspections/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580248170878" />
+    <state x="1990" y="39" width="1416" height="779" key="#Live_Templates" timestamp="1580436549902">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="1990" y="39" width="1416" height="779" key="#Live_Templates/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580436549902" />
     <state x="2281" y="92" key="#Notifications" timestamp="1579841433339">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -123,22 +195,58 @@
     <state x="2311" y="0" key="CommitChangelistDialog2" timestamp="1579842477506">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2311" y="0" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579842477506" />
-    <state x="2013" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1579842516023">
+    <state x="2137" y="32" width="1111" height="824" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580540680428" />
+    <state x="2538" y="340" key="VCS.ChangelistChooser" timestamp="1580541032075">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2013" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579842516023" />
-    <state x="2197" y="76" key="SettingsEditor" timestamp="1579841799011">
+    <state x="2538" y="340" key="VCS.ChangelistChooser/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580541032075" />
+    <state x="2519" y="303" key="VCS.EditChangelistDialog" timestamp="1579896356809">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2197" y="76" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579841799011" />
-    <state x="2281" y="148" key="Vcs.Push.Dialog.v2" timestamp="1579842066720">
+    <state x="2519" y="303" key="VCS.EditChangelistDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896356809" />
+    <state x="2281" y="148" key="Vcs.Push.Dialog.v2" timestamp="1579842547901">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2281" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579842066720" />
-    <state x="2497" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579842145212">
+    <state x="2281" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579842547901" />
+    <state x="2013" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1579896165740">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2497" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579842145212" />
+    <state x="2013" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896165740" />
+    <state x="2497" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579842572716">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2497" y="345" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579842572716" />
+    <state x="188" y="78" width="1178" height="628" maximized="true" key="dock-window-1" timestamp="1580102632081">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="188" y="78" width="1178" height="628" maximized="true" key="dock-window-1/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580102632081" />
+    <state x="157" y="126" width="1178" height="607" key="dock-window-2" timestamp="1580236892794">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="157" y="126" width="1178" height="607" key="dock-window-2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580236892794" />
+    <state x="2358" y="18" width="631" height="831" key="find.popup" timestamp="1580167532934">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2358" y="18" width="631" height="831" key="find.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580167532934" />
+    <state x="2448" y="329" key="git4idea.ui.GitStashDialog" timestamp="1579896257750">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2448" y="329" key="git4idea.ui.GitStashDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896257750" />
+    <state x="2405" y="242" key="jetbrains.nodejs.interpreters-dialog" timestamp="1580151019367">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2405" y="242" key="jetbrains.nodejs.interpreters-dialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580151019367" />
+    <state x="2345" y="197" width="672" height="677" key="run.anything.popup" timestamp="1580537547587">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2345" y="197" width="672" height="677" key="run.anything.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580537547587" />
+    <state x="2280" y="92" key="scopes" timestamp="1580152134361">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2280" y="92" key="scopes/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580152134361" />
+    <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1580540336830">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580540336830" />
   </component>
 </project>

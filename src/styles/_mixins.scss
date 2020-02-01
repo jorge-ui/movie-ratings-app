@@ -1,0 +1,8 @@
+@mixin multiLineYou($lines: 4) {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
