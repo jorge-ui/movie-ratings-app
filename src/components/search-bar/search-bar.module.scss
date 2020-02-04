@@ -1,8 +1,21 @@
+@import 'styles/colors';
+
 .root {
-  border: 1px solid green;
- .grid-item {
-   max-height: 180px;
-   border: 1px solid lightblue;
-   box-shadow: 0 0 10px whitesmoke;
+  margin: 40px 30vw;
+  color: $textColor;
+  box-sizing: border-box;
+  border-radius: 6px;
+  overflow: hidden;
+  .title {
+    font-weight: normal;
+    font-size: 1.3rem;
+    margin: 0;
+  }
+  .bar {
+    background-color: $cardBgColor;
+    label, input {
+      color: lightslategrey;
+      margin-left: 10px;
+    }
  }
 }

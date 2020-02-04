@@ -6,3 +6,9 @@
   text-overflow: ellipsis;
   white-space: normal;
 }
+
+@mixin flexCentered() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

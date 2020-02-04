@@ -1,7 +1,6 @@
 import MoviesSearchData from "../../interfaces/app-types/MoviesSearchData";
 import MoviesSearchError from "../../interfaces/app-types/MoviesSearchError";
 import {MovieActionTypes, MoviesActions} from "../../interfaces/action-types/MoviesActions";
-import SearchResultData from "../../interfaces/SearchResultData";
 import {Dispatch} from "redux";
 import {wait} from "../../util/utilityFunctions";
 
@@ -34,7 +33,7 @@ export const fetchMoviesAsync = (searchTerm:string) => async (dispatch: Dispatch
             return dispatch(fetchMoviesFailure(error)); // Failure
         }
         else {
-            let data: SearchResultData = await res.json();
+            let data: MoviesSearchData = await res.json();
             return dispatch(fetchMoviesSuccess(data));// Success
         }
     } catch (error) {

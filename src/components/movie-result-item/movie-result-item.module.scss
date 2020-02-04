@@ -13,27 +13,31 @@ $imageWidth: .33;
   border-radius: 15px;
   box-shadow: inset 0 0 16px 2px rgba(6, 6, 6, 0.7);
   color: whitesmoke;
-  .image {
+  .imageWrapper {
     width: percentage($imageWidth);
-    background-color: #8c8c8c;
-    border-radius: 5px;
-    // TODO: make global mixin
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    svg {
-      width: 50%;
-      height: 50%;
-      color: #232323;
+    .image {
+      width: 100%;
+      height: 0;
+      padding-bottom: 150%;
+      background-color: #8c8c8c;
+      border-radius: 5px;
+      background-size: cover;
+      position: relative;
+      @include flexCentered();
+      svg {
+        position: absolute;
+        top: 25%;
+        width: 50%;
+        height: 50%;
+        color: #232323;
+      }
     }
   }
   .content {
     flex: 1;
     position: relative;
     .wrapper {
-      & > * {
-        box-sizing: border-box;
-      }
+      & > * { box-sizing: border-box; }
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -71,6 +75,14 @@ $imageWidth: .33;
         display: flex;
         align-items: center;
         position: relative;
+        .infoWrapper {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+        }
       }
     }
   }

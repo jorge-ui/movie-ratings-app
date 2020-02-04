@@ -20,9 +20,8 @@ const SearchBar: FC<Props> = ({ fetchMoviesAsync }) => {
 
   return (
     <div className={styles.root}>
-      <h3>Search</h3>
       <form noValidate autoComplete="off" onSubmit={onSubmit}>
-        <TextField id="standard-basic" label="Standard" onChange={onChange} />
+        <TextField className={styles.bar} id="standard-basic" label="Movie Search" onChange={onChange} fullWidth />
       </form>
     </div>
   );

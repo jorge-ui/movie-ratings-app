@@ -1,0 +1,15 @@
+@import 'styles/colors';
+@import 'styles/mixins';
+
+.root {
+  box-sizing: border-box;
+  height: 100%;
+  width: fit-content;
+  position: relative;
+  transform: scale(.95);
+  @include flexCentered();
+  mask-mode: luminance;
+  svg {
+    overflow: visible;
+  }
+}

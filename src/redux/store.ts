@@ -7,7 +7,7 @@ const middleware = [thunk as ThunkMiddleware<AppState, AppActions>];
 
 const storeEnhancer = [];
 
-if (process.env.NODE_ENV === 'development') 
+if (process.env.NODE_ENV === 'development' && window.innerWidth > 576)
     storeEnhancer.push(
         // @ts-ignore
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
