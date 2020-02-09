@@ -1,0 +1,13 @@
+@import 'styles/shape';
+@import 'styles/colors';
+
+.root {
+  border-radius: $appBorderRadius;
+  background-color: $movieCardBgColor;
+  .MuiMobileStepper-dots {
+    padding: 0 5px;
+  }
+  button {
+    color: $appTextColor;
+  }
+}

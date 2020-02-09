@@ -1,2 +1,24 @@
-$textColor: whitesmoke;
-$cardBgColor: #191d22;
+$appColor: #14223c;
+$movieCardBgColor: #191d22;
+$movieCardBgColor: adjust_color($color: $appColor, $lightness: -5%);
+$appTextColor: adjust_color($color: $appColor, $lightness: 50%, $saturation: -20%);
+
+$degreeOffset: 15deg;
+$linearDegrees: 45deg;
+
+$navBackground: linear-gradient(
+    $linearDegrees,
+    adjust_hue($appColor, -$degreeOffset),
+    $appColor,
+    adjust_hue($appColor, $degreeOffset)
+);
+
+
+$appBgColor: desaturate($appColor, 25%);
+
+$appBackground: linear-gradient(
+    -$linearDegrees,
+    adjust_hue($appBgColor, -$degreeOffset),
+    $appBgColor,
+    adjust_hue($appBgColor, $degreeOffset)
+);

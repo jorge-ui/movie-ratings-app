@@ -1,3 +1,15 @@
-.root {
+@import 'styles/colors';
 
+.root {
+  position: relative;
+  .spinner {
+    margin-top: 10vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    svg {
+      transform: scale(1.7);
+    }
+  }
 }

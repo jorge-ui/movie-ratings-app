@@ -1,0 +1,16 @@
+@import 'styles/colors';
+
+.circularProgress {
+  display: block;
+  margin: 0 auto;
+  svg {
+    height: 100%;
+    width: auto;
+    color: lighten($appColor, 50%);
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 2px white);
+    circle {
+      stroke-width: 2px !important;
+    }
+  }
+}

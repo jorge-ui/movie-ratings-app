@@ -1,20 +1,44 @@
 @import 'styles/colors';
+@import 'styles/breakpoints';
 @import 'styles/mixins';
 
-$imageWidth: .33;
+$imageWidth: .30;
 
 .root {
   position: relative;
   display: flex;
-  background-color: $cardBgColor;
+  background-color: $movieCardBgColor;
   height: 100%;
   padding: 20px;
   box-sizing: border-box;
-  border-radius: 15px;
-  box-shadow: inset 0 0 16px 2px rgba(6, 6, 6, 0.7);
+  border-radius: 12px;
   color: whitesmoke;
+
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    box-shadow: inset 0 0 16px 2px rgba(6, 6, 6, 0.7);
+    z-index: -1;
+  }
+
+  .backImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .4;
+    // TODO: fix for IE browser
+    filter: blur(45px);
+  }
+
   .imageWrapper {
     width: percentage($imageWidth);
+
     .image {
       width: 100%;
       height: 0;
@@ -24,7 +48,9 @@ $imageWidth: .33;
       background-size: cover;
       position: relative;
       @include flexCentered();
-      svg {
+      box-shadow: 0 0 9px 1px #0d0d0d;
+
+      .imageIcon {
         position: absolute;
         top: 25%;
         width: 50%;
@@ -33,11 +59,16 @@ $imageWidth: .33;
       }
     }
   }
+
   .content {
     flex: 1;
     position: relative;
+
     .wrapper {
-      & > * { box-sizing: border-box; }
+      & > * {
+        box-sizing: border-box;
+      }
+
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -48,33 +79,31 @@ $imageWidth: .33;
       right: 0;
       left: 0;
       padding-left: 15px;
-      .title {
-        flex: 1;
+
+      .header {
         font-weight: normal;
-        text-align: center;
-        vertical-align: center;
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .overviewWrap {
-        flex: 2.7;
-        position: relative;
-        overflow: hidden;
-        .overview {
-          font-size: .85em;
+        font-size: 1.13rem;
+        opacity: .82;
+        cursor: default;
+
+        .title {
+          flex: 1;
+          width: 100%;
           margin: 0;
-          @include multiLineYou(5);
+        }
+
+        .year {
+          opacity: .7;
+          font-size: .8em;
         }
       }
+
       .info {
-        flex: 1.3;
+        flex: .6;
         display: flex;
         align-items: center;
         position: relative;
+
         .infoWrapper {
           position: absolute;
           top: 0;
@@ -83,6 +112,39 @@ $imageWidth: .33;
           right: 0;
           display: flex;
         }
+      }
+    }
+  }
+}
+
+@media (min-width: $breakPoint-lg) {
+  .root {
+    transition: box-shadow 550ms ease-out;
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.3);
+
+    &:hover {
+      transition: box-shadow 150ms ease-out;
+      box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.1);
+    }
+
+    .imageWrapper {
+      $cubicBezier: cubic-bezier(.09, .75, .4, 1);
+      $onHover: 300ms $cubicBezier;
+      $offHover: 600ms ease;
+      transition: transform $offHover;
+
+      &:hover {
+        transition: transform $onHover;
+        transform: scale(1.05);
+
+        .image {
+          transition: box-shadow $onHover;
+          box-shadow: -5px 6px 9px 3px rgba(0, 0, 0, 0.41);
+        }
+      }
+
+      .image {
+        transition: box-shadow $offHover;
       }
     }
   }

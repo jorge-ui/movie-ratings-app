@@ -1,10 +1,12 @@
+@import 'styles/colors';
+
 body {
   margin: 0;
   font-family: 'Ubuntu', 'Roboto', sans-serif;
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #263345;
+  background: $appBackground;
 }
 
 code {

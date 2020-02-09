@@ -1,0 +1,15 @@
+@import 'styles/colors';
+
+.root {
+  background: $navBackground;
+  .title {
+    font-weight: lighter;
+    font-size: 1.8rem;
+    color: lighten($appColor, 70%);
+    text-shadow: 0 0 3px white;
+  }
+  .toolBar {
+    display: flex;
+    justify-content: space-between;
+  }
+}

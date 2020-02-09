@@ -1,12 +1,16 @@
 import MoviesSearchData from "../../interfaces/app-types/MoviesSearchData";
 import MoviesSearchError from "../../interfaces/app-types/MoviesSearchError";
-import {MovieActionTypes, MoviesActions} from "../../interfaces/action-types/MoviesActions";
-import {Dispatch} from "redux";
-import {wait} from "../../util/utilityFunctions";
+import {
+    MovieActionTypes,
+    MoviesActions
+} from "../../interfaces/action-types/MoviesActions";
+import {ThunkAction} from "redux-thunk";
+import {AppState} from "../root-reducer";
 
+const {REACT_APP_API_KEY} = process.env;
 
 export const fetchMoviesStart = (): MoviesActions => ({
-    type: MovieActionTypes.FETCH_MOVIES_START,
+    type: MovieActionTypes.FETCH_MOVIES_START
 });
 
 export const fetchMoviesSuccess = (data: MoviesSearchData): MoviesActions => ({
@@ -19,27 +23,29 @@ export const fetchMoviesFailure = (error: MoviesSearchError): MoviesActions => (
     payload: error
 });
 
-export const fetchMoviesAsync = (searchTerm:string) => async (dispatch: Dispatch<MoviesActions>) => {
+export const fetchMoviesAsync = (
+    searchTerm: string
+): ThunkAction<void, AppState, null, MoviesActions> => async dispatch => {
     // Start
-
     dispatch(fetchMoviesStart());
 
-    await wait(600);
-    let res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=a44864e428db2c92b5da8792195a9779&query=${searchTerm}`);
-
     try {
-        if (res.status !== 200){
+        let res = await fetch(
+            `https://api.themoviedb.org/3/search/movie?api_key=${REACT_APP_API_KEY}&query=${searchTerm}`
+        );
+
+        if (res.status !== 200) {
             let error: MoviesSearchError = await res.json();
-            return dispatch(fetchMoviesFailure(error)); // Failure
-        }
-        else {
+            dispatch(fetchMoviesFailure(error)); // Failure
+        } else {
             let data: MoviesSearchData = await res.json();
-            return dispatch(fetchMoviesSuccess(data));// Success
+            dispatch(fetchMoviesSuccess(data)); // Success
         }
     } catch (error) {
-        return dispatch(fetchMoviesFailure({ // Failure
-            errors: ["Something went terribly wrong."]
-        }));
+        dispatch(
+            fetchMoviesFailure({
+                errors: ["Internal server error."] // Failure
+            })
+        );
     }
 };
-

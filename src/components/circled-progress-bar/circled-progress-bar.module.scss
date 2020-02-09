@@ -4,12 +4,16 @@
 .root {
   box-sizing: border-box;
   height: 100%;
-  width: fit-content;
   position: relative;
-  transform: scale(.95);
   @include flexCentered();
-  mask-mode: luminance;
+  width: fit-content;
+  opacity: .95;
+  cursor: default;
   svg {
-    overflow: visible;
+    filter: drop-shadow(0 0 4px black);
+  }
+  .scoreValue {
+    position: absolute;
+    opacity: .9;
   }
 }

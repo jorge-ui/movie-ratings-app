@@ -1,56 +1,75 @@
-import React, { FC, MutableRefObject, useEffect, useRef, useState } from "react";
+import React, {FC, RefObject, useEffect, useRef} from "react";
 import styles from "./circled-progress-bar.module.scss";
-import ProgressBar from "progressbar.js";
+import {TweenMax} from "gsap";
+import {hslInterval, isMobile} from "../../util/utilityFunctions";
 
 interface OwnProps {
-  score: number;
+    score: number;
 }
 
 type Props = OwnProps;
 
-const CircledProgressBar: FC<Props> = ({ score, ...rest }) => {
-  const rootRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  const progressRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-  const progressMultiplier = score / 10;
+const viewBoxSize = 60;
+const strokeWidth = viewBoxSize / 15;
+const circleRadius = viewBoxSize / 2 - strokeWidth;
+const circleCircumference = circleRadius * 2 * Math.PI;
 
-  let [circleRadiusPx, setCircleSizePx] = useState(0);
+// (min & max) colors MUST be in hsl
+const minScoreColor = "hsl(1,81%,40%)";
+const maxScoreColor = "hsl(117,88%,67%)";
+const backFill = "rgba(0, 0, 0, .25)";
+const backStroke = "#5d5d5d";
 
-  useEffect(() => {
-    function getBoundingClientSize() {
-      let clientRect = rootRef.current?.getBoundingClientRect();
-      if (clientRect) {
-        let circleRadius = clientRect.height / 2;
-        setCircleSizePx(circleRadius);
-      }
-    }
-    getBoundingClientSize();
-    window.addEventListener("resize", getBoundingClientSize);
+const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
+    const progressRef: RefObject<SVGCircleElement> = useRef(null);
+    const progressMultiplier = score / 10;
+    const progressColor = hslInterval(
+        minScoreColor,
+        maxScoreColor,
+        progressMultiplier
+    );
 
-    const progressPath = new ProgressBar.Circle(progressRef.current, {
-      trailColor: "#546b7a",
-      trailWidth: 6,
-      strokeWidth: 6,
-      duration: 1700,
-      easing: "easeOut",
-      from: { color: "#ED6A5A", a: 0, width: 6  },
-      to:   { color: "#5ded59", a: 1, width: 10 },
-      step: ( state: { width: number; color: any, a: number }, circle: { path: SVGPathElement; trail: SVGPathElement } ) => {
-        if(state.a <= progressMultiplier) circle.path.setAttribute("stroke", state.color);
-        circle.path.setAttribute("stroke-width", state.width.toString());
-        circle.trail.setAttribute("stroke-width", state.width.toString());
-      }
-    });
-    progressPath.animate(progressMultiplier);
+    const progressValue = circleCircumference * progressMultiplier;
 
-    return () => window.removeEventListener("resize", getBoundingClientSize);
-  }, [progressMultiplier]);
+    useEffect(() => {
+        if (progressMultiplier > 0 && !isMobile())
+            TweenMax.from(progressRef.current, 3, {
+                stroke: minScoreColor,
+                strokeDashoffset: circleCircumference,
+                ease: "power3.out",
+            });
+    }, [progressMultiplier]);
 
-  return (
-    <div ref={rootRef} className={styles.root} {...rest} style={{ width: circleRadiusPx * 2 }}>
-      <div ref={progressRef} />
-      <span style={{ position: "absolute" }}>{score.toPrecision(2)}</span>
-    </div>
-  );
+    return (
+        <div className={styles.root} {...rest}>
+            <svg height="100%" width={viewBoxSize} viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`} overflow={"visible"} >
+                <circle
+                    cx={viewBoxSize / 2}
+                    cy={viewBoxSize / 2}
+                    r={circleRadius}
+                    fill={backFill}
+                    stroke={backStroke}
+                    strokeWidth={strokeWidth}
+                    style={{zIndex: -1}}
+                />
+                <circle
+                    cx={viewBoxSize / 2}
+                    cy={viewBoxSize / 2}
+                    r={circleRadius}
+                    stroke={progressColor}
+                    ref={progressRef}
+                    fill={"none"}
+                    strokeDasharray={circleCircumference}
+                    strokeLinecap={"round"}
+                    strokeDashoffset={circleCircumference - progressValue}
+                    strokeWidth={strokeWidth}
+                    strokeMiterlimit={viewBoxSize / 10}
+                    transform={`rotate(-90 ${viewBoxSize/2} ${viewBoxSize/2})`}
+                />
+            </svg>
+            <span className={styles.scoreValue}>{score ? score.toPrecision(2) : 'NR'}</span>
+        </div>
+    );
 };
 
 export default CircledProgressBar;

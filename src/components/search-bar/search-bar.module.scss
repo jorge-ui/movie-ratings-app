@@ -1,20 +1,14 @@
 @import 'styles/colors';
+@import 'styles/shape';
 
 .root {
-  margin: 40px 30vw;
-  color: $textColor;
   box-sizing: border-box;
-  border-radius: 6px;
+  border-radius: $appBorderRadius;
   overflow: hidden;
-  .title {
-    font-weight: normal;
-    font-size: 1.3rem;
-    margin: 0;
-  }
   .bar {
-    background-color: $cardBgColor;
+    background-color: $movieCardBgColor;
     label, input {
-      color: lightslategrey;
+      color: $appTextColor;
       margin-left: 10px;
     }
  }
