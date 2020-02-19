@@ -1,8 +1,5 @@
+@import 'styles/colors';
+
 .root {
-  .searchHead {
-    box-sizing: border-box;
-    padding: 20px 0;
-    display: flex;
-    justify-content: space-between;
-  }
+  color: $appTextColor;
 }

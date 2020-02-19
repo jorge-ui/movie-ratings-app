@@ -1,7 +1,8 @@
 $appColor: #14223c;
-$movieCardBgColor: #191d22;
-$movieCardBgColor: adjust_color($color: $appColor, $lightness: -5%);
 $appTextColor: adjust_color($color: $appColor, $lightness: 50%, $saturation: -20%);
+
+$movieCardBgColor: adjust_color($color: $appColor, $lightness: -5%);
+
 
 $degreeOffset: 15deg;
 $linearDegrees: 45deg;
@@ -14,7 +15,7 @@ $navBackground: linear-gradient(
 );
 
 
-$appBgColor: desaturate($appColor, 25%);
+$appBgColor: adjust_color($appColor, $saturation: -25%, $lightness: 4%);
 
 $appBackground: linear-gradient(
     -$linearDegrees,

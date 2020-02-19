@@ -1,0 +1,18 @@
+.root {
+  .searchHead {
+    box-sizing: border-box;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .animated {
+    position: relative;
+    transform-origin: bottom;
+    & > * {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+  }
+}

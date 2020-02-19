@@ -1,16 +1,30 @@
 @import 'styles/colors';
+@import 'styles/breakpoints';
 
-.circularProgress {
-  display: block;
-  margin: 0 auto;
+.root {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
   svg {
     height: 100%;
     width: auto;
     color: lighten($appColor, 50%);
     stroke-linecap: round;
-    filter: drop-shadow(0 0 2px white);
+
     circle {
-      stroke-width: 2px !important;
+      stroke-width: 1px !important;
+    }
+  }
+}
+
+@include media("<phone") {
+  .root {
+    svg {
+      circle {
+        stroke-width: 2px !important;
+      }
     }
   }
 }

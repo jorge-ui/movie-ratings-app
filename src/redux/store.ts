@@ -5,7 +5,7 @@ import {AppActions} from "../interfaces/action-types/AppActions";
 
 const middleware = [thunk as ThunkMiddleware<AppState, AppActions>];
 
-const storeEnhancer = [];
+const storeEnhancer: never[] = [];
 
 if (process.env.NODE_ENV === 'development' && window.innerWidth > 576)
     storeEnhancer.push(

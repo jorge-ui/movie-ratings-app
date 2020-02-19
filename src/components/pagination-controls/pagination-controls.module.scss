@@ -1,13 +1,45 @@
 @import 'styles/shape';
+@import "styles/breakpoints";
 @import 'styles/colors';
+
+.bob {
+  background-color: rgb(233, 255, 198);
+}
 
 .root {
   border-radius: $appBorderRadius;
   background-color: $movieCardBgColor;
-  .MuiMobileStepper-dots {
-    padding: 0 5px;
-  }
+  color: $appTextColor;
+  cursor: default;
+  user-select: none;
   button {
     color: $appTextColor;
+    background-color: darken($movieCardBgColor, 3%);
+    &[disabled] {
+      color: darken($appTextColor, 50%);
+    }
+    &:hover {
+      background-color: lighten($movieCardBgColor, 10%);
+    }
+    &:first-of-type {
+      padding-right: 15px;
+      margin-right: 10px;
+    }
+    &:last-of-type {
+      padding-left: 15px;
+      margin-left: 10px;
+    }
+  }
+}
+
+@include media("<phone") {
+  .root {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    position: fixed;
   }
 }

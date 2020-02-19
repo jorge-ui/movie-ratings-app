@@ -3,13 +3,24 @@
 
 .root {
   box-sizing: border-box;
-  border-radius: $appBorderRadius;
-  overflow: hidden;
   .bar {
+    border-radius: $appBorderRadius;
+    position: relative;
     background-color: $movieCardBgColor;
+    & > div {
+      border-radius: $appBorderRadius;
+      position: relative;
+      overflow: hidden;
+    }
     label, input {
       color: $appTextColor;
       margin-left: 10px;
+    }
+    p {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 5px;
     }
  }
 }

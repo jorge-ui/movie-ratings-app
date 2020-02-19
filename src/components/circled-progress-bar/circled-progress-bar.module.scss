@@ -1,5 +1,6 @@
 @import 'styles/colors';
 @import 'styles/mixins';
+@import 'styles/breakpoints';
 
 .root {
   box-sizing: border-box;
@@ -9,11 +10,16 @@
   width: fit-content;
   opacity: .95;
   cursor: default;
-  svg {
-    filter: drop-shadow(0 0 4px black);
-  }
   .scoreValue {
     position: absolute;
     opacity: .9;
+  }
+}
+
+@include media(">tablet") {
+  .root {
+    svg {
+      filter: drop-shadow(0 0 4px black);
+    }
   }
 }

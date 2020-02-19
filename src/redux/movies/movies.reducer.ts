@@ -1,45 +1,83 @@
 import MoviesSearchData from "../../interfaces/app-types/MoviesSearchData";
 import MoviesSearchError from "../../interfaces/app-types/MoviesSearchError";
-import {
-    MovieActionTypes,
-    MoviesActions
-} from "../../interfaces/action-types/MoviesActions";
+import {FetchMoviesSuccess, IMoviesActions, MovieActionTypes} from "../../interfaces/action-types/IMoviesActions";
 
 export interface MoviesState {
-    currentSearchKeyword: string,
-    searchResults: MoviesSearchData | null;
+    currentSearchTerm: string;
+    searchData: MoviesSearchData | null;
     searchError: MoviesSearchError | null;
     isFetching: boolean;
+    isFetchingMore: boolean;
+    apiFetchedPages: number[];
 }
 
 const INITIAL_STATE: MoviesState = {
-    currentSearchKeyword: '',
-    searchResults: null,
+    currentSearchTerm: "",
+    searchData: null,
     searchError: null,
-    isFetching: false
+    isFetching: false,
+    isFetchingMore: false,
+    apiFetchedPages: [],
 };
 
 const moviesReducer = (
     state = INITIAL_STATE,
-    {type, payload}: MoviesActions
+    action: IMoviesActions
 ): MoviesState => {
-    switch (type) {
+    switch (action.type) {
         case MovieActionTypes.FETCH_MOVIES_START:
             return {
                 ...INITIAL_STATE,
-                isFetching: true
+                isFetching: true,
             };
         case MovieActionTypes.FETCH_MOVIES_SUCCESS:
+            let {data: fetchedData, searchTerm} = (action as FetchMoviesSuccess).payload;
+
+            if (!fetchedData.total_results)
+                return {
+                    ...INITIAL_STATE,
+                    currentSearchTerm: searchTerm,
+                    searchError: {
+                        errors: ["No results found."]
+                    }
+                };
+
             return {
-                ...state,
-                searchResults: payload,
-                isFetching: false
+                ...INITIAL_STATE,
+                searchData: fetchedData,
+                currentSearchTerm: searchTerm,
+                apiFetchedPages: [1]
             };
         case MovieActionTypes.FETCH_MOVIES_FAILURE:
             return {
+                ...INITIAL_STATE,
+                searchError: action.payload
+            };
+
+        case MovieActionTypes.FETCH_MORE_MOVIES_START:
+            return {
                 ...state,
-                searchError: payload,
-                isFetching: false
+                isFetchingMore: true
+            };
+        case MovieActionTypes.FETCH_MORE_MOVIES_SUCCESS:
+            return {
+                ...state,
+                searchData: {
+                    ...(state.searchData as MoviesSearchData),
+                    results: {
+                        ...(state.searchData as MoviesSearchData).results,
+                        ...action.payload.data
+                    },
+                    page: action.payload.fetchedPage
+                },
+                apiFetchedPages: [...state.apiFetchedPages, action.payload.fetchedPage],
+                isFetchingMore: false
+            };
+        case MovieActionTypes.FETCH_MORE_MOVIES_FAILURE:
+            return {
+                ...state,
+                searchError: action.payload,
+                isFetchingMore: false
             };
         default:
             return state;

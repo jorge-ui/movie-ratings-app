@@ -1,38 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="Add circled-progress-bar.component">
-      <change afterPath="$PROJECT_DIR$/src/App.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/appProperties.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/app-bar/app-bar.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/app-bar/app-bar.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/with-spinner/with-spinner.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/with-spinner/with-spinner.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/_breakpoints.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/styles/_shape.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="Performance optimizations, add react-sp">
+      <change afterPath="$PROJECT_DIR$/src/components/error-message/error-message.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/error-message/error-message.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/movie-result-item-skeleton/movie-result-item-skeleton.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/movie-result-item-skeleton/movie-result-item-skeleton.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/action-types/IMoviesActions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/action-types/IReduxBaseAction.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/action-types/IResultsPagingActions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interfaces/app-types/MoviesSearchResponseData.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/search-page/search-page.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/search-page/search-page.module.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/easingFuctions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/usePrevious.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/appProperties.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/appProperties.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/search-bar/search-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search-bar/search-bar.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/search-bar/search-bar.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search-bar/search-bar.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/with-spinner/with-spinner.component.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/with-spinner/with-spinner.module.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/action-types/AppActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/action-types/AppActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/action-types/MoviesActions.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/action-types/ReduxBaseAction.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/app-types/MovieSearchItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/app-types/MovieSearchItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/app-types/MoviesSearchData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/app-types/MoviesSearchData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movies/movies.actions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movies/movies.reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movies/movies.selectors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/root-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/root-reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_breakpoints.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_breakpoints.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/_colors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_colors.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/utilityFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/utilityFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/utilityFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/utilityFunctions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <list id="de75be24-7b63-4021-ab6e-a8431e90edcf" name="Staged" comment="First app draft, components:&#10;- search-bar&#10;- movie-results-container&#10;- movie-result-item&#10;- movie-item-score&#10;Add appState with redux &amp; reselect,&#10;Add fetchMovies action." />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,11 +67,11 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript File" />
         <option value="JavaScript File" />
         <option value="TypeScript JSX File" />
         <option value="Sass File" />
         <option value="SCSS File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -84,10 +103,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="NewWatcherDialog.advanced.open" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript JSX" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/util" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -99,26 +119,27 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Program Files\nodejs\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.CommitDialog" />
     <property name="ts.external.directory.path" value="D:\Development\JavaScript\WebStorm\movie-ratings-app\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\components" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux\movies" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\util" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\styles" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types\AppActions.ts" />
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchError.ts" />
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchData.ts" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\styles" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\util" />
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux\results-paging" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\components" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux\movies" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -128,6 +149,16 @@
   </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
@@ -154,7 +185,13 @@
       <item itemvalue="JavaScript Debug.Debug Application" />
       <item itemvalue="npm.npm start" />
       <item itemvalue="npm.start-no-browser" />
+      <item itemvalue="npm.build" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.build" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -202,7 +239,19 @@
       <workItem from="1581132026262" duration="3396000" />
       <workItem from="1581135431949" duration="6093000" />
       <workItem from="1581186323718" duration="7401000" />
-      <workItem from="1581212209433" duration="12781000" />
+      <workItem from="1581212209433" duration="12997000" />
+      <workItem from="1581276696659" duration="18645000" />
+      <workItem from="1581305499805" duration="4205000" />
+      <workItem from="1581387560910" duration="6790000" />
+      <workItem from="1581442042774" duration="3314000" />
+      <workItem from="1581459047256" duration="18636000" />
+      <workItem from="1581513662326" duration="17021000" />
+      <workItem from="1581551198099" duration="14040000" />
+      <workItem from="1581638919413" duration="13812000" />
+      <workItem from="1581703803101" duration="18154000" />
+      <workItem from="1581898551330" duration="18760000" />
+      <workItem from="1581972253962" duration="13738000" />
+      <workItem from="1582079908027" duration="20776000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1579841945871</created>
@@ -232,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1580844790559</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Refactored code and new UI main components.">
+      <created>1581227249070</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1581227249070</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -267,17 +323,23 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="First app draft, components:&#10;- search-bar&#10;- movie-results-container&#10;- movie-result-item&#10;- movie-item-score&#10;Add appState with redux &amp; reselect,&#10;Add fetchMovies action." />
     <MESSAGE value="Add circled-progress-bar.component" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add circled-progress-bar.component" />
+    <MESSAGE value="Refactored code and new UI main components." />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactored code and new UI main components." />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2336" y="79" key="#Chrome_Settings" timestamp="1581742414486">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2336" y="79" key="#Chrome_Settings/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581742414486" />
     <state x="2281" y="92" key="#Inspections" timestamp="1580248170878">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2281" y="92" key="#Inspections/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580248170878" />
-    <state x="1978" y="26" width="1416" height="779" key="#Live_Templates" timestamp="1581223606903">
+    <state x="1978" y="26" width="1416" height="779" key="#Live_Templates" timestamp="1582104894051">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="1978" y="26" width="1416" height="779" key="#Live_Templates/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581223606903" />
+    <state x="1978" y="26" width="1416" height="779" key="#Live_Templates/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582104894051" />
     <state x="2281" y="92" key="#Notifications" timestamp="1579841433339">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -290,10 +352,10 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2280" y="91" key="#Web_Browsers/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580249369663" />
-    <state x="2405" y="193" width="774" height="477" key="#com.intellij.codeInsight.template.impl.EditVariableDialog" timestamp="1581223604650">
+    <state x="2405" y="193" width="774" height="477" key="#com.intellij.codeInsight.template.impl.EditVariableDialog" timestamp="1582104881495">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2405" y="193" width="774" height="477" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581223604650" />
+    <state x="2405" y="193" width="774" height="477" key="#com.intellij.codeInsight.template.impl.EditVariableDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582104881495" />
     <state x="2143" y="88" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580788847015">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -314,14 +376,18 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2319" y="173" key="#com.intellij.ide.util.ExportDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580097574932" />
-    <state x="2494" y="149" key="#com.intellij.ide.util.MemberChooser" timestamp="1580150517558">
+    <state x="2494" y="149" key="#com.intellij.ide.util.MemberChooser" timestamp="1581554527632">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2494" y="149" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580150517558" />
-    <state x="2419" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580843885870">
+    <state x="2494" y="149" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581554527632" />
+    <state x="2419" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1581460476918">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2419" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580843885870" />
+    <state x="2419" y="180" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581460476918" />
+    <state x="2515" y="249" key="#com.intellij.tools.ToolEditorDialog" timestamp="1581737888689">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state x="2515" y="249" key="#com.intellij.tools.ToolEditorDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581737888689" />
     <state x="2588" y="104" width="440" height="655" key="#xdebugger.XInspectDialog" timestamp="1580857761630">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -330,34 +396,38 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2510" y="101" width="796" height="763" key="#xdebugger.evaluate/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580857812043" />
-    <state x="2311" y="0" key="CommitChangelistDialog2" timestamp="1581227166105">
+    <state x="2311" y="0" key="CommitChangelistDialog2" timestamp="1582109506974">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2311" y="0" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581227166105" />
+    <state x="2311" y="0" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582109506974" />
     <state x="2013" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1580854264619">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2013" y="93" width="1350" height="678" key="DiffContextDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580854264619" />
-    <state x="2501" y="233" key="FileChooserDialogImpl" timestamp="1580151015229">
+    <state x="2387" y="162" width="712" height="702" key="EditFileWatcherDialog" timestamp="1581737880497">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2501" y="233" key="FileChooserDialogImpl/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580151015229" />
-    <state width="1493" height="138" key="GridCell.Tab.0.bottom" timestamp="1581227166133">
+    <state x="2387" y="162" width="712" height="702" key="EditFileWatcherDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581737880497" />
+    <state x="2501" y="233" key="FileChooserDialogImpl" timestamp="1581742361755">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581227166133" />
-    <state width="1493" height="138" key="GridCell.Tab.0.center" timestamp="1581227166133">
+    <state x="2501" y="233" key="FileChooserDialogImpl/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581742361755" />
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom" timestamp="1582109050509">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581227166133" />
-    <state width="1493" height="138" key="GridCell.Tab.0.left" timestamp="1581227166133">
+    <state width="1493" height="121" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582109050509" />
+    <state width="1493" height="121" key="GridCell.Tab.0.center" timestamp="1582109050509">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581227166133" />
-    <state width="1493" height="138" key="GridCell.Tab.0.right" timestamp="1581227166133">
+    <state width="1493" height="121" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582109050509" />
+    <state width="1493" height="121" key="GridCell.Tab.0.left" timestamp="1582109050509">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="138" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581227166133" />
+    <state width="1493" height="121" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582109050509" />
+    <state width="1493" height="121" key="GridCell.Tab.0.right" timestamp="1582109050509">
+      <screen x="1920" y="0" width="1536" height="864" />
+    </state>
+    <state width="1493" height="121" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582109050509" />
     <state width="1493" height="229" key="GridCell.Tab.1.bottom" timestamp="1580865504775">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -374,10 +444,10 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state width="1493" height="229" key="GridCell.Tab.1.right/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580865504775" />
-    <state x="2124" y="7" width="1238" height="824" key="SettingsEditor" timestamp="1581223740705">
+    <state x="2124" y="7" width="1238" height="824" key="SettingsEditor" timestamp="1582109002040">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2124" y="7" width="1238" height="824" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581223740705" />
+    <state x="2124" y="7" width="1238" height="824" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582109002040" />
     <state x="2538" y="340" key="VCS.ChangelistChooser" timestamp="1580541032075">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -386,10 +456,10 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2519" y="303" key="VCS.EditChangelistDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896356809" />
-    <state x="2281" y="148" key="Vcs.Push.Dialog.v2" timestamp="1580844797130">
+    <state x="2281" y="148" key="Vcs.Push.Dialog.v2" timestamp="1581227261669">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2281" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580844797130" />
+    <state x="2281" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581227261669" />
     <state x="2013" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1579896165740">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -406,10 +476,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="157" y="126" width="1178" height="607" key="dock-window-2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580236892794" />
-    <state x="2561" y="33" width="631" height="831" key="find.popup" timestamp="1581225577419">
+    <state x="2561" y="33" width="631" height="831" key="find.popup" timestamp="1582108687166">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2561" y="33" width="631" height="831" key="find.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581225577419" />
+    <state x="2561" y="33" width="631" height="831" key="find.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582108687166" />
     <state x="2448" y="329" key="git4idea.ui.GitStashDialog" timestamp="1579896257750">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -418,18 +488,18 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2405" y="242" key="jetbrains.nodejs.interpreters-dialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580151019367" />
-    <state x="2345" y="197" width="672" height="677" key="run.anything.popup" timestamp="1581219900752">
+    <state x="2345" y="197" width="672" height="677" key="run.anything.popup" timestamp="1581918518271">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2345" y="197" width="672" height="677" key="run.anything.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581219900752" />
-    <state x="2280" y="92" key="scopes" timestamp="1580152134361">
+    <state x="2345" y="197" width="672" height="677" key="run.anything.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581918518271" />
+    <state x="2280" y="92" key="scopes" timestamp="1582108952309">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2280" y="92" key="scopes/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580152134361" />
-    <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1581226078707">
+    <state x="2280" y="92" key="scopes/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582108952309" />
+    <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup" timestamp="1582108827658">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
-    <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581226078707" />
+    <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582108827658" />
     <state x="2089" y="169" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1580854288145">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>

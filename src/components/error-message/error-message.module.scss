@@ -1,0 +1,15 @@
+@import 'styles/shape';
+
+.root {
+  color: rgba(190, 13, 0, 0.7); //TODO: move to colors
+  text-align: center;
+  padding: 58px 0;
+  text-shadow: 0 0 4px rgba(24, 11, 11, 0.7);
+  font-size: 1.5rem;
+  opacity: 0.9;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: $appBorderRadius;
+  .title {
+    margin-bottom: 10px;
+  }
+}

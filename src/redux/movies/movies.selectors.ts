@@ -1,32 +1,84 @@
-import {createSelector, Selector} from 'reselect';
+import {createSelector, Selector} from "reselect";
 import {AppState} from "../root-reducer";
 import {MoviesState} from "./movies.reducer";
+import MoviesSearchData from "../../interfaces/app-types/MoviesSearchData";
+import MovieSearchItem from "../../interfaces/app-types/MovieSearchItem";
+import appProperties from "../../appProperties";
 
-export const getMoviesState: Selector<AppState, MoviesState> = state => state.movies;
+const {perPageResultsItems} = appProperties;
 
-export const selectMoviesState = createSelector(
+export const getMoviesState: Selector<AppState, MoviesState> = state =>
+    state.movies;
+
+export const selectMoviesCurrentSearchTerm = createSelector(
     [getMoviesState],
-    movies => movies
+    movies => movies.currentSearchTerm
 );
 
-export const selectMoviesResults = createSelector(
+
+const selectMoviesFetchedPagesLength = createSelector(
     [getMoviesState],
-    ({searchResults}: MoviesState) => searchResults
+    (movies) => movies.apiFetchedPages.length
 );
 
-export const selectMoviesResultsPaging = createSelector(
+const selectMoviesSearchData = createSelector(
     [getMoviesState],
-    ({searchResults}: MoviesState) => {
+    movies => movies.searchData
+);
 
-        if (searchResults !== null) {
-            let {page, total_pages, total_results} = searchResults;
-            return {page, total_pages, total_results};
+export const selectMoviesFetchedPages = createSelector(
+    [getMoviesState],
+    (movies) => movies.apiFetchedPages
+);
+
+export const selectMoviesTotalResultsFound = createSelector(
+    [selectMoviesSearchData],
+    (searchData) => searchData ? searchData.total_results : 0
+);
+
+export const selectMoviesTotalPages = createSelector(
+    [selectMoviesSearchData],
+    (searchData) => searchData ? searchData.total_pages : 0
+);
+
+export const selectMoviesResultItems = createSelector(
+    [selectMoviesSearchData, selectMoviesFetchedPagesLength],
+    (searchData, fetchedPagesLength) => fetchedPagesLength > 0 ? (searchData as MoviesSearchData).results : null
+);
+
+interface EmptyMovieItem {
+    key: number,
+    id?: undefined
+}
+const getPageFromProps = (state: object, props: {page: number}) => props.page;
+export const makeSelectMoviesResultsPortion = () => createSelector(
+    [selectMoviesResultItems, selectMoviesTotalResultsFound, getPageFromProps],
+    (resultItems, totalResults, currentPage) => {
+        let resultsPortion: (MovieSearchItem | EmptyMovieItem)[] = [];
+        if (resultItems) {
+            let grabIndex: number;
+            let startIndex = (currentPage ? currentPage - 1 : currentPage) * perPageResultsItems;
+            for (let i = 0; i < perPageResultsItems; i++)
+                if ((grabIndex = startIndex + i) < totalResults) {
+                    resultsPortion[i] = resultItems[grabIndex] || {key: grabIndex};
+                    resultsPortion[i].key = grabIndex;
+                }
         }
-        else return null;
+        return resultsPortion;
     }
 );
 
-export const selectMoviesCurrentSearchKeyword = createSelector(
+export const selectMoviesSearchError = createSelector(
     [getMoviesState],
-    movies => movies.currentSearchKeyword
+    movies => movies.searchError
+);
+
+export const selectMoviesIsFetching = createSelector(
+    [getMoviesState],
+    movies => movies.isFetching
+);
+
+export const selectMoviesIsFetchingMore = createSelector(
+    [getMoviesState],
+    movies => movies.isFetchingMore
 );

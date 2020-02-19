@@ -1,76 +1,52 @@
-import React, {FC, useEffect} from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import MovieResultItem from "../movie-result-item/movie-result-item.component";
-import {connect} from "react-redux";
-import {AppState} from "../../redux/root-reducer";
-import {selectMoviesState} from "../../redux/movies/movies.selectors";
-import {TweenMax} from "gsap";
-import {isMobile} from "../../util/utilityFunctions";
 import styles from "./movie-results-container.module.scss";
-import LoadingSpinner from "../loading-spinner/loading-spinner.component";
+import MovieSearchItem from "../../interfaces/app-types/MovieSearchItem";
+import {AppState} from "../../redux/root-reducer";
+import {makeSelectMoviesResultsPortion} from "../../redux/movies/movies.selectors";
+import {connect} from "react-redux";
+import MovieResultItemSkeleton from "../movie-result-item-skeleton/movie-result-item-skeleton.component";
 
-interface OwnProps {}
+interface OwnProps {
+    className?: string,
+    page: number
+}
 
-type Props = OwnProps & ReturnType<typeof mapStateToProps>;
+type Props = OwnProps & ReturnType<ReturnType<typeof makeMapStateToProps>>;
 
-const MovieResultsContainer: FC<Props> = ({ movies }) => {
-  let errorMarkup;
-  // TODO: handle isFetching
-  let { searchError, isFetching, searchResults } = movies;
+class MovieResultsContainer extends React.Component<Props> {
 
-  let results = searchResults?.results;
-
-  useEffect(() => {
-    if (!isMobile())
-      TweenMax.from(".movie-item", 0.7, {
-        opacity: -3,
-        transform: "scale(0.7)",
-        ease: "power4.out",
-        stagger: 0.08
-      });
-  }, [results]);
-
-  useEffect(() => {
-    if (isFetching) {
-      TweenMax.to(".movie-item", 0.5, {
-        opacity: -.5,
-        ease: "none"
-      });
+    shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
+        let {resultsPortion} = this.props;
+        let {resultsPortion: nextResultsPortion} = nextProps;
+        return resultsPortion[resultsPortion.length - 1].id !== nextResultsPortion[nextResultsPortion.length - 1].id;
     }
-  }, [isFetching]);
 
-  if (searchResults && searchResults.total_results === 0)
-    searchError = { errors: ["No results found."] };
+    render() {
+        let {resultsPortion, className} = this.props;
+        return (
+            <Grid container alignItems="stretch" spacing={2} className={styles.root + " " + className}>
+                {resultsPortion.map(movie => {
+                    return (
+                        <Grid key={movie.key} item xs={12} sm={6} md={4}>
+                            {!!(movie as MovieSearchItem).id
+                                ? <MovieResultItem movie={(movie as MovieSearchItem)}/>
+                                : <MovieResultItemSkeleton/>}
+                        </Grid>
+                    );
+                })}
+            </Grid>
+        );
 
-  if (searchError)
-    errorMarkup = (
-      <div>
-        {searchError?.errors.map((message, i) => (
-          <div key={i} style={{ color: "red" }}>
-            {i + 1}) {message}
-          </div>
-        ))}
-      </div>
-    );
+    }
+}
 
-  return (
-    <div className={styles.root}>
-      {isFetching && <LoadingSpinner className={styles.spinner}/>}
-      <Grid container alignItems="stretch" spacing={2}>
-        {errorMarkup
-          ? errorMarkup
-          : results?.map(movie => (
-              <Grid key={movie.id} item xs={12} sm={6} md={4}>
-                <MovieResultItem movie={movie} />
-              </Grid>
-            ))}
-      </Grid>
-    </div>
-  );
+const makeMapStateToProps = () => {
+    const selectMoviesResultsPortion = makeSelectMoviesResultsPortion();
+    return (state: AppState, props: OwnProps) => ({
+        resultsPortion: selectMoviesResultsPortion(state, props)
+    });
 };
 
-const mapStateToProps = (state: AppState) => ({
-  movies: selectMoviesState(state)
-});
-
-export default connect(mapStateToProps)(MovieResultsContainer);
+export default connect(makeMapStateToProps)(MovieResultsContainer);

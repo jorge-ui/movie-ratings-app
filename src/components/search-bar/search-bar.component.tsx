@@ -1,65 +1,70 @@
-import React, {ChangeEvent, FC, FormEvent, useState} from "react";
+import React, {FC, FormEvent, useEffect, useRef, useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import {connect} from "react-redux";
 import {fetchMoviesAsync} from "../../redux/movies/movies.actions";
 import styles from "./search-bar.module.scss";
-import {AppState} from "../../redux/root-reducer";
-import {selectMoviesCurrentSearchKeyword} from "../../redux/movies/movies.selectors";
 import {bindActionCreators, Dispatch} from "redux";
-import {MoviesActions} from "../../interfaces/action-types/MoviesActions";
+import {IMoviesActions} from "../../interfaces/action-types/IMoviesActions";
 
 interface OwnProps {
-    className?: string;
+    className?: string,
+    currentSearchTerm: string
 }
 
-type Props = ReturnType<typeof mapDispatchToProps> &
-    ReturnType<typeof mapStateToProps> &
-    OwnProps;
+type Props = ReturnType<typeof mapDispatchToProps> & OwnProps;
 
-const SearchBar: FC<Props> = ({
-                                  className,
-                                  fetchMoviesAsync,
-                                  currentSearchKeyword,
-                                  ...rest
-                              }) => {
-    let [searchText, setSearchText] = useState<string>("");
-
-    const onChange = ({target}: ChangeEvent<HTMLInputElement>) =>
-        setSearchText(target.value);
+const SearchBar: FC<Props> = ({className, fetchMoviesAsync, currentSearchTerm}) => {
+    let inputRef = useRef<HTMLInputElement>(null);
+    let [error, setError] = useState("");
 
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        let searchText = inputRef.current?.value;
         e.preventDefault();
-        if (currentSearchKeyword !== searchText) fetchMoviesAsync(searchText);
-        else {
+        if (!searchText || !searchText.length)
+            return setError("Search can't be empty.");
+
+        if (currentSearchTerm !== searchText) {
+            fetchMoviesAsync(searchText);
+            error && setError("");
+        } else {
+            setError("Search results already showing.");
             // TODO: animate results already showing
         }
     };
 
+    useEffect(() => {
+        const listener = (e: KeyboardEvent) => {
+            let element = inputRef.current;
+            if (!!element && e.code === "Slash" && document.activeElement !== element)
+                setTimeout(
+                    () => {
+                        (element as HTMLInputElement).focus();
+                        (element as HTMLInputElement).select();
+                    },
+                    50
+                );
+        };
+        window.addEventListener("keydown", listener);
+        return () => window.removeEventListener("keydown", listener);
+    }, []);
     return (
-        <div className={styles.root + " " + className} {...rest}>
-            <form noValidate autoComplete="off" onSubmit={onSubmit}>
+        <div className={styles.root + " " + className}>
+            <form autoComplete="off" onSubmit={onSubmit}>
                 <TextField
                     className={styles.bar}
-                    required
                     label="Movie Search"
-                    onChange={onChange}
-                    fullWidth
+                    error={!!error}
+                    helperText={error}
+                    onBlur={() => setError("")}
+                    inputRef={inputRef}
                 />
             </form>
         </div>
     );
 };
 
-const mapStateToProps = (state: AppState) => ({
-    currentSearchKeyword: selectMoviesCurrentSearchKeyword(state)
-});
 
-const mapDispatchToProps = (dispatch: Dispatch<MoviesActions>) =>
-    bindActionCreators(
-        {
-            fetchMoviesAsync
-        },
-        dispatch
-    );
+const mapDispatchToProps = (dispatch: Dispatch<IMoviesActions>) =>
+    bindActionCreators({fetchMoviesAsync}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(null, mapDispatchToProps)(SearchBar);

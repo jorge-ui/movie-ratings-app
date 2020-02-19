@@ -4,11 +4,18 @@ import './styles/index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'typeface-roboto';
-
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import { StylesProvider } from '@material-ui/core/styles';
+
+declare global {
+    interface Window {
+        apiNowFetchingPages: Set<number>
+    }
+}
+window.apiNowFetchingPages = new Set<number>();
+
 
 const rootPath =
     process.env.NODE_ENV === 'development' ? '/' : '/movie-ratings-app/';
