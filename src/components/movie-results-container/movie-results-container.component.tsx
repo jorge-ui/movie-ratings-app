@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import MovieResultItem from "../movie-result-item/movie-result-item.component";
 import styles from "./movie-results-container.module.scss";
-import MovieSearchItem from "../../interfaces/app-types/MovieSearchItem";
+import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import {AppState} from "../../redux/root-reducer";
 import {makeSelectMoviesResultsPortion} from "../../redux/movies/movies.selectors";
 import {connect} from "react-redux";
@@ -30,8 +30,8 @@ class MovieResultsContainer extends React.Component<Props> {
                 {resultsPortion.map(movie => {
                     return (
                         <Grid key={movie.key} item xs={12} sm={6} md={4}>
-                            {!!(movie as MovieSearchItem).id
-                                ? <MovieResultItem movie={(movie as MovieSearchItem)}/>
+                            {!!(movie as IMovieResultItem).id
+                                ? <MovieResultItem movie={(movie as IMovieResultItem)}/>
                                 : <MovieResultItemSkeleton/>}
                         </Grid>
                     );

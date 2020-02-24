@@ -1,13 +1,14 @@
-import MoviesSearchData, {ResultItemsObject} from "../../interfaces/app-types/MoviesSearchData";
-import MoviesSearchError from "../../interfaces/app-types/MoviesSearchError";
+import IMoviesSearchData, {ResultItemsObject} from "../../interfaces/app-types/IMoviesSearchData";
+import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
 import {IMoviesActions, MovieActionTypes} from "../../interfaces/action-types/IMoviesActions";
 import {ThunkAction} from "redux-thunk";
 import {AppState} from "../root-reducer";
-import MoviesSearchResponseData from "../../interfaces/app-types/MoviesSearchResponseData";
+import IMoviesSearchResponseData from "../../interfaces/app-types/IMoviesSearchResponseData";
 import {IResultsPagingActions} from "../../interfaces/action-types/IResultsPagingActions";
-import {convertResultsData} from "../../util/utilityFunctions";
+import {cacheResultsPostersOnSession, convertResultsData} from "../../util/utilityFunctions";
+import appProperties from "../../appProperties";
 
-const {REACT_APP_API_KEY} = process.env;
+const {buildApiFetchUrl} = appProperties;
 
 
 export const fetchMoviesStart = (): IMoviesActions => ({
@@ -16,7 +17,7 @@ export const fetchMoviesStart = (): IMoviesActions => ({
 
 
 export const fetchMoviesSuccess = (
-    data: MoviesSearchData,
+    data: IMoviesSearchData,
     searchTerm: string
 ): IMoviesActions => ({
     type: MovieActionTypes.FETCH_MOVIES_SUCCESS,
@@ -25,7 +26,7 @@ export const fetchMoviesSuccess = (
 
 
 export const fetchMoviesFailure = (
-    error: MoviesSearchError
+    error: IMoviesSearchError
 ): IMoviesActions => ({
     type: MovieActionTypes.FETCH_MOVIES_FAILURE,
     payload: error
@@ -40,25 +41,21 @@ export const fetchMoviesAsync = (
     dispatch(fetchMoviesStart());
     apiNowFetchingPages.add(1);
     try {
-        let res = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${REACT_APP_API_KEY}&query=${searchTerm}`
-        );
+        let res = await fetch(buildApiFetchUrl(searchTerm));
         if (res.status !== 200) {
-            let error: MoviesSearchError = await res.json();
+            let error: IMoviesSearchError = await res.json();
             dispatch(fetchMoviesFailure(error)); // Failure
         } else {
-            let data: MoviesSearchResponseData = await res.json();
+            let data: IMoviesSearchResponseData = await res.json();
 
-            data.results.forEach(({poster_path}) => {
-                if (poster_path)
-                    fetch(`https://image.tmdb.org/t/p/w300${poster_path}`);
-            });
+            cacheResultsPostersOnSession(data.results);
 
-            let transformedData: MoviesSearchData = {
+            let transformedData: IMoviesSearchData = {
                 ...data,
-                results: convertResultsData(data.results, 1)
+                results: convertResultsData(data.results)
             };
-            dispatch(fetchMoviesSuccess(transformedData, searchTerm)); // Success
+
+            setTimeout(() => dispatch(fetchMoviesSuccess(transformedData, searchTerm)), 100); // Success
         }
     } catch (error) {
         dispatch(
@@ -87,7 +84,7 @@ export const fetchMoreMoviesSuccess = (
 
 
 export const fetchMoreMoviesFailure = (
-    error: MoviesSearchError
+    error: IMoviesSearchError
 ): IMoviesActions => ({
     type: MovieActionTypes.FETCH_MORE_MOVIES_FAILURE,
     payload: error
@@ -106,23 +103,18 @@ export const fetchMoreMoviesAsync = (
     dispatch(fetchMoreMoviesStart());
     apiNowFetchingPages.add(nextPage);
     try {
-        let res = await fetch(
-            `https://api.themoviedb.org/3/search/movie?api_key=${REACT_APP_API_KEY}&query=${searchTerm}&page=${nextPage}`
-        );
+        let res = await fetch(buildApiFetchUrl(searchTerm, nextPage));
         if (res.status !== 200) {
-            let error: MoviesSearchError = await res.json();
+            let error: IMoviesSearchError = await res.json();
             dispatch(fetchMoreMoviesFailure(error)); // Failure
         } else {
-            let data: MoviesSearchResponseData = await res.json();
+            let data: IMoviesSearchResponseData = await res.json();
 
-            data.results.forEach(({poster_path}) => {
-                if (poster_path)
-                    fetch(`https://image.tmdb.org/t/p/w300${poster_path}`);
-            });
+            cacheResultsPostersOnSession(data.results);
 
             let resultsObject = convertResultsData(data.results, nextPage);
 
-            dispatch(fetchMoreMoviesSuccess(resultsObject, nextPage)); // Success
+            setTimeout(() => dispatch(fetchMoreMoviesSuccess(resultsObject, nextPage)), 100); // Success
         }
     } catch (error) {
         dispatch(

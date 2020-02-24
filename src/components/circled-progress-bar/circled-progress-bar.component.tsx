@@ -1,6 +1,6 @@
-import React, {FC, RefObject, useRef} from "react";
+import React, {FC, RefObject, useEffect, useRef} from "react";
 import styles from "./circled-progress-bar.module.scss";
-import {hslInterval, hslToHex, isMobile} from "../../util/utilityFunctions";
+import {clearMultipleTimeouts, hslInterval, hslToHex, isMobile} from "../../util/utilityFunctions";
 import {animated, useSpring} from 'react-spring';
 import {easeOutQuad} from "../../util/easingFuctions";
 
@@ -22,6 +22,7 @@ const backFill = "rgba(0, 0, 0, .25)";
 const backStroke = "#5d5d5d";
 
 const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
+    const rootRef = useRef<HTMLDivElement>(null);
     const progressRef: RefObject<SVGCircleElement> = useRef(null);
     const progressMultiplier = score / 10;
     const progressColor = hslInterval(
@@ -33,22 +34,19 @@ const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
     const progressValue = circleCircumference * progressMultiplier;
     const strokeDashOffsetVal = circleCircumference - progressValue;
 
-    const props = useSpring({
-        stroke: hslToHex(progressColor),
-        strokeDashoffset: strokeDashOffsetVal,
-        from: {
-            stroke: hslToHex(minScoreColor),
-            strokeDashoffset: circleCircumference,
-        },
+    const [props, set] = useSpring(() => ({
+        stroke: hslToHex(minScoreColor),
+        strokeDashoffset: circleCircumference,
         config: {
             duration: 3000 * progressMultiplier,
             easing: easeOutQuad
         },
-        delay: 450
-    });
+    }));
+
+    useEffect(onComponentMount, []);
 
     return (
-        <div className={styles.root} {...rest}>
+        <div className={styles.root} {...rest} style={{ opacity: 0 }} ref={rootRef}>
             <svg height="100%" width={viewBoxSize} viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
                           overflow={"visible"} >
                 <circle
@@ -79,6 +77,26 @@ const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
             <span className={styles.scoreValue}>{score ? score.toPrecision(2) : 'NR'}</span>
         </div>
     );
+
+    function onComponentMount() {
+        let timeout1: (NodeJS.Timeout | undefined), timeout2: (NodeJS.Timeout | undefined);
+
+        let {current} = rootRef;
+
+        timeout1 = setTimeout(() => {
+            current && (current.style.opacity = ".95");
+            timeout2 = setTimeout(() => {
+                animateProgress();
+            },400);
+        }, 450);
+
+        const animateProgress = () => set({
+            stroke: hslToHex(progressColor),
+            strokeDashoffset: strokeDashOffsetVal
+        });
+
+        return clearMultipleTimeouts.bind(null, timeout1, timeout2);
+    }
 };
 
 export default CircledProgressBar;

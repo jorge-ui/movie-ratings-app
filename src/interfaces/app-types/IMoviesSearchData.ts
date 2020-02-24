@@ -1,7 +1,7 @@
 // Movie search API on success fetch
-import MovieSearchItem from "./MovieSearchItem";
+import IMovieResultItem from "./IMovieResultItem";
 
-export default interface MoviesSearchData {
+export default interface IMoviesSearchData {
     page: number;
     total_results: number;
     total_pages: number;
@@ -10,8 +10,8 @@ export default interface MoviesSearchData {
 
 /**
  * An object where each key corresponds to the index
- * of a MovieSearchItem[] array to get its value
+ * of a IMovieResultItem[] array to get its value
  * */
 export interface ResultItemsObject {
-    [key: number]: MovieSearchItem | undefined
+    [key: number]: IMovieResultItem | undefined
 }

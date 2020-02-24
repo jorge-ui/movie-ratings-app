@@ -1,4 +1,4 @@
-export default interface MovieSearchItem {
+export default interface IMovieResultItem {
     popularity: number;
     vote_count: number;
     video: boolean;

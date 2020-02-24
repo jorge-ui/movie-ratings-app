@@ -1,0 +1,17 @@
+@import 'styles/breakpoints';
+
+.root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: background-color 400ms linear;
+}
+
+@include media('>md') {
+  .root {
+    // TODO: fix for IE browser
+    filter: blur(45px);
+  }
+}

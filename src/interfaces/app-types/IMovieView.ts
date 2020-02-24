@@ -1,4 +1,4 @@
-export default interface Movie {
+export default interface IMovieView {
     adult: boolean;
     backdrop_path: string;
     belongs_to_collection?: any;

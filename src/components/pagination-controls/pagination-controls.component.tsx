@@ -17,7 +17,8 @@ type Props = OwnProps
 
 class PaginationControls extends React.Component<Props> {
 
-    keydownListener(e: KeyboardEvent) {
+    keydownListener = (e: KeyboardEvent) => {
+        if (document.activeElement?.id === "search-bar-input") return;
         let {goToNextPage, goToPreviousPage, totalPages} = this.props;
         if (totalPages)
             switch (e.code) {
@@ -28,18 +29,14 @@ class PaginationControls extends React.Component<Props> {
                 default:
                     break;
             }
-    }
+    };
 
     componentDidMount(): void {
-        window.addEventListener("keydown", this.keydownListener.bind(this));
+        window.addEventListener("keydown", this.keydownListener);
     }
 
     componentWillUnmount(): void {
-        window.removeEventListener("keydown", this.keydownListener.bind(this));
-    }
-
-    shouldComponentUpdate(nextProps: Readonly<Props>): boolean {
-        return nextProps.currentPage !== this.props.currentPage;
+        window.removeEventListener("keydown", this.keydownListener);
     }
 
     render() {

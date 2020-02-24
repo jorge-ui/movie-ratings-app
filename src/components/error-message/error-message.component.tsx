@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
-import MoviesSearchError from "../../interfaces/app-types/MoviesSearchError";
+import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
 import styles from './error-message.module.scss';
 
 
 interface OwnProps {
-    error: MoviesSearchError,
+    error: IMoviesSearchError,
     className?: string
 }
 

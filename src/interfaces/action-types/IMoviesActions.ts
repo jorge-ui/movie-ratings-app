@@ -1,5 +1,5 @@
-import MoviesSearchData, {ResultItemsObject} from "../app-types/MoviesSearchData";
-import MoviesSearchError from "../app-types/MoviesSearchError";
+import IMoviesSearchData, {ResultItemsObject} from "../app-types/IMoviesSearchData";
+import IMoviesSearchError from "../app-types/IMoviesSearchError";
 import IReduxBaseAction from "./IReduxBaseAction";
 
 export enum MovieActionTypes {
@@ -16,11 +16,11 @@ interface FetchMoviesStart extends IReduxBaseAction {
 }
 export interface FetchMoviesSuccess extends IReduxBaseAction {
   type: typeof MovieActionTypes.FETCH_MOVIES_SUCCESS;
-  payload: { data: MoviesSearchData; searchTerm: string };
+  payload: { data: IMoviesSearchData; searchTerm: string };
 }
 export interface FetchMoviesFailure extends IReduxBaseAction {
   type: typeof MovieActionTypes.FETCH_MOVIES_FAILURE;
-  payload: MoviesSearchError;
+  payload: IMoviesSearchError;
 }
 
 
@@ -36,7 +36,7 @@ export interface FetchMoreMoviesSuccess extends IReduxBaseAction {
 }
 export interface FetchMoreMoviesFailure extends IReduxBaseAction {
   type: typeof MovieActionTypes.FETCH_MORE_MOVIES_FAILURE;
-  payload: MoviesSearchError;
+  payload: IMoviesSearchError;
 }
 
 

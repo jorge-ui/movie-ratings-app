@@ -21,10 +21,10 @@ import appProperties from "../../appProperties";
 import ErrorMessage from "../../components/error-message/error-message.component";
 import LoadingSpinner from "../../components/loading-spinner/loading-spinner.component";
 import {animated} from "react-spring";
-import {easeOutQuad} from '../../util/easingFuctions';
 import {Transition} from "react-spring/renderprops";
+import MovieItemView from "../../components/movie-item-view/movie-item-view.component";
 
-const {perPageResultsItems} = appProperties;
+const {perPageResultsItems, searchPageTransitionConfig} = appProperties;
 
 interface State {
     currentPage: number,
@@ -43,20 +43,21 @@ class SearchPage extends React.Component<Props, State> {
     checkIfFetchMore = (currentPage: number) => {
         if (!currentPage) return; // do nothing
 
-        let {totalApiPages, apiFetchedPages} = this.props;
+        let {totalApiPages, apiFetchedPages, onFetchMoreMoviesAsync} = this.props;
 
         let totalViewedOnPortion = currentPage * perPageResultsItems;
         let nextPageOnApi = Math.ceil((totalViewedOnPortion + perPageResultsItems) / 20);
         if (nextPageOnApi <= totalApiPages && !apiFetchedPages.includes(nextPageOnApi) && !window.apiNowFetchingPages.has(nextPageOnApi))
-            this.props.fetchMoreMoviesAsync(nextPageOnApi);
+            setTimeout(() => onFetchMoreMoviesAsync(nextPageOnApi), 250);
     };
 
     goToNextPage = () => {
         let {currentPage, totalPages} = this.state;
         if (currentPage < totalPages) {
-            this.checkIfFetchMore(currentPage+1);
+            let nextPage = currentPage + 1;
+            this.checkIfFetchMore(nextPage);
             this.setState({
-                currentPage: currentPage + 1
+                currentPage: nextPage
             });
         }
     };
@@ -64,16 +65,17 @@ class SearchPage extends React.Component<Props, State> {
         let {currentPage} = this.state;
         if (currentPage > 1)
             this.setState({
-                currentPage: currentPage-1
+                currentPage: currentPage - 1
             });
     };
 
     shouldComponentUpdate(nextProps: Readonly<Props>, nextState: Readonly<State>, nextContext: any): boolean {
-        if(nextProps.isFetching !== this.props.isFetching)
+        let {state: nowState, props: nowProps} = this;
+        if (nextProps.isFetching !== nowProps.isFetching)
             return true;
-        else if(nextState.currentPage !== this.state.currentPage)
+        else if (nextState.currentPage !== nowState.currentPage || (nextState.totalPages !== nowState.totalPages && nextState.totalPages))
             return true;
-        else return nextProps.apiFetchedPages.length !== this.props.apiFetchedPages.length;
+        else return nextProps.apiFetchedPages.length !== nowProps.apiFetchedPages.length;
     }
 
     componentDidUpdate(prevProps: Readonly<Props>): void {
@@ -81,10 +83,10 @@ class SearchPage extends React.Component<Props, State> {
         let {currentSearchTerm: prevCurrentSearchTerm} = prevProps;
         let {currentSearchTerm, totalResults} = this.props;
 
-        if(prevCurrentSearchTerm !== currentSearchTerm && !!currentSearchTerm) {
+        if (prevCurrentSearchTerm !== currentSearchTerm && !!currentSearchTerm) {
             this.setState({
                 currentPage: 1,
-                totalPages: Math.ceil(totalResults/perPageResultsItems)
+                totalPages: Math.ceil(totalResults / perPageResultsItems)
             });
         }
     }
@@ -94,7 +96,7 @@ class SearchPage extends React.Component<Props, State> {
             totalResults,
             currentSearchTerm,
             searchError,
-            isFetching
+            isFetching,
         } = this.props;
         let {currentPage, totalPages} = this.state;
 
@@ -116,12 +118,13 @@ class SearchPage extends React.Component<Props, State> {
                         : !!currentPage &&
                         <Transition items={currentPage} keys={currentPage} {...getTransitionConfig(isNextSlide)}>
                             {item => props =>
-                                <animated.div key={item} style={props} className={styles.animated}>
+                                <animated.div key={item} style={props} className={`${styles.animated} transition-page`}>
                                     <MovieResultsContainer page={item}/>
                                 </animated.div>
                             }
                         </Transition>
                 }
+                <MovieItemView/>
             </div>
         );
     }
@@ -133,13 +136,13 @@ const mapStateToProps = (state: AppState) => ({
     apiFetchedPages: selectMoviesFetchedPages(state),
     totalApiPages: selectMoviesTotalPages(state),
     searchError: selectMoviesSearchError(state),
-    isFetching: selectMoviesIsFetching(state)
+    isFetching: selectMoviesIsFetching(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<IMoviesActions>) =>
     bindActionCreators(
         {
-            fetchMoreMoviesAsync
+            onFetchMoreMoviesAsync: fetchMoreMoviesAsync
         },
         dispatch
     );
@@ -147,9 +150,13 @@ const mapDispatchToProps = (dispatch: Dispatch<IMoviesActions>) =>
 function getTransitionConfig(isNextSlide: boolean) {
     let xOffset = "7%";
     return {
+        initial: {
+            opacity: 0,
+            transform: `translateX(0.0)`,
+        },
         from: {
             opacity: -.2,
-            transform: `translateX(${(isNextSlide ? '' : '-')+xOffset})`
+            transform: `translateX(${(isNextSlide ? '' : '-') + xOffset})`
         },
         enter: {
             opacity: 1,
@@ -157,13 +164,10 @@ function getTransitionConfig(isNextSlide: boolean) {
         },
         leave: {
             opacity: -.2,
-            transform: `translateX(${(isNextSlide ? '-' : '')+xOffset})`
+            transform: `translateX(${(isNextSlide ? '-' : '') + xOffset})`
         },
-        config: {
-            duration: 400,
-            easing: easeOutQuad,
-        },
-        unique: true
+        config: searchPageTransitionConfig,
+        unique: true,
     };
 }
 

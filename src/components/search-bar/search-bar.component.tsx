@@ -35,14 +35,22 @@ const SearchBar: FC<Props> = ({className, fetchMoviesAsync, currentSearchTerm}) 
     useEffect(() => {
         const listener = (e: KeyboardEvent) => {
             let element = inputRef.current;
-            if (!!element && e.code === "Slash" && document.activeElement !== element)
-                setTimeout(
-                    () => {
-                        (element as HTMLInputElement).focus();
-                        (element as HTMLInputElement).select();
-                    },
-                    50
-                );
+            switch (e.code) {
+                case "Slash":
+                    if (!!element && document.activeElement !== element)
+                        setTimeout(() => {
+                            (element as HTMLInputElement).focus();
+                            (element as HTMLInputElement).select();
+                        },50);
+                    break;
+                case "Escape":
+                    if (!!element && document.activeElement === element)
+                        (element as HTMLInputElement).blur();
+                    break;
+                default:
+                    break;
+            }
+
         };
         window.addEventListener("keydown", listener);
         return () => window.removeEventListener("keydown", listener);
@@ -57,6 +65,9 @@ const SearchBar: FC<Props> = ({className, fetchMoviesAsync, currentSearchTerm}) 
                     helperText={error}
                     onBlur={() => setError("")}
                     inputRef={inputRef}
+                    inputProps={{
+                        id: "search-bar-input"
+                    }}
                 />
             </form>
         </div>

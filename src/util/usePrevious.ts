@@ -1,7 +1,7 @@
 import {useRef, useEffect, MutableRefObject} from 'react';
 
-function usePrevious(value: number) {
-  const ref: MutableRefObject<number | undefined> = useRef();
+function usePrevious(value: any) {
+  const ref: MutableRefObject<any | undefined> = useRef();
   useEffect(() => {
     ref.current = value;
   }, [value]);

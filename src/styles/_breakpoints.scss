@@ -5,6 +5,14 @@ $breakPoint-md: 960px;
 $breakPoint-lg: 1280px;
 $breakPoint-xl: 1920px;
 
+$breakpoints: (
+        'xs': 0px,
+        'sm': 600px,
+        'md': 960px,
+        'lg': 1280px,
+        'xl': 1920px
+) !default;
+
 
 //     _            _           _                           _ _
 //    (_)          | |         | |                         | (_)
@@ -37,11 +45,6 @@ $breakPoint-xl: 1920px;
 /// @example scss - Creates a single breakpoint with the label `phone`
 ///  $breakpoints: ('phone': 320px);
 ///
-$breakpoints: (
-        'phone': 600px,
-        'tablet': 960px,
-        'desktop': 1280px
-) !default;
 
 
 ///

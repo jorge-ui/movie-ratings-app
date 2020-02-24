@@ -1,0 +1,10 @@
+@import 'styles/shape';
+
+.root {
+  box-sizing: border-box;
+  border-radius: $appBorderRadius;
+  overflow: hidden;
+  position: fixed;
+  .movieItem {
+  }
+}

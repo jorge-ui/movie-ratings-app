@@ -1,5 +1,5 @@
 import IReduxBaseAction from "./IReduxBaseAction";
-import MovieSearchItem from "../app-types/MovieSearchItem";
+import IMovieResultItem from "../app-types/IMovieResultItem";
 
 export enum ResultsPagingActionTypes {
     GO_TO_NEXT_RESULTS_PAGE = "GO_TO_NEXT_RESULTS_PAGE",
@@ -19,7 +19,7 @@ interface GoToPreviousResultsPage extends IReduxBaseAction {
 
 interface SetPagingPortion extends IReduxBaseAction {
     type: typeof ResultsPagingActionTypes.SET_PAGING_PORTION,
-    payload: { resultsPortion: (MovieSearchItem | undefined)[], page: number }
+    payload: { resultsPortion: (IMovieResultItem | undefined)[], page: number }
 }
 
 interface InitPagingPortion extends IReduxBaseAction {

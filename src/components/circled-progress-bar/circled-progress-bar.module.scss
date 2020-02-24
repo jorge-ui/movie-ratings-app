@@ -8,15 +8,15 @@
   position: relative;
   @include flexCentered();
   width: fit-content;
-  opacity: .95;
   cursor: default;
+  transition: opacity 800ms ease-out;
   .scoreValue {
     position: absolute;
     opacity: .9;
   }
 }
 
-@include media(">tablet") {
+@include media(">md") {
   .root {
     svg {
       filter: drop-shadow(0 0 4px black);

@@ -1,38 +1,57 @@
-import React from "react";
-import MovieSearchItem from "../../interfaces/app-types/MovieSearchItem";
+import React, {ReactElement} from "react";
+import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import {Card, CardContent} from "@material-ui/core";
 import styles from "./movie-result-item.module.scss";
 import ImageIcon from "@material-ui/icons/Image";
 import CircledProgressBar from "../circled-progress-bar/circled-progress-bar.component";
-import {isMobile} from "../../util/utilityFunctions";
+import {IMovieItemActions} from "../../interfaces/action-types/IMovieItemActions";
+import {bindActionCreators, Dispatch} from "redux";
+import {clearMovieItem, setMovieItem} from "../../redux/movie-item/movie-item.actions";
+import {connect} from "react-redux";
+import MovieItemImgBg from "../movie-item-img-bg/movie-item-img-bg.component";
+import appProperties from "../../appProperties";
+const {posterSrcPathPrefix} = appProperties;
 
-const {REACT_APP_API_KEY} = process.env;
-
-interface Props {
-    movie: MovieSearchItem;
+interface OwnProps {
+    movie: IMovieResultItem;
+    itemView?: boolean;
+    itemViewBg?: ReactElement,
+    className?: string;
 }
+
+type Props = OwnProps & ReturnType<typeof mapDispatchToProps>
 
 class MovieResultItem extends React.Component<Props> {
 
-    shouldComponentUpdate() {
-        return false;
+    itemRef = React.createRef<HTMLDivElement>();
+
+    shouldComponentUpdate(nextProps: Readonly<Props>) {
+        return !!nextProps && (!!nextProps.itemView);
     }
 
+    handleItemClick = (movie: IMovieResultItem) => {
+        let domRect = (this.itemRef.current as HTMLDivElement).getBoundingClientRect();
+        if (!this.props.itemView)
+            this.props.onSetMovieItem(movie, domRect);
+        else this.props.onClearMovieItem();
+    };
+
     render() {
-        let {movie} = this.props;
-        let {poster_path: img_url, title, vote_average, release_date} = movie;
+        let {movie, className, itemView = false} = this.props;
+        let {poster_path, title, vote_average, release_date} = movie;
+
+        let imgSrcPath = `${posterSrcPathPrefix}${poster_path}`;
 
         return (
-            <Card className={`${styles.root} movie-item`}>
-                {!isMobile() && img_url &&
-                <img src={`https://image.tmdb.org/t/p/w300${img_url}`} className={styles.backImage}
-                     alt={'movie-poster'}/>}
+            <Card className={`${styles.root} movie-item ${!!className && className}`}
+                  ref={this.itemRef} item-view={String(itemView)}>
+                <MovieItemImgBg img_path={poster_path} movieId={movie.id} itemView={itemView}/>
                 <div className={styles.imageWrapper}>
-                    <a href={`https://api.themoviedb.org/3/movie/${movie.id}?api_key=${REACT_APP_API_KEY}`}
-                       style={{backgroundImage: img_url && `url("https://image.tmdb.org/t/p/w300${img_url}")`}}
-                       className={styles.image}>
-                        {!img_url && <ImageIcon className={styles.imageIcon}/>}
-                    </a>
+                    <div style={{backgroundImage: poster_path && `url("${imgSrcPath}")`}}
+                         onClick={() => this.handleItemClick(movie)}
+                         className={styles.image}>
+                        {!poster_path && <ImageIcon className={styles.imageIcon}/>}
+                    </div>
                 </div>
                 <CardContent className={styles.content}>
                     <div className={styles.wrapper}>
@@ -52,4 +71,13 @@ class MovieResultItem extends React.Component<Props> {
     }
 }
 
-export default MovieResultItem;
+const mapDispatchToProps = (dispatch: Dispatch<IMovieItemActions>) =>
+    bindActionCreators(
+        {
+            onSetMovieItem: setMovieItem,
+            onClearMovieItem: clearMovieItem
+        },
+        dispatch
+    );
+
+export default connect(null, mapDispatchToProps)(MovieResultItem);

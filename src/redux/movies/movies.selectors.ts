@@ -1,8 +1,8 @@
 import {createSelector, Selector} from "reselect";
 import {AppState} from "../root-reducer";
 import {MoviesState} from "./movies.reducer";
-import MoviesSearchData from "../../interfaces/app-types/MoviesSearchData";
-import MovieSearchItem from "../../interfaces/app-types/MovieSearchItem";
+import IMoviesSearchData from "../../interfaces/app-types/IMoviesSearchData";
+import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import appProperties from "../../appProperties";
 
 const {perPageResultsItems} = appProperties;
@@ -43,7 +43,7 @@ export const selectMoviesTotalPages = createSelector(
 
 export const selectMoviesResultItems = createSelector(
     [selectMoviesSearchData, selectMoviesFetchedPagesLength],
-    (searchData, fetchedPagesLength) => fetchedPagesLength > 0 ? (searchData as MoviesSearchData).results : null
+    (searchData, fetchedPagesLength) => fetchedPagesLength > 0 ? (searchData as IMoviesSearchData).results : null
 );
 
 interface EmptyMovieItem {
@@ -54,7 +54,7 @@ const getPageFromProps = (state: object, props: {page: number}) => props.page;
 export const makeSelectMoviesResultsPortion = () => createSelector(
     [selectMoviesResultItems, selectMoviesTotalResultsFound, getPageFromProps],
     (resultItems, totalResults, currentPage) => {
-        let resultsPortion: (MovieSearchItem | EmptyMovieItem)[] = [];
+        let resultsPortion: (IMovieResultItem | EmptyMovieItem)[] = [];
         if (resultItems) {
             let grabIndex: number;
             let startIndex = (currentPage ? currentPage - 1 : currentPage) * perPageResultsItems;

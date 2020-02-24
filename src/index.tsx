@@ -11,7 +11,7 @@ import { StylesProvider } from '@material-ui/core/styles';
 
 declare global {
     interface Window {
-        apiNowFetchingPages: Set<number>
+        apiNowFetchingPages: Set<number>,
     }
 }
 window.apiNowFetchingPages = new Set<number>();

@@ -1,11 +1,11 @@
-import MoviesSearchData from "../../interfaces/app-types/MoviesSearchData";
-import MoviesSearchError from "../../interfaces/app-types/MoviesSearchError";
+import IMoviesSearchData from "../../interfaces/app-types/IMoviesSearchData";
+import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
 import {FetchMoviesSuccess, IMoviesActions, MovieActionTypes} from "../../interfaces/action-types/IMoviesActions";
 
 export interface MoviesState {
     currentSearchTerm: string;
-    searchData: MoviesSearchData | null;
-    searchError: MoviesSearchError | null;
+    searchData: IMoviesSearchData | null;
+    searchError: IMoviesSearchError | null;
     isFetching: boolean;
     isFetchingMore: boolean;
     apiFetchedPages: number[];
@@ -63,9 +63,9 @@ const moviesReducer = (
             return {
                 ...state,
                 searchData: {
-                    ...(state.searchData as MoviesSearchData),
+                    ...(state.searchData as IMoviesSearchData),
                     results: {
-                        ...(state.searchData as MoviesSearchData).results,
+                        ...(state.searchData as IMoviesSearchData).results,
                         ...action.payload.data
                     },
                     page: action.payload.fetchedPage

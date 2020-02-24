@@ -1,5 +1,9 @@
-import MovieSearchItem from "../interfaces/app-types/MovieSearchItem";
-import {ResultItemsObject} from "../interfaces/app-types/MoviesSearchData";
+import IMovieResultItem from "../interfaces/app-types/IMovieResultItem";
+import {ResultItemsObject} from "../interfaces/app-types/IMoviesSearchData";
+import IMovieImgSessionObj from "../interfaces/app-types/IMovieImgSessionObj";
+import appProperties from "../appProperties";
+import CanvasImgDataConverter from "./CanvasImgDataConverter";
+const {posterSrcPathPrefix} = appProperties;
 
 export function wait(time: number) {
     return new Promise((resolve) => {
@@ -58,15 +62,107 @@ export function hslToHex([h, s, l]: [number, number, number]): string {
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
+// export function getJpgDataAndAverageRGB(imgEl: HTMLImageElement): IMovieImgSessionObj | Error  {
+
+    // let canvas = document.createElement('canvas');
+    // let context = canvas.getContext && canvas.getContext('2d');
+    // console.log("created new context");
+    //
+    // if (!context) {
+    //     throw new Error("canvas context not supported");
+    // }
+    //
+    // let blockSize = 5, // only visit every 5 pixels
+    //     data, width, height,
+    //     i = -4,
+    //     length,
+    //     rgb = {r: 0, g: 0, b: 0}, jpgData = '',
+    //     count = 0;
+    //
+    //
+    //
+    // height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
+    // width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
+    //
+    // context.drawImage(imgEl, 0, 0);
+    //
+    // try {
+    //     data = context.getImageData(0, 0, width, height);
+    //     jpgData = canvas.toDataURL("image/jpeg", .1);
+    // } catch(e) {
+    //     throw new Error(e);
+    // }
+    //
+    // length = data.data.length;
+    //
+    // while ( (i += blockSize * 4) < length ) {
+    //     ++count;
+    //     rgb.r += data.data[i];
+    //     rgb.g += data.data[i+1];
+    //     rgb.b += data.data[i+2];
+    // }
+    //
+    // // ~~ used to floor values
+    // rgb.r = ~~(rgb.r/count);
+    // rgb.g = ~~(rgb.g/count);
+    // rgb.b = ~~(rgb.b/count);
+    //
+    // return {
+    //     jpgData,
+    //     averageColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
+    // };
+
+// }
+
 /**
- * Converts MovieSearchItem[] to ResultItemsObject
+ * Converts IMovieResultItem[] to ResultItemsObject
  * @see ResultItemsObject
- * @see MovieSearchItem
+ * @see IMovieResultItem
  * @return {ResultItemsObject} The transformed array to a map(object)
  * */
-export function convertResultsData(results: MovieSearchItem[], page: number): ResultItemsObject {
+export function convertResultsData(results: IMovieResultItem[], page: number = 1): ResultItemsObject {
     let transformedData: ResultItemsObject = {};
     let startIndex = (page - 1) * 20;
     results.forEach((value, index) => transformedData[startIndex+index] = value);
     return transformedData;
+}
+
+export function cacheResultsPostersOnSession(results: IMovieResultItem[] | undefined): void {
+    if (!results) return;
+
+    results.forEach(({poster_path, id}) => {
+        if (poster_path) {
+            if (sessionStorage.getItem(String(id))) return;
+
+            let img = new Image();
+            img.crossOrigin = "anonymous";
+            img.onload = function () {
+                try {
+                    let movieImgDataObj = (CanvasImgDataConverter.makeMovieImgSessionObj(img) as IMovieImgSessionObj);
+                    saveMovieImgDataOnSession(movieImgDataObj, id);
+                } catch (e) { console.error(e); }
+            };
+            img.src = `${posterSrcPathPrefix}${poster_path}`;
+        }
+    });
+}
+
+function saveMovieImgDataOnSession(movieImgSessionObj: IMovieImgSessionObj, movieId: number) {
+    sessionStorage.setItem(String(movieId), JSON.stringify(movieImgSessionObj));
+}
+
+export function getMovieImgObjFromSession(movieId: number): IMovieImgSessionObj | undefined {
+    let movieImgDataObj: IMovieImgSessionObj | undefined;
+    let imgJsonData  = sessionStorage.getItem(String(movieId));
+
+    if (imgJsonData)
+        movieImgDataObj = (JSON.parse(imgJsonData) as IMovieImgSessionObj);
+
+    return movieImgDataObj;
+}
+
+export function clearMultipleTimeouts(...timeouts: (NodeJS.Timeout | undefined)[]): void {
+    for (let timeout of timeouts)
+        if(timeout)
+            clearTimeout(timeout);
 }
