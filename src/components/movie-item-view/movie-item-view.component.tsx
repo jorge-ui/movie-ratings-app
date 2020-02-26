@@ -17,7 +17,6 @@ type Props = OwnProps & ReturnType<typeof mapStateToProps>;
 
 const MovieItemView: FC<Props> = ({className, item: movie, domRect}) => {
 
-    // @ts-ignore
 
     let transitionConfig = getTransitionConfig(movie, domRect);
     let prevConfig = usePrevious(transitionConfig);
@@ -27,22 +26,19 @@ const MovieItemView: FC<Props> = ({className, item: movie, domRect}) => {
     return (
         <Transition items={movie} keys={movie?.id} {...appliedConfig} >
             {(item: IMovieResultItem | null) => item && ((props) =>
-                <animated.div key={item.id} className={`${className ? className : null} ${styles.root}`} style={props}>
-                    <MovieResultItem movie={item} itemView/>
+                <animated.div key={item.id} className={`${className ? className : ''} ${styles.root}`} style={props}>
+                    <div className={styles.viewWrapper} >
+                        <MovieResultItem movie={item} itemView className={styles.movieItem}/>
+                    </div>
                 </animated.div>
             )}
         </Transition>
     );
 };
 
-const mapStateToProps = ({movieItem: {domRect, item}}: AppState) => ({
-    domRect,
-    item
-});
-
-function getTransitionConfig(movie: IMovieResultItem | null, domRect: DOMRect | undefined) {
+function getTransitionConfig(movie: IMovieResultItem | null, domRect: DOMRect | null) {
     let animatedDiv = document.querySelector<HTMLDivElement>(".transition-page");
-    if (movie != null && !!animatedDiv && domRect !== undefined) {
+    if (!!movie && !!animatedDiv && !!domRect) {
         let animatedDomRect = animatedDiv.getBoundingClientRect();
 
         let initialPosition = {
@@ -55,9 +51,9 @@ function getTransitionConfig(movie: IMovieResultItem | null, domRect: DOMRect | 
         return {
             from: initialPosition,
             enter: {
-                top: window.innerHeight*.15,
+                top: window.innerHeight*.10,
                 left: animatedDomRect?.x,
-                bottom: 0,
+                bottom: -10,
                 width: animatedDomRect?.width
             },
             leave: {
@@ -70,9 +66,32 @@ function getTransitionConfig(movie: IMovieResultItem | null, domRect: DOMRect | 
             config: {
                 ...config.stiff,
                 tension: config.stiff.tension && config.stiff.tension*1.3
+            },
+            onStart: (item: IMovieResultItem | null, state: string) => {
+                if (state === "enter" && item)
+                    document.dispatchEvent(new CustomEvent("itemView", {
+                        detail: {
+                            movieId: item.id,
+                            visibility: "hidden"
+                        }
+                    }))
+            },
+            onRest: (item: IMovieResultItem | null, state: string) => {
+                if (state === "leave" && item)
+                    document.dispatchEvent(new CustomEvent("itemView", {
+                        detail: {
+                            movieId: item.id,
+                            visibility: "visible"
+                        }
+                    }))
             }
         }
     } else return null;
 }
+
+const mapStateToProps = ({movieItem: {domRect, item}}: AppState) => ({
+    domRect,
+    item
+});
 
 export default connect(mapStateToProps)(MovieItemView);

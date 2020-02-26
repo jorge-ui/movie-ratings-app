@@ -11,6 +11,7 @@ import { StylesProvider } from '@material-ui/core/styles';
 
 declare global {
     interface Window {
+        __REDUX_DEVTOOLS_EXTENSION__: (()=>void) | undefined;
         apiNowFetchingPages: Set<number>,
     }
 }
@@ -35,9 +36,12 @@ renderApp(App);
 
 
 // @ts-ignore (this enables hot reloading)
-if (process.env.NODE_ENV === 'development') module.hot && module.hot.accept('./App', () => {
-    const NextApp = require('./App').default;
-    renderApp(NextApp);
+if (process.env.NODE_ENV === 'development') module.hot && module.hot.accept(['./App','./pages/search-page/search-page.component'], () => {
+    // @ts-ignore
+    let movieView: HTMLDivElement | undefined = document.querySelector('.MuiContainer-root').firstElementChild.childNodes[2];
+
+    if (!movieView)
+        renderApp(require('./App').default);
 });
 
 // If you want your app to work offline and load faster, you can change

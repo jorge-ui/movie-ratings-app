@@ -55,6 +55,7 @@ const SearchBar: FC<Props> = ({className, fetchMoviesAsync, currentSearchTerm}) 
         window.addEventListener("keydown", listener);
         return () => window.removeEventListener("keydown", listener);
     }, []);
+
     return (
         <div className={styles.root + " " + className}>
             <form autoComplete="off" onSubmit={onSubmit}>

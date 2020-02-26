@@ -35,10 +35,19 @@ type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchT
 let prevPage: number;
 
 class SearchPage extends React.Component<Props, State> {
-    state = {
-        currentPage: 0,
-        totalPages: 0
-    };
+    // state = { //TODO: initial state
+    //     currentPage: 0,
+    //     totalPages: 0
+    // };
+
+    constructor(props: Readonly<Props>) { //TODO: possibly remove this constructor (dev only)
+        super(props);
+        let {currentSearchTerm, totalResults} = this.props;
+        this.state = { //TODO: state hardcoded for dev purpose (initial = { currentPage: 0, totalPages: 0 }
+            currentPage: currentSearchTerm ? 1 : 0,
+            totalPages: Math.ceil(totalResults / perPageResultsItems)
+        };
+    }
 
     checkIfFetchMore = (currentPage: number) => {
         if (!currentPage) return; // do nothing
@@ -83,7 +92,7 @@ class SearchPage extends React.Component<Props, State> {
         let {currentSearchTerm: prevCurrentSearchTerm} = prevProps;
         let {currentSearchTerm, totalResults} = this.props;
 
-        if (prevCurrentSearchTerm !== currentSearchTerm && !!currentSearchTerm) {
+        if ((prevCurrentSearchTerm !== currentSearchTerm) && !!currentSearchTerm) {
             this.setState({
                 currentPage: 1,
                 totalPages: Math.ceil(totalResults / perPageResultsItems)

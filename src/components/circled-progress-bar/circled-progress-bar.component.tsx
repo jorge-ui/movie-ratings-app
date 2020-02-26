@@ -6,6 +6,7 @@ import {easeOutQuad} from "../../util/easingFuctions";
 
 interface OwnProps {
     score: number;
+    itemView: boolean;
 }
 
 type Props = OwnProps;
@@ -21,7 +22,7 @@ const maxScoreColor: [number, number, number] = [117, 88, 67];
 const backFill = "rgba(0, 0, 0, .25)";
 const backStroke = "#5d5d5d";
 
-const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
+const CircledProgressBar: FC<Props> = ({score, itemView = false, ...rest}) => {
     const rootRef = useRef<HTMLDivElement>(null);
     const progressRef: RefObject<SVGCircleElement> = useRef(null);
     const progressMultiplier = score / 10;
@@ -35,8 +36,8 @@ const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
     const strokeDashOffsetVal = circleCircumference - progressValue;
 
     const [props, set] = useSpring(() => ({
-        stroke: hslToHex(minScoreColor),
-        strokeDashoffset: circleCircumference,
+        stroke: hslToHex(!itemView ? minScoreColor : progressColor),
+        strokeDashoffset: !itemView ? circleCircumference : strokeDashOffsetVal,
         config: {
             duration: 3000 * progressMultiplier,
             easing: easeOutQuad
@@ -46,7 +47,7 @@ const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
     useEffect(onComponentMount, []);
 
     return (
-        <div className={styles.root} {...rest} style={{ opacity: 0 }} ref={rootRef}>
+        <div className={styles.root} {...rest} style={{ opacity: itemView ? 1 : 0 }} ref={rootRef}>
             <svg height="100%" width={viewBoxSize} viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
                           overflow={"visible"} >
                 <circle
@@ -79,14 +80,15 @@ const CircledProgressBar: FC<Props> = ({score, ...rest}) => {
     );
 
     function onComponentMount() {
-        let timeout1: (NodeJS.Timeout | undefined), timeout2: (NodeJS.Timeout | undefined);
+        let timeout1: (NodeJS.Timeout | undefined);
+        let timeout2: (NodeJS.Timeout | undefined) = undefined;
 
         let {current} = rootRef;
 
         timeout1 = setTimeout(() => {
             current && (current.style.opacity = ".95");
             timeout2 = setTimeout(() => {
-                animateProgress();
+                !itemView && animateProgress();
             },400);
         }, 450);
 

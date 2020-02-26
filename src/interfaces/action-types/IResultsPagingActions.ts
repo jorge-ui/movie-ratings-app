@@ -1,5 +1,5 @@
-import IReduxBaseAction from "./IReduxBaseAction";
 import IMovieResultItem from "../app-types/IMovieResultItem";
+import {AnyAction as ReduxAnyAction} from "redux";
 
 export enum ResultsPagingActionTypes {
     GO_TO_NEXT_RESULTS_PAGE = "GO_TO_NEXT_RESULTS_PAGE",
@@ -9,27 +9,28 @@ export enum ResultsPagingActionTypes {
     RESET_PAGING = "RESET_PAGING"
 }
 
-interface GoToNextResultsPage extends IReduxBaseAction {
+interface GoToNextResultsPage extends ReduxAnyAction {
     type: typeof ResultsPagingActionTypes.GO_TO_NEXT_RESULTS_PAGE;
 }
 
-interface GoToPreviousResultsPage extends IReduxBaseAction {
+interface GoToPreviousResultsPage extends ReduxAnyAction {
     type: typeof ResultsPagingActionTypes.GO_TO_PREVIOUS_RESULTS_PAGE;
 }
 
-interface SetPagingPortion extends IReduxBaseAction {
+interface SetPagingPortion extends ReduxAnyAction {
     type: typeof ResultsPagingActionTypes.SET_PAGING_PORTION,
     payload: { resultsPortion: (IMovieResultItem | undefined)[], page: number }
 }
 
-interface InitPagingPortion extends IReduxBaseAction {
+interface InitPagingPortion extends ReduxAnyAction {
     type: typeof ResultsPagingActionTypes.INIT_PAGING,
     payload: { total_results: number, totalPaging: number }
 }
 
-interface ResetPaging extends IReduxBaseAction {
+interface ResetPaging extends ReduxAnyAction {
     type: typeof ResultsPagingActionTypes.RESET_PAGING
 }
+
 
 export type IResultsPagingActions =
     | GoToNextResultsPage

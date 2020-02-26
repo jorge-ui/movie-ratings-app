@@ -18,7 +18,7 @@ type Props = OwnProps;
 
 const opacityReveal = .4;
 
-const MovieItemImgBg: FC<Props> = ({img_path, className, movieId, itemView = false}) => {
+const MovieItemImgBg: FC<Props> = ({img_path, className, movieId, itemView}) => {
     let timeout1: NodeJS.Timeout | undefined,
         timeout2: NodeJS.Timeout | undefined;
 
@@ -80,6 +80,10 @@ const MovieItemImgBg: FC<Props> = ({img_path, className, movieId, itemView = fal
         return clearMultipleTimeouts.bind(null, timeout1, timeout2);
     }
 
+};
+
+MovieItemImgBg.defaultProps = {
+    itemView: false
 };
 
 

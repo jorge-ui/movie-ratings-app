@@ -25,14 +25,42 @@ class MovieResultItem extends React.Component<Props> {
 
     itemRef = React.createRef<HTMLDivElement>();
 
+    onItemView = ({detail: {movieId, visibility}}: CustomEvent) => {
+        if (movieId === this.props.movie.id) {
+            let {current} = this.itemRef;
+            if (current) {
+                current.style.visibility = visibility;
+
+                if (visibility === "visible") {
+                    void current.offsetWidth;
+                    current.classList.add(styles.runAnimation);
+                } else current.classList.remove(styles.runAnimation);
+            }
+        }
+    };
+
+    componentDidMount() {
+        if (!this.props.itemView) {
+            // @ts-ignore
+            document.addEventListener("itemView", this.onItemView);
+        }
+    }
+    componentWillUnmount() {
+        if (!this.props.itemView) {
+            // @ts-ignore
+            document.removeEventListener("itemView", this.onItemView);
+        }
+    }
+
     shouldComponentUpdate(nextProps: Readonly<Props>) {
-        return !!nextProps && (!!nextProps.itemView);
+        return false;
     }
 
     handleItemClick = (movie: IMovieResultItem) => {
-        let domRect = (this.itemRef.current as HTMLDivElement).getBoundingClientRect();
-        if (!this.props.itemView)
+        if (!this.props.itemView) {
+            let domRect = (this.itemRef.current as HTMLDivElement).getBoundingClientRect();
             this.props.onSetMovieItem(movie, domRect);
+        }
         else this.props.onClearMovieItem();
     };
 
@@ -43,7 +71,7 @@ class MovieResultItem extends React.Component<Props> {
         let imgSrcPath = `${posterSrcPathPrefix}${poster_path}`;
 
         return (
-            <Card className={`${styles.root} movie-item ${!!className && className}`}
+            <Card className={`${styles.root} movie-item ${className ? className : ''}`}
                   ref={this.itemRef} item-view={String(itemView)}>
                 <MovieItemImgBg img_path={poster_path} movieId={movie.id} itemView={itemView}/>
                 <div className={styles.imageWrapper}>
@@ -61,7 +89,7 @@ class MovieResultItem extends React.Component<Props> {
                         </div>
                         <div className={styles.info}>
                             <div className={styles.infoWrapper}>
-                                <CircledProgressBar score={vote_average}/>
+                                <CircledProgressBar score={vote_average} itemView={itemView}/>
                             </div>
                         </div>
                     </div>

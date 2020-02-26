@@ -1,10 +1,18 @@
 @import 'styles/shape';
+@import 'styles/colors';
 
 .root {
   box-sizing: border-box;
-  border-radius: $appBorderRadius;
+  border-radius: $appBorderRadius $appBorderRadius 0 0;
   overflow: hidden;
   position: fixed;
-  .movieItem {
+  background-color: $movieCardBgColor;
+  .viewWrapper {
+    position: relative;
+    height: 100%;
+    .movieItem {
+      height: fit-content;
+      position: unset;
+    }
   }
 }
