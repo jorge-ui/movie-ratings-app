@@ -4,15 +4,19 @@
 
 .root {
   box-sizing: border-box;
-  height: 100%;
   position: relative;
   @include flexCentered();
   width: fit-content;
+  height: fit-content;
   cursor: default;
-  transition: opacity 800ms ease-out;
+  transition: opacity 400ms linear;
   .scoreValue {
     position: absolute;
     opacity: .9;
+  }
+  svg {
+    height: auto;
+    max-height: 72px;
   }
 }
 

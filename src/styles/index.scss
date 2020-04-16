@@ -1,4 +1,11 @@
 @import 'styles/colors';
+@import 'styles/breakpoints';
+@import 'styles/mixins';
+
+html {
+  background: $appBackground fixed;
+}
+
 
 body {
   margin: 0;
@@ -6,13 +13,9 @@ body {
   font-size: 15px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $appBackground;
-  box-sizing: border-box;
   min-height: 100vh;
-  overflow-x: hidden;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.loading-pulse {
+  @include loadingAnimation;
 }

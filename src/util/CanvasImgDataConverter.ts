@@ -11,9 +11,9 @@ class CanvasImgDataConverter {
         if (!context) {
             throw new Error("canvas context not supported");
         }
-
-        let blockSize = 5, // only visit every 5 pixels
-            data, width, height,
+        let data: ImageData;
+        let blockSize = 8, // only visit every 8 pixels
+            width, height,
             i = -4,
             length,
             rgb = {r: 0, g: 0, b: 0}, jpgData = '',
@@ -28,6 +28,7 @@ class CanvasImgDataConverter {
             data = context.getImageData(0, 0, width, height);
             jpgData = canvas.toDataURL("image/jpeg", .1);
         } catch(e) {
+            console.error(e)
             throw new Error(e);
         }
 

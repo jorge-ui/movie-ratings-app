@@ -6,7 +6,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="es6-promise.auto" level="application" />
-    <orderEntry type="library" name="es6-promise" level="application" />
+    <orderEntry type="library" name="@types/node-sass" level="application" />
   </component>
 </module>

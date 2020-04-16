@@ -1,15 +1,27 @@
-import IMoviesSearchData, {ResultItemsObject} from "../../interfaces/app-types/IMoviesSearchData";
+import IMoviesSearchData, { ResultItemsObject } from "../../interfaces/app-types/IMoviesSearchData";
 import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
-import {IMoviesActions, MovieActionTypes} from "../../interfaces/action-types/IMoviesActions";
-import {ThunkAction} from "redux-thunk";
-import {AppState} from "../root-reducer";
+import { IMoviesActions } from "./";
+import { ThunkAction } from "redux-thunk";
+import { AppState } from "../";
 import IMoviesSearchResponseData from "../../interfaces/app-types/IMoviesSearchResponseData";
-import {IResultsPagingActions} from "../../interfaces/action-types/IResultsPagingActions";
-import {cacheResultsPostersOnSession, convertResultsData} from "../../util/utilityFunctions";
+import { convertResultsData, getSearchParam, goFetchPostersOnWorker } from "../../util/utilityFunctions";
 import appProperties from "../../appProperties";
 
-const {buildApiFetchUrl} = appProperties;
+const {buildFetchMovieSearchUrl, perPageResultsItems} = appProperties;
 
+export enum MovieActionTypes {
+    FETCH_MOVIES_START = "FETCH_MOVIES_START",
+    FETCH_MOVIES_SUCCESS = "FETCH_MOVIES_SUCCESS",
+    FETCH_MOVIES_FAILURE = "FETCH_MOVIES_FAILURE",
+    FETCH_MORE_MOVIES_START = "FETCH_MORE_MOVIES_START",
+    FETCH_MORE_MOVIES_SUCCESS = "FETCH_MORE_MOVIES_SUCCESS",
+    FETCH_MORE_MOVIES_FAILURE = "FETCH_MORE_MOVIES_FAILURE",
+    CLEAR_FETCHED_MOVIES = "CLEAR_FETCHED_MOVIES",
+}
+
+export const clearFetchedMovies = (): IMoviesActions => ({
+    type: MovieActionTypes.CLEAR_FETCHED_MOVIES
+})
 
 export const fetchMoviesStart = (): IMoviesActions => ({
     type: MovieActionTypes.FETCH_MOVIES_START,
@@ -35,27 +47,26 @@ export const fetchMoviesFailure = (
 
 export const fetchMoviesAsync = (
     searchTerm: string
-): ThunkAction<void, AppState, null, IMoviesActions | IResultsPagingActions> => async dispatch => {
-    let {apiNowFetchingPages} = window;
+): ThunkAction<void, AppState, null, IMoviesActions> => async dispatch => {
     // Start
     dispatch(fetchMoviesStart());
     apiNowFetchingPages.add(1);
     try {
-        let res = await fetch(buildApiFetchUrl(searchTerm));
+        let res = await fetch(buildFetchMovieSearchUrl(searchTerm));
         if (res.status !== 200) {
             let error: IMoviesSearchError = await res.json();
             dispatch(fetchMoviesFailure(error)); // Failure
         } else {
             let data: IMoviesSearchResponseData = await res.json();
 
-            cacheResultsPostersOnSession(data.results);
+            goFetchPostersOnWorker(data.results);
 
             let transformedData: IMoviesSearchData = {
                 ...data,
                 results: convertResultsData(data.results)
             };
 
-            setTimeout(() => dispatch(fetchMoviesSuccess(transformedData, searchTerm)), 100); // Success
+            setTimeout(() => dispatch(fetchMoviesSuccess(transformedData, searchTerm)), 50); // Success
         }
     } catch (error) {
         dispatch(
@@ -92,29 +103,29 @@ export const fetchMoreMoviesFailure = (
 
 
 export const fetchMoreMoviesAsync = (
-    nextPage: number
+    nextPageOnApi: number, ...otherPagesOnApi: number[]
 ): ThunkAction<void, AppState, null, IMoviesActions> => async (
     dispatch,
     getState
 ) => {
-    let {apiNowFetchingPages} = window;
-    let searchTerm = getState().movies.currentSearchTerm;
+    let searchTerm = getSearchParam("s");
+    if (!searchTerm) return;
     // Start
     dispatch(fetchMoreMoviesStart());
-    apiNowFetchingPages.add(nextPage);
+    apiNowFetchingPages.add(nextPageOnApi);
     try {
-        let res = await fetch(buildApiFetchUrl(searchTerm, nextPage));
+        let res = await fetch(buildFetchMovieSearchUrl(searchTerm, nextPageOnApi));
         if (res.status !== 200) {
             let error: IMoviesSearchError = await res.json();
             dispatch(fetchMoreMoviesFailure(error)); // Failure
         } else {
             let data: IMoviesSearchResponseData = await res.json();
 
-            cacheResultsPostersOnSession(data.results);
+            goFetchPostersOnWorker(data.results);
 
-            let resultsObject = convertResultsData(data.results, nextPage);
+            let resultsObject = convertResultsData(data.results, nextPageOnApi);
 
-            setTimeout(() => dispatch(fetchMoreMoviesSuccess(resultsObject, nextPage)), 100); // Success
+            setTimeout(() => dispatch(fetchMoreMoviesSuccess(resultsObject, nextPageOnApi)), 50); // Success
         }
     } catch (error) {
         dispatch(
@@ -123,6 +134,34 @@ export const fetchMoreMoviesAsync = (
             })
         );
     } finally {
-        apiNowFetchingPages.delete(nextPage);
+        apiNowFetchingPages.delete(nextPageOnApi);
+        if (otherPagesOnApi.length) {
+            // @ts-ignore
+            dispatch(fetchMoreMoviesAsync(...otherPagesOnApi))
+        }
     }
 };
+
+export const checkIfFetchMore = (
+    pageOnUi: number
+): ThunkAction<void, AppState, null, IMoviesActions> => async (dispatch, getState) => {
+    if (!pageOnUi) return;
+
+    const { apiFetchedPages, searchData } = getState().movies;
+    const total_pages = searchData?.total_pages || 0;
+
+    const isFetchPage = (pageOnApi: number) => // this is a utility function
+        pageOnApi>0 && pageOnApi<=total_pages && !apiFetchedPages.includes(pageOnApi)
+        && !apiNowFetchingPages.has(pageOnApi);
+
+    let totalViewedOnPortion = pageOnUi * perPageResultsItems;
+
+    let nextPageViewOnApi = Math.ceil((totalViewedOnPortion + perPageResultsItems) / 20);
+
+    if (isFetchPage(nextPageViewOnApi))
+        dispatch(fetchMoreMoviesAsync(nextPageViewOnApi))
+    if (isFetchPage(nextPageViewOnApi - 1))
+        dispatch(fetchMoreMoviesAsync(nextPageViewOnApi - 1))
+    if (isFetchPage(nextPageViewOnApi - 2))
+        dispatch(fetchMoreMoviesAsync(nextPageViewOnApi - 2))
+}

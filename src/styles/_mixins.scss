@@ -1,3 +1,5 @@
+@import 'colors';
+
 @mixin multiLineYou($lines: 4) {
   -webkit-box-orient: vertical;
   display: -webkit-box;
@@ -7,8 +9,91 @@
   white-space: normal;
 }
 
-@mixin flexCentered() {
+@mixin flexCentered {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+@mixin customScrollbar($trackBg: #666666) {
+  &::-webkit-scrollbar {
+	width: 6px;
+	height: 6px;
+  }
+
+  &::-webkit-scrollbar-button {
+	width: 0;
+	height: 0;
+  }
+
+  &::-webkit-scrollbar-thumb {
+	background: #bfbfbf;
+	border: 0 none #ffffff;
+	border-radius: 50px;
+
+    &:hover {
+      background: #d2d2d2;
+    }
+
+    &:active {
+      background: #b5b5b5;
+    }
+  }
+
+
+  &::-webkit-scrollbar-track {
+	background: $trackBg;
+	border: 2px none #ffffff;
+	border-radius: 50px;
+
+    &:hover {
+      background: $trackBg;
+    }
+
+    &:active {
+      background: $trackBg;
+    }
+  }
+
+
+  &::-webkit-scrollbar-corner {
+	background: transparent;
+  }
+}
+
+@mixin bordered($color: red) {
+  border: 1px solid $color;
+  box-sizing: border-box;
+}
+
+@mixin loadingAnimation {
+  animation: loadingPulse 1s ease-in-out infinite alternate-reverse;
+}
+@mixin opacityAnimation {
+  animation: opacityPulse 1s ease-in-out infinite alternate-reverse;
+}
+
+@mixin posAllZero {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+@keyframes loadingPulse {
+  from {
+	  background-color: adjust_color($loadingColor, $alpha: -.65);
+  }
+  to {
+	  background-color: $loadingColor;
+  }
+}
+
+@keyframes opacityPulse {
+	from {
+		opacity: .35;
+	}
+	to {
+		opacity: 1;
+	}
 }

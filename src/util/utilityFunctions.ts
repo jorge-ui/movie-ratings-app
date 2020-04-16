@@ -1,9 +1,18 @@
 import IMovieResultItem from "../interfaces/app-types/IMovieResultItem";
-import {ResultItemsObject} from "../interfaces/app-types/IMoviesSearchData";
+import { ResultItemsObject } from "../interfaces/app-types/IMoviesSearchData";
 import IMovieImgSessionObj from "../interfaces/app-types/IMovieImgSessionObj";
 import appProperties from "../appProperties";
 import CanvasImgDataConverter from "./CanvasImgDataConverter";
-const {posterSrcPathPrefix} = appProperties;
+import WorkerFetchedDoneEvent from "../interfaces/custom-events-types/WorkerFetchedDoneEvent";
+import ImageDataEvent from "./custom-events/ImageDataEvent";
+import SearchParamsMap from "../interfaces/app-types/SearchParamsMap";
+import CustomURLSearchParams from "./custom-objects/CustomURLSearchParams";
+import IMovieView from "../interfaces/app-types/IMovieView";
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
+import { UserState } from "../redux/user";
+import TokenData from '../interfaces/app-types/TokenData';
+
+const { buildFetchMovieViewUrl, newSessionUrl, buildAccountUrl } = appProperties;
 
 export function wait(time: number) {
     return new Promise((resolve) => {
@@ -11,8 +20,8 @@ export function wait(time: number) {
     });
 }
 
-export function isMobile() {
-    return window.innerWidth < 600;
+export function checkIsMobile(): boolean {
+    return window.innerWidth <= 600;
 }
 
 export function hslInterval(
@@ -62,57 +71,6 @@ export function hslToHex([h, s, l]: [number, number, number]): string {
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 }
 
-// export function getJpgDataAndAverageRGB(imgEl: HTMLImageElement): IMovieImgSessionObj | Error  {
-
-    // let canvas = document.createElement('canvas');
-    // let context = canvas.getContext && canvas.getContext('2d');
-    // console.log("created new context");
-    //
-    // if (!context) {
-    //     throw new Error("canvas context not supported");
-    // }
-    //
-    // let blockSize = 5, // only visit every 5 pixels
-    //     data, width, height,
-    //     i = -4,
-    //     length,
-    //     rgb = {r: 0, g: 0, b: 0}, jpgData = '',
-    //     count = 0;
-    //
-    //
-    //
-    // height = canvas.height = imgEl.naturalHeight || imgEl.offsetHeight || imgEl.height;
-    // width = canvas.width = imgEl.naturalWidth || imgEl.offsetWidth || imgEl.width;
-    //
-    // context.drawImage(imgEl, 0, 0);
-    //
-    // try {
-    //     data = context.getImageData(0, 0, width, height);
-    //     jpgData = canvas.toDataURL("image/jpeg", .1);
-    // } catch(e) {
-    //     throw new Error(e);
-    // }
-    //
-    // length = data.data.length;
-    //
-    // while ( (i += blockSize * 4) < length ) {
-    //     ++count;
-    //     rgb.r += data.data[i];
-    //     rgb.g += data.data[i+1];
-    //     rgb.b += data.data[i+2];
-    // }
-    //
-    // // ~~ used to floor values
-    // rgb.r = ~~(rgb.r/count);
-    // rgb.g = ~~(rgb.g/count);
-    // rgb.b = ~~(rgb.b/count);
-    //
-    // return {
-    //     jpgData,
-    //     averageColor: `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`
-    // };
-
-// }
 
 /**
  * Converts IMovieResultItem[] to ResultItemsObject
@@ -127,24 +85,45 @@ export function convertResultsData(results: IMovieResultItem[], page: number = 1
     return transformedData;
 }
 
-export function cacheResultsPostersOnSession(results: IMovieResultItem[] | undefined): void {
-    if (!results) return;
+export function onWorkerFetchedDoneEvent({data: {blobUrl, id}} : WorkerFetchedDoneEvent) {
+    if(sessionStorage.getItem(String(id))) {
+        URL.revokeObjectURL(blobUrl);
+        return;
+    }
 
-    results.forEach(({poster_path, id}) => {
-        if (poster_path) {
-            if (sessionStorage.getItem(String(id))) return;
-
-            let img = new Image();
-            img.crossOrigin = "anonymous";
-            img.onload = function () {
-                try {
-                    let movieImgDataObj = (CanvasImgDataConverter.makeMovieImgSessionObj(img) as IMovieImgSessionObj);
-                    saveMovieImgDataOnSession(movieImgDataObj, id);
-                } catch (e) { console.error(e); }
-            };
-            img.src = `${posterSrcPathPrefix}${poster_path}`;
+    let img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+        try {
+            let movieImgDataObj = (CanvasImgDataConverter.makeMovieImgSessionObj(img) as IMovieImgSessionObj);
+            saveMovieImgDataOnSession(movieImgDataObj, id);
+            dispatchEvent(new ImageDataEvent(id, movieImgDataObj));
         }
-    });
+        catch (e) {
+            console.error(e);
+        }
+        finally {
+            window.sessionColorsNowFetching.delete(id);
+            URL.revokeObjectURL(blobUrl);
+        }
+    };
+    img.src = blobUrl;
+}
+
+export function goFetchPostersOnWorker(item_s_: IMovieResultItem[] | IMovieResultItem | undefined): void {
+    if (!item_s_) return;
+
+    const isArray = Array.isArray(item_s_);
+    let toFetch;
+
+    if (isArray) {
+        toFetch = (item_s_ as IMovieResultItem[]).filter(({id, poster_path}) =>
+                poster_path && !sessionStorage.getItem(String(id))
+            );
+    } else toFetch = item_s_;
+
+    if (!(isArray && (toFetch as []).length === 0))
+        window.worker.postMessage(toFetch);
 }
 
 function saveMovieImgDataOnSession(movieImgSessionObj: IMovieImgSessionObj, movieId: number) {
@@ -161,8 +140,173 @@ export function getMovieImgObjFromSession(movieId: number): IMovieImgSessionObj 
     return movieImgDataObj;
 }
 
-export function clearMultipleTimeouts(...timeouts: (NodeJS.Timeout | undefined)[]): void {
+export function clearTimeouts(...timeouts: (NodeJS.Timeout | undefined)[]): void {
     for (let timeout of timeouts)
         if(timeout)
             clearTimeout(timeout);
+}
+
+const months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+export function getReadableDate(isoDate: string) {
+    let date = isoDate.split('-').map(n => Number(n));
+    let month = months[date[1]-1];
+    let day = date[2];
+    let year = date[0];
+
+    return `${month} ${day}, ${year}`
+}
+
+export const formatToUSD = new Intl.NumberFormat('en-US', {
+    currency: "USD"
+}).format;
+
+export function minutesToRuntimeDisplay(minutes: number) {
+    let hours = Math.floor(minutes/60);
+    let remaining = minutes%60;
+    return `${hours}h ${remaining}m`
+}
+
+export function setScrollLocked(lock: boolean = true) {
+    if (checkIsMobile()) return;
+    // if(lock) {
+    //     const supportPageOffset = window.pageXOffset !== undefined;
+    //     const isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
+    //     const y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+    //     document.onscroll = () => window.scrollY && window.scrollTo(0, y);
+    // }
+    // else (document.onscroll = null)
+    if (lock)
+        disableBodyScroll(document.scrollingElement as Element, {
+            allowTouchMove: el => el.id === "movie-item-view"
+        });
+    else enableBodyScroll(document.scrollingElement as Element);
+}
+
+export function getSearchParam<Param extends keyof SearchParamsMap>(paramName: Param): SearchParamsMap[Param] | null {
+    let query = window.location.hash.split("?")[1];
+    return new CustomURLSearchParams(query).get(paramName);
+}
+export function setSearchParam<Param extends keyof SearchParamsMap>
+    (paramName: Param, value: SearchParamsMap[Param] | null): void {
+        let [hash, hashQuery] = window.location.hash.split("?");
+        let newParams = new CustomURLSearchParams(hashQuery);
+
+        value === null ?
+            newParams.delete(paramName) : newParams.set(paramName, value);
+
+        window.location.hash = hash.substr(1) + "?" + newParams.toString();
+}
+
+export function isMovieView(movie: IMovieResultItem | IMovieView | null): movie is IMovieView {
+    if (!movie) return false;
+    return 'budget' in movie;
+}
+
+export function goFetchMovieView(movieId_or_Item: number | IMovieResultItem): Promise<IMovieView> {
+    let id: number;
+
+    if (typeof movieId_or_Item === "number") {
+        id = movieId_or_Item;
+    } else {
+        id = movieId_or_Item.id;
+        goFetchPostersOnWorker(movieId_or_Item)
+    }
+
+    return new Promise<IMovieView>((resolve) => {
+        fetch(buildFetchMovieViewUrl(id))
+            .then(res => res.json())
+            .then(resolve)
+            .catch(console.error);
+        })
+}
+
+export function goFetch<T = any>(url: string, options?: RequestInit) {
+    return new Promise<T>((resolve) => {
+        fetch(url, options)
+            .then(res => res.json())
+            .then(resolve)
+            .catch(console.log);
+    })
+}
+
+export function scrollToTop() {
+    document.scrollingElement?.scrollTo(0, 0);
+}
+
+export async function goFetchUserAccount(): Promise<UserState> {
+        let fetchUrl: string;
+
+        const session_id = localStorage.getItem("session_id");
+
+        if (!session_id) {
+            const searchParams = new URLSearchParams(window.location.search);
+            const requestToken = searchParams.get('request_token');
+            const approved = searchParams.get('approved');
+
+            if (requestToken && approved && approved === 'true') {
+                try {
+                    let fetchedSessionId = await goFetchSessionId(requestToken);
+                    fetchUrl = buildAccountUrl(fetchedSessionId);
+                    alert("Successfully logged in!");
+                    localStorage.setItem("session_id", fetchedSessionId);
+                }
+                catch (e) {
+                    throw e;
+                }
+            }
+            // eslint-disable-next-line no-throw-literal
+            else throw "No user logged in";
+
+        } else {
+            fetchUrl = buildAccountUrl(session_id);
+        }
+
+        const res = await fetch(fetchUrl);
+
+        return await res.json();
+}
+
+async function goFetchSessionId(request_token: string): Promise<string> {
+
+    const init: RequestInit = {
+        method: 'POST',
+        body: JSON.stringify({request_token}),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    const res = await fetch(newSessionUrl, init)
+
+    const data = await res.json();
+
+    return data.session_id as string;
+}
+
+export function goFetchRequestToken() {
+
+}
+
+/**
+ *  @return the current path on a HashBrowser-based url
+ *  @param url Can be either a full URL of a hash portion
+ * */
+export const getHashPath = (url: string = window.location.hash): string =>
+    (url[0] === '#' ? url.substr(1) :
+        (url.includes('#') ? (url.split('#')[1] || '') : url)
+    ).split('?')[0] || '/';
+
+/**
+ *  @return a string of query parameters on a HashBrowser-based url
+ *  @param url Can be either a full URL of a hash portion
+ * */
+export const getHashQuery = (url: string = window.location.hash): string =>
+    (url[0] === '#' ? url.substr(1) :
+            (url.includes('#') ? (url.split('#')[1] || '') : url)
+    ).split('?')[1] || '';
+
+export function isValidRequestToken(tokenResponse: TokenData): boolean {
+    const expireTime = new Date(tokenResponse.expires_at).getTime();
+    // at least five(5) minutes remaining until expiration
+    return expireTime - Date.now() > 300_000;
 }

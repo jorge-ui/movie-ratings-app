@@ -1,13 +1,15 @@
-import {combineReducers} from "redux";
+import { combineReducers } from "redux";
 import moviesReducer from "./movies/movies.reducer";
-import movieItemReducer from "./movie-item/movie-item.reducer";
+import movieViewReducer from "./movie-view/movie-view.reducer";
+import homePageReducer from "./home-page/home-page.reducer";
+import userReducer from "./user/user.reducer";
 
 
 const rootReducer = combineReducers({
   movies: moviesReducer,
-  movieItem: movieItemReducer
+  movieItem: movieViewReducer,
+  homePage: homePageReducer,
+  user: userReducer
 });
-
-export type AppState = ReturnType<typeof rootReducer>;
 
 export default rootReducer;

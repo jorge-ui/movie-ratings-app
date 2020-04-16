@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, { FC } from 'react';
 import styles from './total-search-results.module.scss';
 
 interface OwnProps {
@@ -6,7 +6,7 @@ interface OwnProps {
 }
 
 const TotalSearchResults: FC<OwnProps> = ({totalResults}) => (
-    <div className={styles.root}>Total movies found: {totalResults}</div>
+    <div className={styles.root}>Found: {totalResults}</div>
 );
 
 export default TotalSearchResults;

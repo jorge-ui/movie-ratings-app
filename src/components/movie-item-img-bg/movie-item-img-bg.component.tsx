@@ -1,85 +1,70 @@
-import React, {FC, useEffect, useRef} from 'react';
-import {clearMultipleTimeouts, getMovieImgObjFromSession, isMobile} from "../../util/utilityFunctions";
+import React, { FC, useEffect, useState } from 'react';
 import styles from './movie-item-img-bg.module.scss';
-import appProperties from "../../appProperties";
-import {animated, useSpring} from "react-spring";
-import {easeOutCubic} from "../../util/easingFuctions";
+import { animated, useSpring } from "react-spring";
+import { easeOutCubic } from "../../util/easingFuctions";
+import { useSessionAvgColor } from "../../util/custom-hooks/useSessionAvgColor";
+import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
+import useIsMobile from "../../util/custom-hooks/useIsMobile";
 
-const {posterSrcPathPrefix, searchPageTransitionConfig} = appProperties;
 
 interface OwnProps {
-    img_path: string | undefined,
     movieId: number,
     itemView?: boolean,
-    className?: string
+    className?: string,
 }
 
 type Props = OwnProps;
 
-const opacityReveal = .4;
 
-const MovieItemImgBg: FC<Props> = ({img_path, className, movieId, itemView}) => {
-    let timeout1: NodeJS.Timeout | undefined,
-        timeout2: NodeJS.Timeout | undefined;
+const MovieItemImgBg: FC<Props> = ({className, movieId, itemView = false}) => {
+    const isMobile = useIsMobile();
 
+    const [isRevealed, setRevealed] = useState<boolean>(itemView);
 
-    useEffect(toClearTimeOuts, []);
+    const opacityReveal = isRevealed ? .4 : 0;
 
-    let imgRef = useRef<HTMLImageElement>(null);
-    let imgSrcPath = `${posterSrcPathPrefix}${img_path}`;
-
-    let movieImgDataObj = getMovieImgObjFromSession(movieId);
-    let hasSessionData = !!movieImgDataObj;
-
-    let [props, set] = useSpring(() => ({
-        opacity: !itemView ? 0 : opacityReveal,
-        config: {
-            duration: 2100,
-            easing: easeOutCubic
+    useEffect(() => {
+        let mounted = true;
+        if (!itemView) { // reveal
+            setTimeout(() => {
+                mounted && setRevealed(true)
+            }, 450);
         }
-    }));
+        return () => { mounted = false };
+    }, []);
+
+    const [opacityOnMovView, eventState] = useOnMovieView(movieId, opacityReveal, {
+        ...(itemView ? {
+            onEnter: 0,
+            onClose: opacityReveal
+        } : {})
+    });
+
+    let props = useSpring({
+        opacity: itemView ? opacityOnMovView : opacityReveal,
+        config: {
+            duration: eventState === "close" ? 450 : 2100,
+            easing: eventState === "close" ? undefined : easeOutCubic
+        }
+    });
+
+    let imgSrc = '';
+
+    let movieImgDataObj = useSessionAvgColor(movieId);
+
+    if (!!movieImgDataObj?.jpgData && !isMobile)
+        imgSrc = movieImgDataObj.jpgData;
 
     return (
-        <animated.img
-            src={movieImgDataObj ? movieImgDataObj.jpgData : (img_path && imgSrcPath)}
-            className={`${styles.root} ${className ? className : ''}`}
-            alt={''} ref={imgRef} crossOrigin={"anonymous"}
-            onLoad={onLoad} style={{
+        <animated.img src={imgSrc} className={`${styles.root} ${className || ''}`}
+            alt={''} crossOrigin={"anonymous"} item-view={String(itemView)} style={{
                 imageRendering: "pixelated",
-                display: !itemView ? "none" : undefined,
-                backgroundColor: movieImgDataObj && movieImgDataObj.averageColor,
+                display: !!movieImgDataObj ? "block" : "none",
+                backgroundColor: movieImgDataObj?.averageColor,
                 ...props
             }}
         />
     );
-
-    function onLoad() {
-        let {current} = imgRef;
-        if (current) {
-            let time = !itemView ? (searchPageTransitionConfig.duration * .6) : 0;
-            timeout1 = setTimeout(appearElement, time);
-        }
-    }
-
-    function appearElement() {
-        let {current} = imgRef;
-        if (current) {
-            if (isMobile()) {
-                current.src = '';
-                if (!hasSessionData) {
-                    let movieImgDataObj = getMovieImgObjFromSession(movieId);
-                    current && (current.style.backgroundColor = movieImgDataObj?.averageColor || '');
-                }
-            }
-            current.style.display = '';
-            !itemView && set({opacity: opacityReveal,});
-        }
-    }
-
-    function toClearTimeOuts() {
-        return clearMultipleTimeouts.bind(null, timeout1, timeout2);
-    }
-
 };
 
 MovieItemImgBg.defaultProps = {

@@ -1,5 +1,24 @@
 @import 'styles/colors';
+@import 'styles/breakpoints';
 
 .root {
   color: $appTextColor;
+  .main {
+    margin-left: 5rem;
+    height: 100vh;
+    box-sizing: border-box;
+    & > *:first-child {
+      height: 100%;
+      box-sizing: border-box;
+    }
+  }
+}
+
+@include media('<=sm') {
+  .root {
+    .main {
+      margin-left: 0;
+      padding-bottom: 4.5rem;
+    }
+  }
 }

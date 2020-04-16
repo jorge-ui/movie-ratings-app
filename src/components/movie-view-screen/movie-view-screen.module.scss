@@ -1,0 +1,22 @@
+@import 'styles/shape';
+@import 'styles/colors';
+
+.root {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.0);
+  transition: background-color 500ms linear;
+  .transitionDiv {
+    position: absolute;
+    box-sizing: border-box;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: $movieCardBgColor;
+    z-index: 10;
+    box-shadow: $movieCardBoxShadow;
+  }
+}

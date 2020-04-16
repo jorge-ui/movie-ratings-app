@@ -1,0 +1,57 @@
+@import 'styles/mixins';
+@import 'styles/breakpoints';
+
+.root {
+	position: relative;
+	height: 100%;
+	width: 100%;
+	display: flex;
+
+	.mainInfo {
+		width: 55vw;
+		display: flex;
+		flex-direction: column;
+
+		.movieItem {
+			height: fit-content;
+			position: unset;
+		}
+	}
+
+	.sideInfo {
+		position: relative;
+		flex: 1;
+		z-index: 1;
+		box-sizing: border-box;
+		padding-top: 50px;
+	}
+}
+
+
+@include media('<=sm') {
+	.root {
+		flex-direction: column;
+		user-select: none;
+		margin-top: 50px;
+
+		.mainInfo {
+			width: 100%;
+			box-sizing: border-box;
+			height: fit-content;
+			min-height: fit-content;
+			.movieItem {
+				min-height: fit-content;
+			}
+			.mobileOverview {
+				font-size: 1.1rem;
+				padding: 0;
+				text-align: justify;
+				margin-top: 50px;
+			}
+			.mobileRateActions {
+				display: flex;
+				justify-content: space-evenly;
+			}
+		}
+	}
+}

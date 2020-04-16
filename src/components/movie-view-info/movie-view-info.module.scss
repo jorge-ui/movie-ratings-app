@@ -1,0 +1,100 @@
+@import 'styles/breakpoints';
+
+$sideInfoBgColor: rgba(0, 0, 0, 0.27);
+
+.root {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding-top: 20px;
+	color: rgba(220, 220, 220, 0.8);
+	box-shadow: 0 0 30px rgba(0, 0, 0, .9);
+	transition: opacity 200ms linear;
+
+	&::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		background-color: rgba(0, 0, 0, .35);
+		z-index: -1;
+	}
+
+	.title {
+		margin-top: 0;
+		text-align: center;
+	}
+
+	.sideInfoItem {
+		width: 80%;
+		margin: 0 auto 30px;
+		background-color: $sideInfoBgColor;
+		padding: 10px;
+		border-radius: 12px;
+		cursor: default;
+
+		& > * {
+			margin: 0;
+			display: block;
+		}
+
+		& > *:first-child {
+			font-size: 1rem;
+
+			&:after {
+				content: ':';
+				font-size: .9rem;
+			}
+		}
+
+		& > *:last-child {
+			padding-top: 10px;
+			margin-left: auto;
+			width: 90%;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+
+			&:hover {
+				text-shadow: 0 0 3px rgba(128, 184, 255, 0.65);
+			}
+		}
+	}
+}
+
+@include media('>md') {
+	.root {
+		.sideInfoItem {
+			transition: background-color 300ms;
+			&:hover {
+				background-color: opacify($sideInfoBgColor, .15);
+			}
+
+		}
+	}
+}
+
+@include media('<=sm') {
+	.root {
+		padding: 0;
+		height: auto;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		overflow: hidden;
+		.title {
+			margin-top: 10px;
+		}
+		.sideInfoItem {
+			&:last-child {
+				margin-bottom: 150px;
+			}
+		}
+	}
+}

@@ -1,0 +1,141 @@
+@import 'styles/colors';
+
+$addToListColor: rgb(63, 175, 255);
+$addToFavColor: rgb(255, 83, 150);
+$addWatchlistColor: rgb(84, 255, 88);
+$rateActionColor: rgb(255, 241, 55);
+
+.root {
+	margin: 0;
+	display: flex;
+	position: relative;
+	align-items: center;
+	height: fit-content;
+
+	.iconWrapper {
+		border-radius: 100%;
+		position: relative;
+		background-color: rgba(0, 0, 0, 0.5);
+		&:not(:last-child) {
+			margin-right: 15px;
+		}
+
+		&[is-loading=true] {
+			animation: rotateLoading 1s infinite ease-in-out;
+			pointer-events: none;
+		}
+
+		&[active-icon=true] {
+			background: radial-gradient(darken($appColor, 10%), lighten($appColor, 10%));
+
+			&[action-name=favorite] .icon {
+				color: $addToFavColor;
+			}
+
+			&[action-name=watchlist] .icon {
+				color: $addWatchlistColor;
+			}
+
+			&[action-name=rated] {
+				.icon {
+					color: $rateActionColor;
+				}
+
+				&:after {
+					content: attr(icon-score);
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					transform: translate(-50%, -50%);
+					color: black;
+					font-size: 12px;
+					letter-spacing: .01px;
+					font-weight: bolder;
+					background-color: $rateActionColor;
+					border-radius: 50px;
+					padding: 2px;
+					pointer-events: none;
+				}
+			}
+		}
+
+		&:hover {
+			&[action-name=favorite] .icon {
+				color: $addToFavColor;
+			}
+
+			&[action-name=watchlist] .icon {
+				color: $addWatchlistColor;
+			}
+
+			&[action-name=rated] .icon {
+				color: $rateActionColor;
+			}
+		}
+
+		.icon {
+			color: rgba(255, 255, 255, 0.4);
+			display: block;
+			position: relative;
+			height: 55px;
+			box-sizing: border-box;
+			width: auto;
+			padding: 9px;
+			border-radius: 100%;
+			transition: color 300ms linear, box-shadow 100ms linear,
+			transform 300ms cubic-bezier(0, 0, 0.2, 1);
+
+
+			&:hover {
+				cursor: pointer;
+				background-color: rgba(0, 0, 0, 0.2);
+				transform: scale(1.1);
+			}
+		}
+	}
+}
+
+.ratingModal {
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.15);
+	padding: 4px 7px;
+	top: 50%;
+	transform: translateY(-50%);
+	left: 100%;
+	display: flex;
+	align-items: center;
+	border-radius: 30px;
+	button {
+		outline: none;
+		border: 1px solid black;
+		border-radius: 30px;
+		font-weight: bolder;
+		margin-right: 5px;
+		padding: 0 5.5px;
+		cursor: pointer;
+		background-color: rgba(198, 198, 198, 0.56);
+		box-sizing: border-box;
+
+		&:hover {
+			background-color: rgba(115, 115, 115, 0.7);
+		}
+	}
+}
+
+@keyframes rotateLoading {
+	from {
+		transform: rotateY(0deg);
+	}
+	to {
+		transform: rotateY(360deg);
+	}
+}
+
+.toolTip {
+	& > :first-child {
+		//margin-top: 9px;
+		margin-left: 4px;
+		font-size: .7rem;
+		font-weight: normal;
+	}
+}

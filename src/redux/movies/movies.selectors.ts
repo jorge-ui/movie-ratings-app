@@ -1,6 +1,6 @@
-import {createSelector, Selector} from "reselect";
-import {AppState} from "../root-reducer";
-import {MoviesState} from "./movies.reducer";
+import { createSelector, Selector } from "reselect";
+import { AppState } from "../";
+import { MoviesState } from "./movies.reducer";
 import IMoviesSearchData from "../../interfaces/app-types/IMoviesSearchData";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import appProperties from "../../appProperties";
@@ -9,12 +9,6 @@ const {perPageResultsItems} = appProperties;
 
 export const getMoviesState: Selector<AppState, MoviesState> = state =>
     state.movies;
-
-export const selectMoviesCurrentSearchTerm = createSelector(
-    [getMoviesState],
-    movies => movies.currentSearchTerm
-);
-
 
 const selectMoviesFetchedPagesLength = createSelector(
     [getMoviesState],
@@ -26,20 +20,12 @@ const selectMoviesSearchData = createSelector(
     movies => movies.searchData
 );
 
-export const selectMoviesFetchedPages = createSelector(
-    [getMoviesState],
-    (movies) => movies.apiFetchedPages
-);
 
 export const selectMoviesTotalResultsFound = createSelector(
     [selectMoviesSearchData],
     (searchData) => searchData ? searchData.total_results : 0
 );
 
-export const selectMoviesTotalPages = createSelector(
-    [selectMoviesSearchData],
-    (searchData) => searchData ? searchData.total_pages : 0
-);
 
 export const selectMoviesResultItems = createSelector(
     [selectMoviesSearchData, selectMoviesFetchedPagesLength],
@@ -68,17 +54,5 @@ export const makeSelectMoviesResultsPortion = () => createSelector(
     }
 );
 
-export const selectMoviesSearchError = createSelector(
-    [getMoviesState],
-    movies => movies.searchError
-);
 
-export const selectMoviesIsFetching = createSelector(
-    [getMoviesState],
-    movies => movies.isFetching
-);
 
-export const selectMoviesIsFetchingMore = createSelector(
-    [getMoviesState],
-    movies => movies.isFetchingMore
-);

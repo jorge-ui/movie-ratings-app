@@ -2,10 +2,15 @@
 @import 'styles/breakpoints';
 
 .root {
-  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  transition: opacity 450ms linear;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   svg {
     height: 100%;
@@ -19,7 +24,7 @@
   }
 }
 
-@include media("<sm") {
+@include media("<=sm") {
   .root {
     svg {
       circle {
@@ -27,4 +32,8 @@
       }
     }
   }
+}
+
+.darken {
+  background: rgba(13, 13, 13, 0.7);
 }

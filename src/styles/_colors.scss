@@ -1,25 +1,41 @@
-$appColor: #14223c;
-$appTextColor: adjust_color($color: $appColor, $lightness: 50%, $saturation: -20%);
 
-$movieCardBgColor: adjust_color($color: $appColor, $lightness: -5%);
-
-
-$degreeOffset: 15deg;
-$linearDegrees: 45deg;
-
-$navBackground: linear-gradient(
-    $linearDegrees,
-    adjust_hue($appColor, -$degreeOffset),
-    $appColor,
-    adjust_hue($appColor, $degreeOffset)
+$appColor: #213c67;
+$appTextColor: adjust_color(
+		$color: $appColor,
+		$lightness: 50%,
+		$saturation: -20%,
 );
 
+$movieCardBgColor: adjust_color(
+		$color: $appColor,
+		$lightness: -5%,
+);
+$movieCardBoxShadow: 0 0 5px 2px rgba(0, 0, 0, 0.45);
+
+$degreeOffset: 15deg;
+$linearDegrees: 35deg;
+
+$navBackground: linear-gradient(
+				$linearDegrees,
+				adjust_hue($appColor, -$degreeOffset),
+				$appColor,
+				adjust_hue($appColor, $degreeOffset)
+);
 
 $appBgColor: adjust_color($appColor, $saturation: -25%, $lightness: 4%);
 
+$appBgOpacity: -.2;
 $appBackground: linear-gradient(
-    -$linearDegrees,
-    adjust_hue($appBgColor, -$degreeOffset),
-    $appBgColor,
-    adjust_hue($appBgColor, $degreeOffset)
+				to bottom,
+				adjust_color($appColor, $lightness: -20%, $hue: -$degreeOffset, $alpha: $appBgOpacity),
+				adjust_color($appColor, $saturation: 20%, $alpha: $appBgOpacity),
+				adjust_color($appColor, $lightness: -20%, $hue: -$degreeOffset, $alpha: $appBgOpacity),
+),
+linear-gradient(
+				to left,
+				adjust_color($appColor, $lightness: -40%, $hue: -$degreeOffset, $alpha: $appBgOpacity),
+				adjust_color($appColor, $saturation: 20%, $alpha: $appBgOpacity),
+				adjust_color($appColor, $lightness: -40%, $hue: -$degreeOffset, $alpha: $appBgOpacity),
 );
+
+$loadingColor: #8c8c8c;

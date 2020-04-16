@@ -9,9 +9,11 @@
   transition: background-color 400ms linear;
 }
 
-@include media('>md') {
+@include media('>sm') {
   .root {
-    // TODO: fix for IE browser
     filter: blur(45px);
+    &[item-view=true] {
+      filter: blur(65px);
+    }
   }
 }

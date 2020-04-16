@@ -1,0 +1,17 @@
+@import 'styles/breakpoints';
+
+.root {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  transition: opacity 800ms linear;
+}
+
+@include media('<=sm') {
+  .root {
+    position: fixed;
+    z-index: -10;
+  }
+}

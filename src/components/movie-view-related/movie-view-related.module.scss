@@ -1,0 +1,10 @@
+@import 'styles/mixins';
+@import 'styles/colors';
+@import 'styles/breakpoints';
+
+.root {
+	flex: 1;
+	margin-bottom: 12px;
+	margin-top: auto;
+	max-height: 36.5vh;
+}

@@ -1,0 +1,238 @@
+@import 'styles/colors';
+@import 'styles/breakpoints';
+
+
+$spotLightSectionHeight: 500px;
+$shadowBox: 0 0 15px black;
+
+.root {
+	height: auto;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+
+	h1 {
+		color: inherit;
+		font-weight: 400;
+		box-sizing: border-box;
+		text-align: center;
+		width: fit-content;
+		margin: auto;
+		padding: 15px 10vw 50px;
+		background: linear-gradient(90deg, transparent, $movieCardBgColor, transparent);
+		mask-image: linear-gradient(white, white 45%, transparent 100%);
+	}
+
+	.content {
+		flex: 1;
+		box-sizing: border-box;
+		position: relative;
+		display: flex;
+
+		& > * {
+			flex: 1;
+		}
+	}
+}
+
+.sectionSpotlight {
+	.sectionTitle {
+		font-weight: normal;
+		margin: 15px auto;
+		width: 80%;
+		filter: drop-shadow(0 0 10px $movieCardBgColor);
+	}
+
+	.sectionContentWrapper {
+		width: 80%;
+		margin: auto;
+
+		.sectionContent {
+			height: 0;
+			padding-bottom: 100%;
+			position: relative;
+
+			& > * { // from children props
+				position: absolute;
+				left: 0;
+				right: 0;
+				top: 0;
+				bottom: 0;
+			}
+		}
+	}
+}
+
+.gridContainer {
+	display: flex;
+	flex-wrap: wrap;
+
+	.gridItem {
+		box-shadow: $shadowBox;
+		flex: 1;
+		min-width: calc(50% - 5px);
+
+		&:nth-child(1) {
+			margin-right: 5px;
+			margin-bottom: 5px;
+		}
+
+		&:nth-child(2) {
+			margin-left: 5px;
+			margin-bottom: 5px;
+		}
+
+		&:nth-child(3) {
+			margin-top: 5px;
+		}
+	}
+}
+
+.nowPlayingContainer {
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+
+	.mainMovieItem {
+		height: 60%;
+		box-sizing: border-box;
+		margin-bottom: 5px;
+		box-shadow: $shadowBox;
+	}
+
+	.subMovieItemContainerWrapper {
+		height: 40%;
+		position: relative;
+	}
+}
+
+.subMovieItemContainer {
+	height: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	mask-image: none !important;
+
+	.subMovieItemContainerItem {
+		padding: 5px 5px 10px !important;
+		min-width: 25% !important;
+		& > *:first-child {
+			border-radius: 0 !important;
+			box-shadow: 0 0 1px black !important;
+		}
+	}
+}
+
+$customEaseOut: cubic-bezier(0, 0, 0.2, 1);
+.hoveredBox {
+	transition: transform $customEaseOut 450ms;
+
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+
+.hoveredBg {
+	position: relative;
+	overflow: hidden;
+	transition: background-color 400ms ease-out;
+	cursor: pointer;
+
+	&:after {
+		opacity: 0;
+		text-align: center;
+		text-shadow: 0 0 9px black;
+		content: attr(movie-title);
+		font-size: 1.6em;
+		color: #fff;
+		position: absolute;
+		left: 8px;
+		right: 8px;
+		top: 0;
+		bottom: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: opacity $customEaseOut 400ms;
+	}
+
+	&:hover {
+		background-color: rgba(0, 0, 0, 0.3);
+
+		&:after {
+			opacity: 1;
+		}
+
+		& > *:first-child {
+			transition: transform $customEaseOut 6s;
+			transform: scale(1.2);
+		}
+	}
+
+	& > *:first-child {
+		z-index: -1;
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		background-size: cover;
+		background-position: center;
+		transition: transform $customEaseOut 2s;
+	}
+}
+
+@include media('<=sm') {
+	.root {
+		&:after {
+			content: '';
+			margin-top: 100px;
+		}
+
+		h1 {
+			padding: 30px 0 50px;
+		}
+
+		.content {
+			flex-direction: column;
+		}
+	}
+
+	.sectionSpotlight {
+		width: 100%;
+		margin-bottom: 50px;
+
+		.sectionTitle {
+			width: 100%;
+			font-size: 1.5rem;
+		}
+
+		.sectionContentWrapper {
+			width: 100%;
+		}
+
+		&:last-of-type {
+			.sectionContentWrapper {
+				.sectionContent {
+					padding-bottom: 130%;
+				}
+			}
+		}
+	}
+
+	.nowPlayingContainer {
+		.mainMovieItem {
+			height: 60%;
+		}
+		.subMovieItemContainerWrapper {
+			height: 30%;
+		}
+	}
+
+	.subMovieItemContainer {
+		margin: 0 !important;
+		.subMovieItemContainerItem {
+			min-width: 42% !important;
+		}
+
+	}
+}

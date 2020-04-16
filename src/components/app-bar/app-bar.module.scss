@@ -1,15 +1,217 @@
 @import 'styles/colors';
+@import 'styles/breakpoints';
+
+$transitionBar: 300ms cubic-bezier(0, 0, 0.2, 1);
 
 .root {
-  background: $navBackground;
-  .title {
-    font-weight: lighter;
-    font-size: 1.8rem;
-    color: lighten($appColor, 70%);
-    text-shadow: 0 0 3px white;
-  }
-  .toolBar {
-    display: flex;
-    justify-content: space-between;
-  }
+	background: $navBackground;
+	position: fixed;
+	box-shadow: 0 0 20px #000000ab;
+	z-index: 10;
+
+	.logo {
+		font-family: 'Roboto', sans-serif;
+		font-weight: lighter;
+		font-size: 1.5rem;
+		color: lighten($appColor, 70%);
+		text-shadow: 0 0 3px white;
+		letter-spacing: 3px;
+	}
+
+	.toolBar {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		overflow: hidden;
+
+		.navItem {
+			height: 5rem;
+			position: relative;
+			text-decoration: none;
+			color: inherit;
+			cursor: unset;
+		
+
+			&:not(:first-child)[aria-current=true] {
+				background-color: rgba(0, 0, 0, 0.4);
+				filter: brightness(150%);
+			}
+
+			.navItemIcon {
+				min-width: 5rem;
+				position: relative;
+				.avatar {
+					$colorBg: adjust_color($appColor, $hue: -65deg, $saturation: 100%, $lightness: 5%);
+					position: absolute;
+					left: 0;
+					top: 0;
+					bottom: 0;
+					right: 0;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					border-radius: 100%;
+					width: 65%;
+					height: 65%;
+					background: radial-gradient(darken($colorBg, 10%), $colorBg);
+					color: white;
+					margin: auto;
+					z-index: 10;
+				}
+			}
+
+			.navItemTxt {
+				align-self: center;
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity 200ms linear,
+				visibility 200ms;
+			}
+
+			svg {
+				font-size: 33px;
+			}
+
+			&:first-child {
+				justify-content: flex-end;
+				background-color: rgba(0, 0, 0, 0.4);
+
+				svg {
+					transform: rotateY(0deg);
+					transition: transform $transitionBar 200ms;
+				}
+			}
+
+			&:last-child {
+				margin-top: auto;
+			}
+		}
+
+	}
+}
+
+@include media(">sm") {
+	.root {
+		width: 5rem;
+		height: 100vh;
+		left: 0;
+		transition: width $transitionBar;
+
+		.toolBar {
+			--heightCut: .6rem;
+			bottom: calc(var(--heightCut) * 4);
+			flex-direction: column;
+			align-items: flex-start;
+
+			.navItem {
+				width: 100%;
+				display: flex;
+				justify-content: flex-start;
+				transition: background-color 200ms;
+
+				&:not(:first-child):hover {
+					background-color: rgba(0, 0, 0, 0.2);
+					filter: brightness(140%);
+				}
+			}
+		}
+
+		&.isOpen {
+			width: 16rem;
+
+			.navItem {
+
+				.navItemTxt {
+					opacity: 1;
+					visibility: visible;
+					cursor: pointer;
+				}
+
+
+				&:first-child {
+					svg {
+						transform: rotateY(-180deg);
+					}
+				}
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100vh;
+				width: 100vw;
+				background-color: rgba(0, 0, 0, 0.3);
+				z-index: -1;
+				pointer-events: none;
+				animation: onNavHover 300ms linear;
+			}
+		}
+
+		&:before {
+			position: absolute;
+			content: '';
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			background: linear-gradient(0deg, darken($appBgColor, 50%) 0%, transparent 90%);
+			z-index: -1;
+			height: 30%;
+		}
+	}
+}
+
+@include media("<=sm") {
+	.root {
+		width: 100vw;
+		height: 4.5rem;
+		bottom: 0;
+
+		.logo {
+			display: none;
+		}
+
+		.toolBar {
+			bottom: 0;
+
+			.navItem {
+				flex: 1;
+				width: unset;
+				.navItemIcon {
+					text-align: center;
+					height: 100%;
+					width: 100%;
+					min-width: unset;
+					.avatar {
+						$size: 40px;
+						width: $size;
+						height: $size;
+					}
+				}
+
+				&:first-child {
+					display: none;
+				}
+
+				.navItemTxt {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+@keyframes onNavHover {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }

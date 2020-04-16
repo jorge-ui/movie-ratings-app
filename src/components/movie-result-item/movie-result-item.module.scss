@@ -2,162 +2,197 @@
 @import 'styles/breakpoints';
 @import 'styles/mixins';
 
-$imageWidth: .30;
+$imageWidth: .3;
+$itemRootBgColor: adjust-color($movieCardBgColor, $alpha: -.55, $lightness: -8%);
 
 @keyframes onViewRest {
-  0% {
-    transform: scale(1.00);
-  }
-  20% {
-    transform: scale(0.97);
-  }
-  100% {
-    transform: scale(1.00);
-  }
+	0% {
+		transform: scale(1);
+	}
+	20% {
+		transform: scale(0.97);
+	}
+	100% {
+		transform: scale(1);
+	}
 }
 
 .runAnimation {
-  animation: onViewRest 600ms;
+	animation: onViewRest 600ms;
 }
 
 .root {
-  position: relative;
-  display: flex;
-  background-color: adjust-color($movieCardBgColor, $alpha: -.55);
-  height: 100%;
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  border-radius: 12px;
-  color: whitesmoke;
+	position: relative;
+	display: flex;
+	background-color: $itemRootBgColor;
+	height: 100%;
+	width: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+	border-radius: 12px;
+	color: whitesmoke;
+	overflow: hidden;
 
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    box-shadow: inset 0 0 16px 2px rgba(6, 6, 6, 0.7);
-    z-index: -1;
-  }
+	.imageWrapper {
+		width: percentage($imageWidth);
 
-  .imageWrapper {
-    width: percentage($imageWidth);
+		.image {
+			@include flexCentered;
+			width: 100%;
+			height: 0;
+			padding-bottom: 150%;
+			background-color: #8c8c8c;
+			border-radius: 5px;
+			background-size: cover;
+			position: relative;
+			box-shadow: 0 0 9px 1px #0d0d0d;
 
-    .image {
-      width: 100%;
-      height: 0;
-      padding-bottom: 150%;
-      background-color: #8c8c8c;
-      border-radius: 5px;
-      background-size: cover;
-      position: relative;
-      @include flexCentered();
-      box-shadow: 0 0 9px 1px #0d0d0d;
+			span {
+				position: absolute;
+				text-align: center;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+				cursor: default;
+				color: #232323;
+				font-weight: bold;
+				font-size: 1.2em;
+			}
 
-      .imageIcon {
-        position: absolute;
-        top: 25%;
-        width: 50%;
-        height: 50%;
-        color: #232323;
-      }
-    }
-  }
+			.imageIcon {
+				position: absolute;
+				top: 25%;
+				width: 100%;
+				height: 50%;
+				color: #232323;
+				opacity: .4;
+			}
+		}
+	}
 
-  .content {
-    flex: 1;
-    position: relative;
+	.content {
+		flex: 1;
+		position: relative;
 
-    .wrapper {
-      & > * {
-        box-sizing: border-box;
-      }
+		.wrapper {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			right: 0;
+			left: 0;
+			padding-left: 15px;
 
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0;
-      left: 0;
-      padding-left: 15px;
+			& > * {
+				box-sizing: border-box;
+			}
 
-      .header {
-        font-weight: normal;
-        font-size: 1.13rem;
-        opacity: .82;
-        cursor: default;
+			.header {
+				display: flex;
+				flex-direction: column;
+				height: 65%;
+				max-height: 65%;
+				font-weight: normal;
+				font-size: 1.13rem;
+				opacity: .82;
+				cursor: default;
 
-        .title {
-          flex: 1;
-          width: 100%;
-          margin: 0;
-        }
+				.title {
+					width: 100%;
+					margin: 0;
+					transition: font-size 450ms linear;
+				}
 
-        .year {
-          opacity: .7;
-          font-size: .8em;
-        }
-      }
+				.year {
+					opacity: .7;
+					font-size: .8em;
+				}
 
-      .info {
-        flex: .5;
-        display: flex;
-        align-items: center;
-        position: relative;
+				.overViewSection {
+					@include customScrollbar;
+					flex: 1;
+					font-size: 1rem;
+					overflow-y: auto;
+					margin-bottom: 5px;
+				}
+			}
 
-        .infoWrapper {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          display: flex;
-        }
-      }
-    }
-  }
+			.info {
+				flex: 1;
+				display: flex;
+				align-items: center;
+				position: relative;
+			}
+		}
+	}
 }
 
 @include media('>lg') {
-  .root {
-    &[item-view=true] {
-      background-color: transparent;
-      box-shadow: unset;
-      max-width: 45vw;
-    }
-    &[item-view=false] {
-      transition: box-shadow 550ms ease-out;
-      box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.45);
+	.root {
+		&:after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			box-shadow: inset 0 0 16px 2px rgba(6, 6, 6, 0.7);
+			z-index: -1;
+		}
 
-      //&:hover {
-      //  transition: box-shadow 150ms ease-out;
-      //  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.1);
-      //}
+		&[item-view=true] {
+			background-color: transparent;
+			box-shadow: unset;
+			max-width: 55vw;
 
-      .imageWrapper {
-        $cubicBezier: cubic-bezier(.09, .75, .4, 1);
-        $onHover: 300ms $cubicBezier;
-        $offHover: 600ms ease;
-        transition: transform $offHover;
+			.content .header {
+				max-height: unset;
+				height: calc(100% - 65px);
+			}
+		}
 
-        &:hover {
-          transition: transform $onHover;
-          transform: scale(1.05);
+		&[item-view=false] {
+			transition: box-shadow 550ms ease-out;
+			box-shadow: $movieCardBoxShadow;
 
-          .image {
-            transition: box-shadow $onHover;
-            box-shadow: -5px 6px 9px 3px rgba(0, 0, 0, 0.41);
-          }
-        }
+			.content .header .title {
+				-webkit-line-clamp: 4;
+				display: -webkit-inline-box;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+			}
 
-        .image {
-          transition: box-shadow $offHover;
-        }
-      }
-    }
-  }
+			.imageWrapper {
+				$cubicBezier: cubic-bezier(.09, .75, .4, 1);
+				$onHover: 300ms $cubicBezier;
+				$offHover: 600ms ease;
+				transition: transform $offHover;
+
+				&:hover {
+					transition: transform $onHover;
+					transform: scale(1.05);
+
+					.image {
+						transition: box-shadow $onHover;
+						box-shadow: -5px 6px 9px 3px rgba(0, 0, 0, 0.41);
+					}
+				}
+
+				.image {
+					transition: box-shadow $offHover;
+				}
+			}
+		}
+	}
+}
+
+@include media('<=sm') {
+	.root {
+		&[item-view=true] {
+			background-color: unset;
+			padding: 20px 0;
+		}
+	}
 }
