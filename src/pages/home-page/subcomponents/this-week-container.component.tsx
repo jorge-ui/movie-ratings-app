@@ -6,7 +6,7 @@ import { connect, useSelector } from "react-redux";
 import { AppState } from "../../../redux";
 import { HomePageState } from "../../../redux/home-page/home-page.reducer";
 import LoadingSpinner from "../../../components/loading-spinner/loading-spinner.component";
-import { MovieViewActions } from "../../../redux/movie-view";
+import { IMovieViewActions } from "../../../redux/movie-view";
 import { bindActionCreators, Dispatch } from "redux";
 import { setMovieView } from "../../../redux/movie-view/movie-view.actions";
 import { fetchThisWeekAsync } from "../../../redux/home-page/home-page.actions";
@@ -63,7 +63,7 @@ const stateEquality = (left: ThisWeekSectionState, right: ThisWeekSectionState) 
 	return left.items?.length === right.items?.length && left.isLoading === right.isLoading;
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<MovieViewActions>) =>
+const mapDispatchToProps = (dispatch: Dispatch<IMovieViewActions>) =>
     bindActionCreators({
             onSetMovieView: setMovieView,
 	        onFetchThisWeekAsync: fetchThisWeekAsync

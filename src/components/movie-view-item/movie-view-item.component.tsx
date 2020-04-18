@@ -17,9 +17,7 @@ interface OwnProps {
     movieItem: IMovieResultItem | IMovieView;
 }
 
-type Props = OwnProps;
-
-const MovieViewItem: FC<Props> = ({movieItem}) => {
+const MovieViewItem: FC<OwnProps> = ({movieItem}) => {
     const movieItemRef = useRef(movieItem);
     const isMobile = useIsMobile();
     const isMovView = isMovieView(movieItem);
@@ -53,7 +51,7 @@ const MovieViewItem: FC<Props> = ({movieItem}) => {
                     <>
                         <div className={styles.mobileRateActions}>
                             <RatingProgressBar score={movieItem.vote_average} itemView/>
-                            <MovieViewActionButtons movieId={movieItem.id} />
+                            <MovieViewActionButtons item={(movieItem as IMovieResultItem)} />
                         </div>
                         <p className={styles.mobileOverview}>{movieItem.overview}</p>
                     </>
@@ -67,4 +65,6 @@ const MovieViewItem: FC<Props> = ({movieItem}) => {
     );
 };
 
-export default memo<Props>(MovieViewItem, () => true);
+export default memo<OwnProps>(MovieViewItem, (prevProps, nextProps) =>
+    prevProps.movieItem.id === nextProps.movieItem.id
+);

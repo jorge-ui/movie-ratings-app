@@ -6,7 +6,7 @@ class CustomURLSearchParams extends URLSearchParams {
 		if(param === null) return null;
 
 		let paramNum = Number(param);
-		return (paramNum >= 0 ? paramNum : param) as SearchParamsMap[K] | null;
+		return (Object.is(paramNum, NaN) ? param : paramNum) as SearchParamsMap[K] | null;
 	}
 	set<K extends keyof SearchParamsMap>(name: K, value: SearchParamsMap[K]): void {
 		super.set(name, String(value));

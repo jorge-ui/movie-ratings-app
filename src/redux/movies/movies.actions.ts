@@ -3,7 +3,7 @@ import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
 import { IMoviesActions } from "./";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../";
-import IMoviesSearchResponseData from "../../interfaces/app-types/IMoviesSearchResponseData";
+import IMoviesResponseData from "../../interfaces/app-types/IMoviesResponseData";
 import { convertResultsData, getSearchParam, goFetchPostersOnWorker } from "../../util/utilityFunctions";
 import appProperties from "../../appProperties";
 
@@ -53,11 +53,11 @@ export const fetchMoviesAsync = (
     apiNowFetchingPages.add(1);
     try {
         let res = await fetch(buildFetchMovieSearchUrl(searchTerm));
-        if (res.status !== 200) {
+        if (!res.ok) {
             let error: IMoviesSearchError = await res.json();
             dispatch(fetchMoviesFailure(error)); // Failure
         } else {
-            let data: IMoviesSearchResponseData = await res.json();
+            let data: IMoviesResponseData = await res.json();
 
             goFetchPostersOnWorker(data.results);
 
@@ -115,11 +115,11 @@ export const fetchMoreMoviesAsync = (
     apiNowFetchingPages.add(nextPageOnApi);
     try {
         let res = await fetch(buildFetchMovieSearchUrl(searchTerm, nextPageOnApi));
-        if (res.status !== 200) {
+        if (!res.ok) {
             let error: IMoviesSearchError = await res.json();
             dispatch(fetchMoreMoviesFailure(error)); // Failure
         } else {
-            let data: IMoviesSearchResponseData = await res.json();
+            let data: IMoviesResponseData = await res.json();
 
             goFetchPostersOnWorker(data.results);
 

@@ -1,4 +1,5 @@
 @import 'styles/colors';
+@import 'styles/breakpoints';
 
 $addToListColor: rgb(63, 175, 255);
 $addToFavColor: rgb(255, 83, 150);
@@ -16,8 +17,10 @@ $rateActionColor: rgb(255, 241, 55);
 		border-radius: 100%;
 		position: relative;
 		background-color: rgba(0, 0, 0, 0.5);
-		&:not(:last-child) {
-			margin-right: 15px;
+		@for $i from 1 through 3 {
+			&:nth-child(#{$i}) {
+				margin-right: 15px;
+			}
 		}
 
 		&[is-loading=true] {
@@ -59,20 +62,6 @@ $rateActionColor: rgb(255, 241, 55);
 			}
 		}
 
-		&:hover {
-			&[action-name=favorite] .icon {
-				color: $addToFavColor;
-			}
-
-			&[action-name=watchlist] .icon {
-				color: $addWatchlistColor;
-			}
-
-			&[action-name=rated] .icon {
-				color: $rateActionColor;
-			}
-		}
-
 		.icon {
 			color: rgba(255, 255, 255, 0.4);
 			display: block;
@@ -95,30 +84,57 @@ $rateActionColor: rgb(255, 241, 55);
 	}
 }
 
-.ratingModal {
-	position: absolute;
-	background-color: rgba(0, 0, 0, 0.15);
-	padding: 4px 7px;
-	top: 50%;
-	transform: translateY(-50%);
-	left: 100%;
-	display: flex;
-	align-items: center;
-	border-radius: 30px;
-	button {
-		outline: none;
-		border: 1px solid black;
-		border-radius: 30px;
-		font-weight: bolder;
-		margin-right: 5px;
-		padding: 0 5.5px;
-		cursor: pointer;
-		background-color: rgba(198, 198, 198, 0.56);
-		box-sizing: border-box;
+.ratingModalContainer {
 
-		&:hover {
-			background-color: rgba(115, 115, 115, 0.7);
+	.ratingModal {
+		position: absolute;
+		background-color: rgba(0, 0, 0, 0.15);
+		padding: 4px 7px;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 100%;
+		display: flex;
+		align-items: center;
+		border-radius: 30px;
+		.removeButton {
+			outline: none;
+			border: 1px solid black;
+			border-radius: 30px;
+			font-weight: bolder;
+			margin-right: 5px;
+			padding: 0 5.5px;
+			cursor: pointer;
+			background-color: rgba(198, 198, 198, 0.56);
+			box-sizing: border-box;
+
+			&:hover {
+				background-color: rgba(115, 115, 115, 0.7);
+			}
 		}
+	}
+}
+
+.showAuth {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+	& > * {
+		background: rgba(0, 0, 0, 0.6) !important;
+	}
+	.xButton {
+		margin: 0;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		color: darkred;
+		width: fit-content;
+		display: block;
+		z-index: 200;
+		//transform: translate(-50%, -50%);
 	}
 }
 
@@ -137,5 +153,75 @@ $rateActionColor: rgb(255, 241, 55);
 		margin-left: 4px;
 		font-size: .7rem;
 		font-weight: normal;
+	}
+}
+
+@include media('>sm') {
+	.root {
+		.iconWrapper {
+			&:hover {
+				&[action-name=favorite] .icon {
+					color: $addToFavColor;
+				}
+
+				&[action-name=watchlist] .icon {
+					color: $addWatchlistColor;
+				}
+
+				&[action-name=rated] .icon {
+					color: $rateActionColor;
+				}
+			}
+		}
+	}
+}
+
+@include media('<=sm') {
+	.showAuth {
+		.xButton {
+			right: 20px;
+			border-radius: 10px;
+			top: 10px;
+			width: 28px;
+		}
+		& > * {
+			transform: translate(-50%, -20px) !important;
+		}
+	}
+	.ratingModalContainer {
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		box-sizing: border-box;
+		z-index: 1;
+		background: linear-gradient(to top, $appColor, transparent);
+		.ratingModal {
+			position: relative;
+			width: fit-content;
+			margin: auto;
+			top: 60%;
+			left: unset;
+			right: unset;
+			background-color: rgba(0, 0, 0, 0.4);
+			.removeButton {
+				transform: scale(1.3);
+			}
+		}
+		.mobileSubmit {
+			margin: 60vh auto 0;
+			z-index: 2;
+			display: block;
+			border: 1px solid green;
+			background-color: gold;
+			font-size: 1em;
+			border-radius: 20px;
+			font-weight: bolder;
+
+			&:disabled {
+				filter: grayscale(100%) opacity(55%);
+			}
+		}
 	}
 }

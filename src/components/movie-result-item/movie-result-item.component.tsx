@@ -6,7 +6,7 @@ import MovieViewActionButtons from "../movie-view-actions/movie-view-actions.com
 import styles from './movie-result-item.module.scss';
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import { bindActionCreators, Dispatch } from "redux";
-import { MovieViewActions } from "../../redux/movie-view";
+import { IMovieViewActions } from "../../redux/movie-view";
 import { setMovieView } from "../../redux/movie-view/movie-view.actions";
 import { connect } from "react-redux";
 import appProperties from "../../appProperties";
@@ -28,7 +28,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 	const itemRef = useRef<HTMLDivElement>(null);
 	let {poster_path, title, vote_average, release_date, overview} = movie;
 
-	const [imgSrcPath, setImgSrcPath] = useState(`${getPosterSrcPathPrefix()}${poster_path}`);
+	const [imgSrcPath, setImgSrcPath] = useState(() => `${getPosterSrcPathPrefix()}${poster_path}`);
 
 	const initialOnViewProps: CSSProperties = {opacity: 0, visibility: "hidden"};
 	const [onMovieProps, propsState] = useOnMovieView<CSSProperties>(movie.id, initialOnViewProps, {
@@ -100,7 +100,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 					{!(isMobile && itemView) && (
 						<div className={styles.info}>
 							<div><RatingProgressBar score={vote_average} itemView={itemView}/></div>
-							<div style={onMovieProps}><MovieViewActionButtons movieId={movie.id} /></div>
+							<div style={onMovieProps}><MovieViewActionButtons item={movie} /></div>
 						</div>
 					)}
 				</div>
@@ -130,7 +130,7 @@ const MovieResultItemImage: FC<MovieResultItemImageProps & ReturnType<typeof map
         );
     }, (prevProps, nextProps) => prevProps.backGroundUrl === nextProps.backGroundUrl );
 
-const mapDispatchToProps = (dispatch: Dispatch<MovieViewActions>) =>
+const mapDispatchToProps = (dispatch: Dispatch<IMovieViewActions>) =>
     bindActionCreators({
         onSetMovieItem: setMovieView,
     }, dispatch);

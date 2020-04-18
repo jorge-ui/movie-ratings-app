@@ -15,11 +15,13 @@ type HookState<T> = [T, MovieViewEventState | "initial"]
 
 function useOnMovieView<T>(id: number, initial: T, config: OnMovieViewConfig<T>): HookState<T> {
 	const idRef = useRef(id);
+	const configRef = useRef(config);
 
 	const [props, setProps] = useState<HookState<T>>([initial, "initial"]);
 
 
 	useEffect(() => {idRef.current = id}, [id]);
+	useEffect(() => {configRef.current = config}, [config]);
 
 
 	useEffect(() => {
@@ -30,9 +32,9 @@ function useOnMovieView<T>(id: number, initial: T, config: OnMovieViewConfig<T>)
 
 			const configPropName = `on${capitalize(state)}` as keyof OnMovieViewConfig<T>;
 
-			if (config.hasOwnProperty(configPropName)) {
+			if (configRef.current.hasOwnProperty(configPropName)) {
 
-				let configProp = config[configPropName]!;
+				let configProp = configRef.current[configPropName]!;
 				// @ts-ignore (because the truthy ternary expression is indeed callable)
 				let newStateProps = typeof configProp === "function" ? configProp() : configProp;
 
@@ -44,7 +46,7 @@ function useOnMovieView<T>(id: number, initial: T, config: OnMovieViewConfig<T>)
 			mounted = false;
 			window.removeEventListener("movieView", onEvent);
 		}
-	}, [config]);
+	}, []);
 
 	return props;
 }

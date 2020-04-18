@@ -20,8 +20,7 @@ const PaginationControls: FC<Props> = ({className, totalPages}) => {
     const [currentPage = 0, setCurrentPage] = useSearchParam("page");
     const [movieIdParam] = useSearchParam("movieId");
 
-    const goToNextPage = () => setCurrentPage(currentPage => {
-        let page = Number(currentPage); // This is because of a dumb bug in iOS Safari -_-
+    const goToNextPage = () => setCurrentPage(page => {
         if (page && page < totalPages) {
             isMobile && scrollToTop();
             return page + 1;
@@ -29,8 +28,7 @@ const PaginationControls: FC<Props> = ({className, totalPages}) => {
         return currentPage;
     });
 
-    const goToPreviousPage = () => setCurrentPage(currentPage => {
-        let page = Number(currentPage); // This is because of a dumb bug in iOS Safari -_-
+    const goToPreviousPage = () => setCurrentPage(page => {
         if (page && page > 1) {
             isMobile && scrollToTop();
             return page - 1;

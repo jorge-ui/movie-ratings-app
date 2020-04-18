@@ -9,11 +9,15 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import GradeIcon from "@material-ui/icons/Grade";
 import RatingModal from "./rating-modal.component";
+import AuthPage from "../../pages/auth-page/auth-page.component";
+import { store } from "../../redux";
+import { removeFromListItems, unshiftToListItems } from "../../redux/item-list/list-item.actions";
+import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 
 const {buildFetchMovieViewUrl, itemActions} = appProperties;
 
 interface Props {
-    movieId: number
+    item: IMovieResultItem
 }
 type State = IMovieUserState & {isLoading: Array<keyof IMovieUserState>}
 
@@ -74,7 +78,8 @@ const initial_state: State = {
     id: 0
 }
 
-const MovieViewActionButtons: FC<Props> = ({movieId}) => {
+const MovieViewActionButtons: FC<Props> = ({item}) => {
+    const {id: movieId} = item;
     const isMounted = useRef(false);
 
     useEffect(() => {
@@ -83,6 +88,7 @@ const MovieViewActionButtons: FC<Props> = ({movieId}) => {
     }, []);
 
     const [ratingModal, setRatingModal] = useState(false);
+    const [showLogin, setShowLogin] = useState(false);
 
 
     const [state, dispatch] = useReducer(reducer, initial_state);
@@ -108,41 +114,48 @@ const MovieViewActionButtons: FC<Props> = ({movieId}) => {
     }, [state.id, auth.isAuth, movieId]);
 
     const markFavorite = () => {
-        if (ignoreActions) return;
-        let newVal = !state.favorite;
+        if (ignoreActions) return !auth.isAuth && setShowLogin(true);
+        let newFavValue = !state.favorite;
         setLoading('favorite');
-        itemActions.favorite(newVal, movieId)
+        itemActions.favorite(newFavValue, movieId)
             .then(() => {
+                if (newFavValue)
+                    store.dispatch(unshiftToListItems(item, "favorite"));
+                else store.dispatch(removeFromListItems(movieId, "favorite"));
+
                 isMounted.current && dispatch({
-                    type: 'update-favorite', payload: newVal
+                    type: 'update-favorite', payload: newFavValue
                 });
             })
             .catch(e => {
-                console.log(e);
-                alert("Error: could not mark to favorites :(")
+                console.error(e);
+                alert("Error: could not mark to item-list :(")
                 isMounted.current && dispatch({type: 'clear-loading'});
             })
     }
 
     const markWatchlist = () => {
-        if (ignoreActions) return;
+        if (ignoreActions) return !auth.isAuth && setShowLogin(true);
         let newVal = !state.watchlist;
         setLoading('watchlist');
         itemActions.watchlist(newVal, movieId)
             .then(() => {
+                if (newVal)
+                    store.dispatch(unshiftToListItems(item, "watchlist"));
+                else store.dispatch(removeFromListItems(movieId, "watchlist"));
                 isMounted.current && dispatch({
                     type: 'update-watchlist', payload: newVal
                 });
             })
             .catch(e => {
-                console.log(e);
+                console.error(e);
                 alert("Error: could not update watchlist :(")
                 isMounted.current && dispatch({type: 'clear-loading'});
             })
     }
 
     const rateItem = (newVal: number | null) => {
-        if (ignoreActions) return;
+        if (ignoreActions) return setRatingModal(false);
         if ((typeof state.rated === "object" && newVal === state.rated.value)
             || (newVal === null && state.rated === false)
         )
@@ -158,7 +171,7 @@ const MovieViewActionButtons: FC<Props> = ({movieId}) => {
                     });
                 })
                 .catch(e => {
-                    console.log(e);
+                    console.error(e);
                     alert("Error: could not update rating :(")
                     isMounted.current && dispatch({type: 'clear-loading'});
                 })
@@ -169,7 +182,7 @@ const MovieViewActionButtons: FC<Props> = ({movieId}) => {
                 });
             })
             .catch(e => {
-                console.log(e);
+                console.error(e);
                 alert("Error: could not update rating :(")
                 isMounted.current && dispatch({type: 'clear-loading'});
             })
@@ -206,14 +219,28 @@ const MovieViewActionButtons: FC<Props> = ({movieId}) => {
                      active-icon={String(!!state.rated)}
                      action-name={"rated"}
                      is-loading={String(state.isLoading.includes("rated"))}
-                     onClick={() => setRatingModal(prev => !prev)}
+                     onClick={() => {
+                         if (!auth.isAuth) return setShowLogin(true);
+                         setRatingModal(prev => !prev)
+                     }}
                      {...(!!state.rated ?
                          {"icon-score": (state.rated as Rated).value} : {})}
                 >
                     <GradeIcon className={styles.icon} />
                 </div>
             </Tooltip>
-            {ratingModal && <RatingModal rateItem={rateItem} defaultValue={ratedValue}/>}
+            {ratingModal && <RatingModal setRatingModal={setRatingModal} rateItem={rateItem} defaultValue={ratedValue}/>}
+            {showLogin && (
+                <div className={styles.showAuth} onClick={e => {
+                    if (e.target === e.currentTarget) setShowLogin(false)
+                }}>
+                    <AuthPage>
+                        <button className={styles.xButton}
+                                onClick={() => setShowLogin(false)}
+                        >&#10005;</button>
+                    </AuthPage>
+                </div>
+            )}
         </ul>
     );
 };

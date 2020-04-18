@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import { AppState } from "../../redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { IMoviesActions } from "../../redux/movies";
@@ -13,19 +13,14 @@ import TotalSearchResults from "../../components/total-search-results/total-sear
 import styles from './search-page.module.scss';
 import useSearchParam from "../../util/custom-hooks/useSearchParam";
 import appProperties from "../../appProperties";
-import { getHashPath, getHashQuery } from "../../util/utilityFunctions";
+import useSavedSessionParams from "../../util/custom-hooks/useSavedSessionParams";
+import useEffectSkipFirst from "../../util/custom-hooks/useEffectSkipFirst";
 
 let { perPageResultsItems } = appProperties;
 
-function onHashChange(e: HashChangeEvent) {
-	const pathURL = e.newURL.split("#")[1];
-	const [locationPath, searchQuery = ''] = pathURL.split("?");
-	sessionStorage.setItem(locationPath, searchQuery);
-}
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
 
-let isMounted = false;
 const SearchPage: FC<Props> = props => {
 	const {
 		totalResults, onCheckIfFetchMore, isFetching, searchError,
@@ -44,35 +39,14 @@ const SearchPage: FC<Props> = props => {
 	});
 
 	// Effect to clear searchPage component upon empty parameters or sync state with searchParams
-	useEffect(() => {
-		if (!isMounted) return;
-
+	useEffectSkipFirst(() => {
 		if (!currentPage && !currentSearchTerm && totalResults)
 			onClearFetchedMovies();
 		else if (currentSearchTerm && totalResults && !currentPage)
 			setCurrentPage(1)
 	}, [currentPage, currentSearchTerm, totalResults]);
 
-
-	// On mount effect
-	useEffect(() => {
-		isMounted =true;
-		return () => {
-			isMounted = false;
-			window.removeEventListener("hashchange", onHashChange);
-		}
-	}, []);
-
-	useLayoutEffect(() => {
-		const hashPath = getHashPath();
-		const searchParamsSaved = sessionStorage.getItem(hashPath);
-
-		if (searchParamsSaved && !getHashQuery()) // Total pages to browse with effect to keep sync
-			window.location.hash = hashPath + "?" + searchParamsSaved;
-
-		window.addEventListener("hashchange", onHashChange);
-		return () => window.removeEventListener("hashchange", onHashChange)
-	}, [])
+	useSavedSessionParams();
 
 	const [totalPages, setTotalPages] = useState(Math.ceil(totalResults / perPageResultsItems));
 	useEffect(() => {

@@ -1,129 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="Almost finish, watchlist and favorite sections missing.">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jorge.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/sasslintPlugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vagrant.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.sass-lint.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config-overrides.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/app-bar/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/items-scroll-x/items-scroll-x.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/items-scroll-x/items-scroll-x.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-actions/rating-modal.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-background/movie-view-background.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-background/movie-view-background.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-info/movie-view-info-children.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-info/movie-view-info.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-info/movie-view-info.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-screen/movie-view-screen.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-view-screen/movie-view-screen.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/search-bar/search-bar-suggestions.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/search-bar/suggestion-data.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/app-types/IMovieUserState.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/app-types/SearchParamsMap.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/app-types/TokenData.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/custom-events-types/ToFetchImgOnWorker.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interfaces/custom-events-types/WorkerFetchedDoneEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/myWebWorker.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/auth-page/auth-page.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/auth-page/auth-page.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/home-page/dataTemp.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/home-page/home-page.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/home-page/home-page.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/home-page/subcomponents/now-playing-container.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/home-page/subcomponents/this-week-container.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/home-page/home-page.actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/home-page/home-page.reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/home-page/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/index.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/movies/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/user/index.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/user/user.actions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/user/user.reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/typings/custom.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-events/ImageDataEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-events/MovieViewEvent.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useAuth.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useFetch.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useIsMobile.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useLocationPath.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useLockBodyScroll.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useMovieForView.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useOnMovieView.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useSearchParam.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useSessionAvgColor.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/util/custom-objects/CustomURLSearchParams.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/movie-ratings-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/movie-ratings-app.iml" afterDir="false" />
+    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/items-list/items-list.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/favorites-page/favorites-page.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/watchlist-page/watchlist-page.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/item-list/index.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/item-list/list-item.actions.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/item-list/list-item.reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useEffectSkipFirst.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/custom-hooks/useSavedSessionParams.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/appProperties.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/appProperties.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app-bar/app-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app-bar/app-bar.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app-bar/app-bar.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app-bar/app-bar.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/circled-progress-bar/circled-progress-bar.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/error-message/error-message.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/error-message/error-message.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/loading-spinner/loading-spinner.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-item-img-bg/movie-item-img-bg.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-item-img-bg/movie-item-img-bg.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-item-img-bg/movie-item-img-bg.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-item-img-bg/movie-item-img-bg.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-item-view/movie-item-view.component.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-item-view/movie-item-view.module.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-result-item-skeleton/movie-result-item-skeleton.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-skeleton/movie-result-skeleton.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-result-item-skeleton/movie-result-item-skeleton.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-skeleton/movie-result-skeleton.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/rating-modal.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/rating-modal.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/search-bar/search-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search-bar/search-bar.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/search-bar/search-bar.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search-bar/search-bar.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/with-hot-subscribed/with-hot-subscribed.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/wrapper-components/with-hot-subscribed/with-hot-subscribed.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/action-types/AppActions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/action-types/IMovieItemActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movie-view/index.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/action-types/IMoviesActions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/action-types/IResultsPagingActions.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interfaces/app-types/IMovieResultItem.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/app-types/IMovieResultItem.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interfaces/app-types/IMoviesSearchResponseData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/interfaces/app-types/IMoviesResponseData.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth-page/auth-page.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth-page/auth-page.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/auth-page/auth-page.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/auth-page/auth-page.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home-page/home-page.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home-page/home-page.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home-page/subcomponents/now-playing-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home-page/subcomponents/now-playing-container.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home-page/subcomponents/this-week-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home-page/subcomponents/this-week-container.component.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/search-page/search-page.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/search-page/search-page.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/search-page/search-page.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/search-page/search-page.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/movie-item/movie-item.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movie-view/movie-view.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/movie-item/movie-item.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movie-view/movie-view.reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/movie-item/movie-item.selectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/home-page/home-page.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/home-page/home-page.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movie-view/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movie-view/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movie-view/movie-view.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movie-view/movie-view.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movie-view/movie-view.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movie-view/movie-view.reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movies/movies.actions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movies/movies.reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.selectors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movies/movies.selectors.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/root-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/root-reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/store.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_colors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_colors.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/_mixins.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_mixins.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/CanvasImgDataConverter.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/CanvasImgDataConverter.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/usePrevious.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/usePrevious.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/utilityFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/utilityFunctions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-hooks/useAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/useAuth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-hooks/useMovieForView.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/useMovieForView.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-hooks/useOnMovieView.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/useOnMovieView.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-hooks/useSearchParam.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/useSearchParam.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-objects/CustomURLSearchParams.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-objects/CustomURLSearchParams.ts" afterDir="false" />
     </list>
     <list id="de75be24-7b63-4021-ab6e-a8431e90edcf" name="Staged" comment="First app draft, components:&#10;- search-bar&#10;- movie-results-container&#10;- movie-result-item&#10;- movie-item-score&#10;Add appState with redux &amp; reselect,&#10;Add fetchMovies action." />
     <option name="SHOW_DIALOG" value="false" />
@@ -178,6 +93,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="NewWatcherDialog.advanced.open" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -205,29 +121,29 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Program Files\nodejs\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.tslint" />
     <property name="settings.editor.splitter.proportion" value="0.20281456" />
     <property name="ts.external.directory.path" value="C:\Program Files\nodejs\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\components\search-bar" />
-      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux" />
-      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux\movie-view" />
-      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux\movies" />
-      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\util\custom-hooks" />
-    </key>
-    <key name="es6.move.members.recent.items">
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types\AppActions.ts" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchError.ts" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchData.ts" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\components" />
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\util" />
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types" />
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux\results-paging" />
       <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\components" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types\AppActions.ts" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchError.ts" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchData.ts" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\components\search-bar" />
+      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux" />
+      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux\movie-view" />
+      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux\movies" />
+      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\util\custom-hooks" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -405,7 +321,11 @@
       <workItem from="1586851402011" duration="78000" />
       <workItem from="1586851488103" duration="12714000" />
       <workItem from="1586980859588" duration="4253000" />
-      <workItem from="1587002764268" duration="20569000" />
+      <workItem from="1587002764268" duration="20765000" />
+      <workItem from="1587029497984" duration="34000" />
+      <workItem from="1587056892201" duration="249000" />
+      <workItem from="1587057154617" duration="18342000" />
+      <workItem from="1587176043461" duration="18027000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1579841945871</created>
@@ -463,7 +383,14 @@
       <option name="project" value="LOCAL" />
       <updated>1582705490052</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Almost finish, watchlist and favorite sections missing.">
+      <created>1587029321472</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1587029321472</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -601,11 +528,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2510" y="101" width="796" height="763" key="#xdebugger.evaluate/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580857812043" />
-    <state x="1962" y="-509" key="CommitChangelistDialog2" timestamp="1587029110933">
+    <state x="1962" y="-509" key="CommitChangelistDialog2" timestamp="1587029320540">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2311" y="0" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1583358246831" />
-    <state x="1962" y="-509" key="CommitChangelistDialog2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587029110933" />
+    <state x="1962" y="-509" key="CommitChangelistDialog2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587029320540" />
     <state x="2013" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1582704153334">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -619,32 +546,32 @@
     </state>
     <state x="2501" y="233" key="FileChooserDialogImpl/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582853870683" />
     <state x="2374" y="9" key="FileChooserDialogImpl/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586572512546" />
-    <state width="1157" height="417" key="GridCell.Tab.0.bottom" timestamp="1587028024517">
+    <state width="1157" height="698" key="GridCell.Tab.0.bottom" timestamp="1587204000917">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288110" />
-    <state width="1157" height="417" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587028024517" />
+    <state width="1157" height="698" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587204000917" />
     <state width="1493" height="382" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939295" />
-    <state width="1157" height="417" key="GridCell.Tab.0.center" timestamp="1587028024517">
+    <state width="1157" height="698" key="GridCell.Tab.0.center" timestamp="1587204000917">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288110" />
-    <state width="1157" height="417" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587028024517" />
+    <state width="1157" height="698" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587204000917" />
     <state width="1493" height="382" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939295" />
-    <state width="1157" height="417" key="GridCell.Tab.0.left" timestamp="1587028024517">
+    <state width="1157" height="698" key="GridCell.Tab.0.left" timestamp="1587204000917">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288109" />
-    <state width="1157" height="417" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587028024517" />
+    <state width="1157" height="698" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587204000917" />
     <state width="1493" height="382" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939294" />
-    <state width="1157" height="417" key="GridCell.Tab.0.right" timestamp="1587028024517">
+    <state width="1157" height="698" key="GridCell.Tab.0.right" timestamp="1587204000917">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288110" />
-    <state width="1157" height="417" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587028024517" />
+    <state width="1157" height="698" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587204000917" />
     <state width="1493" height="382" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939295" />
     <state width="1493" height="229" key="GridCell.Tab.1.bottom" timestamp="1580865504775">
@@ -667,11 +594,11 @@
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2134" y="135" width="789" height="465" key="Performance.Activity.Monitor/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586851585314" />
-    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor" timestamp="1587008561340">
+    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor" timestamp="1587201605097">
       <screen x="3120" y="0" width="1536" height="864" />
     </state>
     <state x="1950" y="28" width="1238" height="836" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585201013840" />
-    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587008561340" />
+    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587201605097" />
     <state x="2303" y="-125" width="549" height="1200" key="StructurePopup" timestamp="1586753022207">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
@@ -685,10 +612,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2519" y="303" key="VCS.EditChangelistDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896356809" />
-    <state x="2281" y="148" key="Vcs.Push.Dialog.v2" timestamp="1582705535681">
-      <screen x="1920" y="0" width="1536" height="864" />
+    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2" timestamp="1587029401401">
+      <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2281" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582705535681" />
+    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587029401401" />
     <state x="2013" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1579896165740">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -697,11 +625,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2364" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582144085319" />
-    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1587015929314">
+    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1587075717549">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2339" y="95" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585207550196" />
-    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587015929314" />
+    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587075717549" />
     <state x="2371" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586221942325">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
@@ -716,20 +644,20 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="157" y="126" width="1178" height="607" key="dock-window-2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580236892794" />
-    <state x="2172" y="-229" width="629" height="1358" key="find.popup" timestamp="1587029257197">
+    <state x="2172" y="-229" width="629" height="1358" key="find.popup" timestamp="1587203627044">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2437" y="15" width="631" height="831" key="find.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585200006918" />
-    <state x="2172" y="-229" width="629" height="1358" key="find.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587029257197" />
+    <state x="2172" y="-229" width="629" height="1358" key="find.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587203627044" />
     <state x="2448" y="329" key="git4idea.ui.GitStashDialog" timestamp="1579896257750">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2448" y="329" key="git4idea.ui.GitStashDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896257750" />
-    <state width="300" height="195" key="javadoc.popup.new" timestamp="1587028089885">
+    <state width="300" height="195" key="javadoc.popup.new" timestamp="1587203540063">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="300" height="212" key="javadoc.popup.new/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211175572" />
-    <state width="300" height="195" key="javadoc.popup.new/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587028089885" />
+    <state width="300" height="195" key="javadoc.popup.new/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587203540063" />
     <state width="300" height="472" key="javadoc.popup.new/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585275205844" />
     <state x="2405" y="242" key="jetbrains.nodejs.interpreters-dialog" timestamp="1580151019367">
       <screen x="1920" y="0" width="1536" height="864" />
@@ -749,11 +677,11 @@
     </state>
     <state x="2280" y="92" key="scopes/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582108952309" />
     <state x="2201" y="-305" key="scopes/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586070598768" />
-    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup" timestamp="1587014719469">
+    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup" timestamp="1587203513268">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585205589884" />
-    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587014719469" />
+    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587203513268" />
     <state x="2257" y="-261" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274542926" />
     <state x="2089" y="169" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1580854288145">
       <screen x="1920" y="0" width="1536" height="864" />

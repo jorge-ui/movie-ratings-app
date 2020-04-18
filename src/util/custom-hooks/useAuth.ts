@@ -41,8 +41,7 @@ function logOut() {
 }
 
 function logIn(requestToken: string) {
-	const opened = window.open(buildLoginRedirectUrl(requestToken), "_blank");
-	console.log({opened});
+	window.open(buildLoginRedirectUrl(requestToken), "_blank");
 }
 
 interface AuthHook {

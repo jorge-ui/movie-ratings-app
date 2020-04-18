@@ -4,7 +4,7 @@ import { HomePageActions } from '.';
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
 import { goFetch } from "../../util/utilityFunctions";
-import IMoviesSearchResponseData from "../../interfaces/app-types/IMoviesSearchResponseData";
+import IMoviesResponseData from "../../interfaces/app-types/IMoviesResponseData";
 
 const thisWeekUrl = `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.REACT_APP_API_KEY}`;
 const nowPlayingUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_API_KEY}`;
@@ -23,7 +23,7 @@ export const fetchThisWeekAsync = ():
 
 	dispatch(fetchThisWeekStart());
 
-	goFetch<IMoviesSearchResponseData>(thisWeekUrl)
+	goFetch<IMoviesResponseData>(thisWeekUrl)
 		.then(({results}) => {
 			dispatch(fetchThisWeekSuccess([results[0], results[1], results[2]]))
 		})
@@ -38,7 +38,7 @@ export const fetchNowPlayingAsync = ():
 
 	dispatch(fetchNowPlayingStart());
 
-	goFetch<IMoviesSearchResponseData>(nowPlayingUrl)
+	goFetch<IMoviesResponseData>(nowPlayingUrl)
 		.then(({results}) => {
 			dispatch(fetchNowPlayingSuccess(results))
 		})

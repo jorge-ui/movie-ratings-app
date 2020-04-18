@@ -22,18 +22,22 @@ function useSearchParam<Param extends keyof SearchParamsMap>
 	const [selectedParam, setSelectedParam] = useState(() => {
 		return new CustomURLSearchParams(getHashQuery()).get(paramNameRef.current);
 	});
-	const selectedParamRef = useRef(selectedParam);
+	const fixSelectedParam =
+		((paramNameRef.current === "movieId" || paramNameRef.current === "page") && selectedParam !== null) ?
+		(Number(selectedParam) as SearchParamsMap[Param]) : selectedParam; // string because of a stupid bug in safari iOS -_-
+
+	const selectedParamRef = useRef(fixSelectedParam);
 
 	useLayoutEffect(() => {
-		selectedParamRef.current = selectedParam
-	}, [selectedParam]);
+		selectedParamRef.current = fixSelectedParam
+	}, [fixSelectedParam]);
 
-	const oldSelectedParam = usePrevious(selectedParam) || null;
+	const oldSelectedParam = usePrevious(fixSelectedParam) || null;
 
 	useEffect(() => {
-		if (oldSelectedParam !== selectedParam)
-			onParamChange && onParamChange(selectedParam, oldSelectedParam);
-	}, [selectedParam, onParamChange, oldSelectedParam]);
+		if (oldSelectedParam !== fixSelectedParam)
+			onParamChange && onParamChange(fixSelectedParam, oldSelectedParam);
+	}, [fixSelectedParam, onParamChange, oldSelectedParam]);
 
 	useEffect(() => {
 		const listener = ({oldURL, newURL}: HashChangeEvent) => {
@@ -74,7 +78,7 @@ function useSearchParam<Param extends keyof SearchParamsMap>
 	}, []);
 
 
-	return [selectedParam ?? undefined, updateParam];
+	return [fixSelectedParam ?? undefined, updateParam];
 }
 
 export default useSearchParam;

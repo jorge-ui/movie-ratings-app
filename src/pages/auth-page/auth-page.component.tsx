@@ -7,7 +7,7 @@ import appProperties from "../../appProperties";
 
 const {newRequestTokenUrl} = appProperties;
 
-const AuthPage: FC = () => {
+const AuthPage: FC = ({children}) => {
 	const [requestToken, setRequestToken] = useState<string | null>(null);
 	const {isAuth, user, signOut, signIn} = useAuth();
 
@@ -57,6 +57,7 @@ const AuthPage: FC = () => {
 			) : (
 				<button disabled={!requestToken} onClick={handleLogin}>Log in</button>
 			)}
+			{children}
 		</div>
 	);
 };

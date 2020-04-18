@@ -1,8 +1,12 @@
 import { IMoviesActions } from "./movies";
-import { MovieViewActions } from "./movie-view";
+import { IMovieViewActions } from "./movie-view";
 import rootReducer from "./root-reducer";
+import { IListItemsActions } from "./item-list";
 
-export type AppActions = IMoviesActions | MovieViewActions;
+export type AppActions =
+	| IMoviesActions
+	| IMovieViewActions
+	| IListItemsActions;
 
 export { default as store } from './store'
 

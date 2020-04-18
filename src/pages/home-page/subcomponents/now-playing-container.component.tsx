@@ -1,30 +1,36 @@
 import React, { FC, useEffect } from 'react';
 import styles from "../home-page.module.scss";
 import appProperties from "../../../appProperties";
-import { bindActionCreators, Dispatch } from "redux";
-import { MovieViewActions } from "../../../redux/movie-view";
 import { setMovieView } from "../../../redux/movie-view/movie-view.actions";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { HomePageState } from "../../../redux/home-page/home-page.reducer";
-import { AppState } from "../../../redux";
+import { AppState, store } from "../../../redux";
 import LoadingSpinner from "../../../components/loading-spinner/loading-spinner.component";
 import { fetchNowPlayingAsync } from "../../../redux/home-page/home-page.actions";
 import MovieItemsXScrollList from "../../../components/items-scroll-x/items-scroll-x.component";
+import IMovieResultItem from "../../../interfaces/app-types/IMovieResultItem";
 
 let {getPosterSrcPathPrefix} = appProperties;
 
 type NowPlayingSectionState = HomePageState['nowPlayingSection'];
 
-const NowPlayingContainer: FC<ReturnType<typeof mapDispatchToProps>> = ({onSetMovieView, onFetchNowPlayingAsync}) => {
+const NowPlayingContainer: FC = () => {
 
 	const {isLoading, items} = useSelector<AppState, NowPlayingSectionState>(selector, stateEquality);
 
 	useEffect(() => {
-		if (!items) onFetchNowPlayingAsync();
+		if (!store.getState().homePage.nowPlayingSection.items) {
+			// @ts-ignore
+			store.dispatch(fetchNowPlayingAsync())
+		}
 	}, []);
+
+	const onSetMovieView = (item: IMovieResultItem) =>
+		store.dispatch(setMovieView(item))
 
 	const mainItem = items ? items[0] : null;
 
+	console.log("rendering now-playing-container.component");
 	return (
 		<div className={styles.nowPlayingContainer}>
 			{(!isLoading && items && (
@@ -56,10 +62,4 @@ const stateEquality = (left: NowPlayingSectionState, right: NowPlayingSectionSta
 };
 const selector = ({homePage}: AppState) => homePage.nowPlayingSection;
 
-const mapDispatchToProps = (dispatch: Dispatch<MovieViewActions>) =>
-	bindActionCreators({
-		onSetMovieView: setMovieView,
-		onFetchNowPlayingAsync: fetchNowPlayingAsync
-	}, dispatch);
-
-export default connect(null, mapDispatchToProps)(NowPlayingContainer);
+export default NowPlayingContainer;

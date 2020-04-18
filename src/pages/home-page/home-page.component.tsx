@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import styles from './home-page.module.scss';
 import ThisWeekContainer from './subcomponents/this-week-container.component';
 import NowPlayingContainer from './subcomponents/now-playing-container.component';
@@ -32,4 +32,4 @@ const SpotlightSection: FC<{ title: string }> = ({title, children}) => (
 	</div>
 );
 
-export default HomePage;
+export default memo(HomePage, () => true);

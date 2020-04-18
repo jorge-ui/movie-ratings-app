@@ -1,4 +1,4 @@
-import { MovieViewActions } from "./index";
+import { IMovieViewActions } from "./index";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import { MovieViewActionsTypes } from './movie-view.actions';
 import { setSearchParam } from "../../util/utilityFunctions";
@@ -11,7 +11,7 @@ const INITIAL_STATE: MovieItemState = {
 	item: null,
 };
 
-const movieViewReducer = (state = INITIAL_STATE, action: MovieViewActions): MovieItemState => {
+const movieViewReducer = (state = INITIAL_STATE, action: IMovieViewActions): MovieItemState => {
 	switch (action.type) {
 		case MovieViewActionsTypes.SET_MOVIE_VIEW:
 			setSearchParam("movieId", action.payload.id);

@@ -76,7 +76,9 @@ function useMovieForView(): ReturnHookState {
 		) {
 			dispatch(onSetIsLoading());
 			goFetchMovieView(selectedMovie ?? movieIdParam)
-			.then(movieView => dispatch(onSetMovieItem(movieView)))
+			.then(movieView => {
+				dispatch(onSetMovieItem(movieView))
+			})
 		}
 
 		else if ( !movieIdParam && movieViewItem !== null) {
@@ -84,7 +86,7 @@ function useMovieForView(): ReturnHookState {
 			dispatch({type: "clear-item"});
 		}
 
-	}, [movieIdParam, fromSelectedId, isLoading, movieViewItem]);
+	}, [movieIdParam, fromSelectedId, isLoading, movieViewItem, selectedMovie]);
 
 	const [movieForViewState, setMovieForViewState] =
 		useState<ReturnHookState>({movieViewItem, isLoading, clearMovieId});

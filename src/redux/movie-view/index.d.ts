@@ -14,6 +14,6 @@ interface IClearMovieView {
 	type: typeof MovieViewActionsTypes.CLEAR_MOVIE_VIEW,
 }
 
-export type MovieViewActions =
+export type IMovieViewActions =
 	| ISetMovieView
 	| IClearMovieView

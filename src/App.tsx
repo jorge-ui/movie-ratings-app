@@ -13,14 +13,16 @@ import { setUser } from "./redux/user/user.actions";
 import { store } from "./redux";
 import AuthPage from "./pages/auth-page/auth-page.component";
 import useIsMobile from "./util/custom-hooks/useIsMobile";
+import WatchlistPage from './pages/watchlist-page/watchlist-page.component';
+import FavoritesPage from "./pages/favorites-page/favorites-page.component";
 
 const routesChildren = (
 	<>
-		<Route exact path="/" render={() => <HomePage/> } />
-		<Route path="/search" render={() => <SearchPage/> } />
-		<Route path="/favorites" render={() => <div>Favorites</div> } />
-		<Route path="/watchlist" render={() => <div>Watchlist</div> } />
-		<Route path="/account" render={() => <AuthPage/> } />
+		<Route exact path="/" render={() => <HomePage /> } />
+		<Route path="/search" render={() => <SearchPage /> } />
+		<Route path="/favorites" render={() => <FavoritesPage /> } />
+		<Route path="/watchlist" render={() => <WatchlistPage /> } />
+		<Route path="/account" render={() => <AuthPage /> } />
 	</>
 );
 
