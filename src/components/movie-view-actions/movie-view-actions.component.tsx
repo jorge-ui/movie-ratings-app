@@ -13,11 +13,13 @@ import AuthPage from "../../pages/auth-page/auth-page.component";
 import { store } from "../../redux";
 import { removeFromListItems, unshiftToListItems } from "../../redux/item-list/list-item.actions";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
+import { ActionItemName } from "../../redux/item-list";
 
 const {buildFetchMovieViewUrl, itemActions} = appProperties;
 
 interface Props {
-    item: IMovieResultItem
+    item: IMovieResultItem,
+    className?: string;
 }
 type State = IMovieUserState & {isLoading: Array<keyof IMovieUserState>}
 
@@ -78,7 +80,7 @@ const initial_state: State = {
     id: 0
 }
 
-const MovieViewActionButtons: FC<Props> = ({item}) => {
+const MovieViewActionButtons: FC<Props> = ({item, className}) => {
     const {id: movieId} = item;
     const isMounted = useRef(false);
 
@@ -116,42 +118,48 @@ const MovieViewActionButtons: FC<Props> = ({item}) => {
     const markFavorite = () => {
         if (ignoreActions) return !auth.isAuth && setShowLogin(true);
         let newFavValue = !state.favorite;
-        setLoading('favorite');
-        itemActions.favorite(newFavValue, movieId)
-            .then(() => {
-                if (newFavValue)
-                    store.dispatch(unshiftToListItems(item, "favorite"));
-                else store.dispatch(removeFromListItems(movieId, "favorite"));
 
-                isMounted.current && dispatch({
-                    type: 'update-favorite', payload: newFavValue
+        if (checkAllowToRemove(newFavValue, "favorite")) {
+            setLoading('favorite');
+            itemActions.favorite(newFavValue, movieId)
+                .then(() => {
+                    if (newFavValue)
+                        store.dispatch(unshiftToListItems(item, "favorite"));
+                    else store.dispatch(removeFromListItems(movieId, "favorite"));
+
+                    isMounted.current && dispatch({
+                        type: 'update-favorite', payload: newFavValue
+                    });
+                })
+                .catch(e => {
+                    console.error(e);
+                    alert("Error: could not mark to item-list :(");
+                    isMounted.current && dispatch({type: 'clear-loading'});
                 });
-            })
-            .catch(e => {
-                console.error(e);
-                alert("Error: could not mark to item-list :(")
-                isMounted.current && dispatch({type: 'clear-loading'});
-            })
+        }
     }
 
     const markWatchlist = () => {
         if (ignoreActions) return !auth.isAuth && setShowLogin(true);
         let newVal = !state.watchlist;
-        setLoading('watchlist');
-        itemActions.watchlist(newVal, movieId)
-            .then(() => {
-                if (newVal)
-                    store.dispatch(unshiftToListItems(item, "watchlist"));
-                else store.dispatch(removeFromListItems(movieId, "watchlist"));
-                isMounted.current && dispatch({
-                    type: 'update-watchlist', payload: newVal
+
+        if (checkAllowToRemove(newVal, "watchlist")) {
+            setLoading('watchlist');
+            itemActions.watchlist(newVal, movieId)
+                .then(() => {
+                    if (newVal)
+                        store.dispatch(unshiftToListItems(item, "watchlist"));
+                    else store.dispatch(removeFromListItems(movieId, "watchlist"));
+                    isMounted.current && dispatch({
+                        type: 'update-watchlist', payload: newVal
+                    });
+                })
+                .catch(e => {
+                    console.error(e);
+                    alert("Error: could not update watchlist :(");
+                    isMounted.current && dispatch({type: 'clear-loading'});
                 });
-            })
-            .catch(e => {
-                console.error(e);
-                alert("Error: could not update watchlist :(")
-                isMounted.current && dispatch({type: 'clear-loading'});
-            })
+        }
     }
 
     const rateItem = (newVal: number | null) => {
@@ -190,7 +198,7 @@ const MovieViewActionButtons: FC<Props> = ({item}) => {
 
 
     return (
-        <ul className={styles.root}>
+        <ul className={`${styles.root} ${className || ''}`}>
             <Tooltip key={"favorite"} title={"Mark as Favorite"} enterDelay={300}
                      PopperProps={{className: styles.toolTip}}>
                 <div className={styles.iconWrapper}
@@ -244,6 +252,11 @@ const MovieViewActionButtons: FC<Props> = ({item}) => {
         </ul>
     );
 };
+
+function checkAllowToRemove(newValue: boolean, itemName: ActionItemName): boolean {
+    if (newValue) return true;
+    else return window.confirm(`Remove item from ${itemName === "favorite" ? "favorites" : itemName}?`)
+}
 
 
 

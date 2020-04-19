@@ -59,7 +59,7 @@ const MovieViewItem: FC<OwnProps> = ({movieItem}) => {
                 {isViewing ? <MovieViewRelated movieId={movieItem.id}/> : null}
             </div>
             <div className={styles.sideInfo}>
-                {movieView && <MovieViewInfo movieView={movieView} movieId={movieItem.id}/>}
+                {movieView && <MovieViewInfo movieView={movieView} movieId={movieItem.id} />}
             </div>
         </div>
     );

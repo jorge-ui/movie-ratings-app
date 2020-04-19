@@ -1,0 +1,59 @@
+@import 'styles/breakpoints';
+
+.root {
+	position: relative;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 20px;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	display: flex;
+	.image {
+		width: 120px;
+	}
+	.info {
+		box-sizing: border-box;
+		padding-left: 10px;
+		align-self: stretch;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		.movieTitle {
+			margin: 0;
+		}
+
+		.itemActions {
+			display: flex;
+		}
+	}
+}
+
+@include media('<=sm') {
+	.root {
+		padding: 20px 0;
+		.image {
+			position: absolute;
+			left: 0;
+			top: -20%;
+			width: 100%;
+			opacity: .3;
+			z-index: -1;
+		}
+		.info {
+			padding: 0;
+			width: 100%;
+			.movieTitle {
+				margin-left: 5%;
+				font-size: 1.3rem;
+				padding-bottom: 20px;
+			}
+			.itemActions {
+				justify-content: space-evenly;
+				.actionButtons {
+					padding-left: 15px;
+				}
+			}
+		}
+	}
+}

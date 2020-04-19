@@ -8,3 +8,9 @@
 	margin-top: auto;
 	max-height: 36.5vh;
 }
+
+@include media('<=sm') {
+	.root {
+		margin: 40px 0;
+	}
+}

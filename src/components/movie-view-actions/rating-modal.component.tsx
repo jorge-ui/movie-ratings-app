@@ -42,15 +42,15 @@ const RatingModal: FC<Props> = ({rateItem, defaultValue = 0, setRatingModal}) =>
                     }}
                     size={isMobile ? "large" : "medium"}
                 />
+                {isMobile && <button
+                    disabled={(defaultValue/2) === value}
+                    className={styles.mobileSubmit}
+                    onClick={() => {
+                        rateItem(value ? value*2 : value)
+                    }}
+                >{value === null ? "Un-Rate" : "Rate"}</button>
+                }
             </div>
-            {isMobile && <button
-                disabled={(defaultValue/2) === value}
-                className={styles.mobileSubmit}
-                onClick={() => {
-                    rateItem(value ? value*2 : value)
-                }}
-            >{value === null ? "Un-Rate" : "Rate"}</button>
-            }
         </div>
     );
 };

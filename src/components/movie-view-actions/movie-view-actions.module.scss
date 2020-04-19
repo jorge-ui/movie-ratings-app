@@ -8,6 +8,7 @@ $rateActionColor: rgb(255, 241, 55);
 
 .root {
 	margin: 0;
+
 	display: flex;
 	position: relative;
 	align-items: center;
@@ -17,7 +18,7 @@ $rateActionColor: rgb(255, 241, 55);
 		border-radius: 100%;
 		position: relative;
 		background-color: rgba(0, 0, 0, 0.5);
-		@for $i from 1 through 3 {
+		@for $i from 1 through 2 {
 			&:nth-child(#{$i}) {
 				margin-right: 15px;
 			}
@@ -196,10 +197,11 @@ $rateActionColor: rgb(255, 241, 55);
 		height: 100%;
 		box-sizing: border-box;
 		z-index: 1;
-		background: linear-gradient(to top, $appColor, transparent);
+		background: linear-gradient(to top, darken($appColor, 10%), transparentize($appColor, .5));
 		.ratingModal {
 			position: relative;
 			width: fit-content;
+			transform: scale(1.5);
 			margin: auto;
 			top: 60%;
 			left: unset;
@@ -210,18 +212,26 @@ $rateActionColor: rgb(255, 241, 55);
 			}
 		}
 		.mobileSubmit {
-			margin: 60vh auto 0;
 			z-index: 2;
 			display: block;
-			border: 1px solid green;
 			background-color: gold;
-			font-size: 1em;
 			border-radius: 20px;
+			border: none;
 			font-weight: bolder;
+			position: absolute;
+			top: 120%;
+			left: 50%;
+			transform: translateX(-50%);
 
 			&:disabled {
 				filter: grayscale(100%) opacity(55%);
 			}
 		}
+	}
+}
+
+@media only screen and (max-width: 340px) {
+	.root {
+		padding-left: 15px;
 	}
 }

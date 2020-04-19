@@ -1,0 +1,19 @@
+@import 'styles/breakpoints';
+
+.root {
+	padding-top: 5vh;
+	box-sizing: border-box;
+	padding-bottom: 20vh;
+	width: 100%;
+	max-width: 1000px;
+	margin: auto;
+	.head {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 20px;
+		.title {
+			margin: 0 auto 0 0;
+		}
+	}
+}

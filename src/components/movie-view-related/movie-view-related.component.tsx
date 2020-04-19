@@ -10,9 +10,10 @@ const {buildFetchMovieViewUrl} = appProperties;
 
 interface OwnProps {
 	movieId: number;
+	className?: string;
 }
 
-const MovieViewRelated: FC<OwnProps> = ({movieId}) => {
+const MovieViewRelated: FC<OwnProps> = ({movieId, className}) => {
 
 	const [relatedMovies, setRelatedMovies] = useState<IMovieResultItem[] | null>(
 		null
@@ -32,7 +33,7 @@ const MovieViewRelated: FC<OwnProps> = ({movieId}) => {
 
 	return (
 		<MovieItemsXScrollList
-			className={styles.root}
+			className={`${styles.root} ${className || ''}`}
 			isLoading={!relatedMovies}
 			noResultsFound={noResultsFound}
 			items={relatedMovies ?? undefined}

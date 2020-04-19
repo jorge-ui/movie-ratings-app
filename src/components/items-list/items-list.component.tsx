@@ -8,7 +8,9 @@ import useEffectSkipFirst from "../../util/custom-hooks/useEffectSkipFirst";
 import { useSelector } from "react-redux";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import PaginationControls from "../pagination-controls/pagination-controls.component";
-
+import styles from './items-list.module.scss';
+import LoadingSpinner from "../loading-spinner/loading-spinner.component";
+import ListItem from "../list-item/list-item.component";
 
 interface Props {
 	itemType: ActionItemName;
@@ -50,11 +52,19 @@ const ItemsList: FC<Props> = ({itemType}) => {
 		return state[itemType].total_pages;
 	})
 
+	const title = itemType === "favorite" ? "Favorites" : "Watchlist";
+
 	return (
-		<div>
-			{!!totalPages && <PaginationControls totalPages={totalPages}/>}
-			{selected.map((item, i) => !!item && (
-				<div key={item.id}>{i + 1}) {item.title}</div>
+		<div className={styles.root}>
+			<div className={styles.head}>
+				<h2 className={styles.title}>{title}</h2>
+				{!!totalPages && <PaginationControls totalPages={totalPages}/>}
+			</div>
+
+			{isLoading && <LoadingSpinner darken fixed delay={750} />}
+
+			{selected.map(item => !!item && (
+				<ListItem key={item.id} item={item} />
 			))}
 		</div>
 	);

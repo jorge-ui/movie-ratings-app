@@ -16,7 +16,7 @@ import appProperties from "../../appProperties";
 import useSavedSessionParams from "../../util/custom-hooks/useSavedSessionParams";
 import useEffectSkipFirst from "../../util/custom-hooks/useEffectSkipFirst";
 
-let { perPageResultsItems } = appProperties;
+const { perPageResultsItems } = appProperties;
 
 
 type Props = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
@@ -33,9 +33,8 @@ const SearchPage: FC<Props> = props => {
 	});
 
 	const [currentSearchTerm = ''] = useSearchParam("s", (currentValue) => {
-		if (currentValue !== currentResultsSearchTerm && currentValue) {
+		if (currentValue !== currentResultsSearchTerm && currentValue)
 			onFetchMoviesAsync(currentValue);
-		}
 	});
 
 	// Effect to clear searchPage component upon empty parameters or sync state with searchParams

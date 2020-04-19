@@ -33,43 +33,6 @@ $itemRootBgColor: adjust-color($movieCardBgColor, $alpha: -.55, $lightness: -8%)
 	color: whitesmoke;
 	overflow: hidden;
 
-	.imageWrapper {
-		width: percentage($imageWidth);
-
-		.image {
-			@include flexCentered;
-			width: 100%;
-			height: 0;
-			padding-bottom: 150%;
-			background-color: #8c8c8c;
-			border-radius: 5px;
-			background-size: cover;
-			position: relative;
-			box-shadow: 0 0 9px 1px #0d0d0d;
-
-			span {
-				position: absolute;
-				text-align: center;
-				left: 50%;
-				top: 50%;
-				transform: translate(-50%, -50%);
-				cursor: default;
-				color: #232323;
-				font-weight: bold;
-				font-size: 1.2em;
-			}
-
-			.imageIcon {
-				position: absolute;
-				top: 25%;
-				width: 100%;
-				height: 50%;
-				color: #232323;
-				opacity: .4;
-			}
-		}
-	}
-
 	.content {
 		flex: 1;
 		position: relative;
@@ -164,26 +127,6 @@ $itemRootBgColor: adjust-color($movieCardBgColor, $alpha: -.55, $lightness: -8%)
 				overflow: hidden;
 			}
 
-			.imageWrapper {
-				$cubicBezier: cubic-bezier(.09, .75, .4, 1);
-				$onHover: 300ms $cubicBezier;
-				$offHover: 600ms ease;
-				transition: transform $offHover;
-
-				&:hover {
-					transition: transform $onHover;
-					transform: scale(1.05);
-
-					.image {
-						transition: box-shadow $onHover;
-						box-shadow: -5px 6px 9px 3px rgba(0, 0, 0, 0.41);
-					}
-				}
-
-				.image {
-					transition: box-shadow $offHover;
-				}
-			}
 		}
 	}
 }

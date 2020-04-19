@@ -1,17 +1,13 @@
-import React, { CSSProperties, FC, memo, useEffect, useMemo, useRef, useState } from 'react';
+import React, { CSSProperties, FC, useEffect, useMemo, useRef, useState } from 'react';
 import MovieItemImgBg from "../movie-item-img-bg/movie-item-img-bg.component";
-import ImageIcon from "@material-ui/icons/Image";
 import RatingProgressBar from "../circled-progress-bar/circled-progress-bar.component";
 import MovieViewActionButtons from "../movie-view-actions/movie-view-actions.component";
 import styles from './movie-result-item.module.scss';
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
-import { bindActionCreators, Dispatch } from "redux";
-import { IMovieViewActions } from "../../redux/movie-view";
-import { setMovieView } from "../../redux/movie-view/movie-view.actions";
-import { connect } from "react-redux";
 import appProperties from "../../appProperties";
 import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
 import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import MovieItemImage from "../movie-item-image/movie-item-image.component";
 
 const {getPosterSrcPathPrefix} = appProperties;
 
@@ -67,7 +63,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 	
 	
 	const memoizedBackgroundImage = useMemo(() =>
-		<ConnectedMovieResultItemImage
+		<MovieItemImage
 			backGroundUrl={poster_path ? `url("${imgSrcPath}")` : ''}
 			poster_path={poster_path}
 			movie={movie}
@@ -83,9 +79,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 		     style={{visibility}}
 		>
 			{!(isMobile && itemView) && <MovieItemImgBg movieId={movie.id} itemView={itemView}/>}
-			<div className={styles.imageWrapper}>
-				{memoizedBackgroundImage}
-			</div>
+			{memoizedBackgroundImage}
 			<div className={styles.content}>
 				<div className={styles.wrapper}>
 					<div className={styles.header}>
@@ -108,34 +102,6 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 		</div>
 	);
 };
-
-interface MovieResultItemImageProps {
-    backGroundUrl: string;
-    poster_path: string | null;
-    movie: IMovieResultItem;
-    itemView: boolean;
-}
-
-const MovieResultItemImage: FC<MovieResultItemImageProps & ReturnType<typeof mapDispatchToProps>> =
-    memo(({movie, backGroundUrl, poster_path, onSetMovieItem, itemView}) => {
-        return (
-            <div style={{backgroundImage: backGroundUrl}}
-                 onClick={() => !itemView && onSetMovieItem(movie)}
-                 className={styles.image}>
-                {!poster_path && <>
-                    <ImageIcon className={styles.imageIcon}/>
-                    <span>No<br/>Image</span>
-                </>}
-            </div>
-        );
-    }, (prevProps, nextProps) => prevProps.backGroundUrl === nextProps.backGroundUrl );
-
-const mapDispatchToProps = (dispatch: Dispatch<IMovieViewActions>) =>
-    bindActionCreators({
-        onSetMovieItem: setMovieView,
-    }, dispatch);
-
-const ConnectedMovieResultItemImage = connect(null, mapDispatchToProps)(MovieResultItemImage);
 
 const onViewConfigNotItemView = {
 	onEnter: "hidden" as OnViewConfigGeneric,
