@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/items-list/items-list.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/list-item/list-item.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/list-item/list-item.module.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-item-image/movie-item-image.component.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/movie-item-image/movie-item-image.module.scss" afterDir="false" />
+    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="Add items-list.component and list-item.component, and styles.&#10;both for the watchlist and favorites pages. &#10;Minssing remove animation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/error-message/error-message.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/error-message/error-message.module.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/items-list/items-list.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/items-list/items-list.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/rating-modal.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/rating-modal.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-item/movie-view-item.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.component.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-related/movie-view-related.module.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/search-page/search-page.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/search-page/search-page.component.tsx" afterDir="false" />
     </list>
     <list id="de75be24-7b63-4021-ab6e-a8431e90edcf" name="Staged" comment="First app draft, components:&#10;- search-bar&#10;- movie-results-container&#10;- movie-result-item&#10;- movie-item-score&#10;Add appState with redux &amp; reselect,&#10;Add fetchMovies action." />
     <option name="SHOW_DIALOG" value="false" />
@@ -310,7 +318,7 @@
       <workItem from="1587239231129" duration="792000" />
       <workItem from="1587245084178" duration="624000" />
       <workItem from="1587265541752" duration="10195000" />
-      <workItem from="1587280171834" duration="8716000" />
+      <workItem from="1587280171834" duration="9936000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1579841945871</created>
@@ -382,7 +390,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587204201090</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add watchlist-page.component &amp; favorites-page.component,&#10;Create listItemsReducer creator function for shared reducer logic,&#10;Add watchlist &amp; favorites page fetch logic and pagination.&#10;-Missing styles">
+      <created>1587292306268</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1587292306268</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -403,7 +418,63 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="date">
+                    <value>
+                      <list>
+                        <option value="1586687846414" />
+                        <option value="" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -430,6 +501,10 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2336" y="79" key="#Chrome_Settings/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1581742414486" />
+    <state x="2112" y="109" key="#Deployment" timestamp="1587292274162">
+      <screen x="1920" y="-509" width="1200" height="1920" />
+    </state>
+    <state x="2112" y="109" key="#Deployment/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587292274162" />
     <state x="2202" y="-307" key="#ESLint" timestamp="1586147545170">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
@@ -444,11 +519,11 @@
     </state>
     <state x="1978" y="26" width="1416" height="779" key="#Live_Templates/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585205625773" />
     <state x="1965" y="-451" key="#Live_Templates/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586234519422" />
-    <state x="2202" y="-305" key="#Notifications" timestamp="1586555527560">
+    <state x="2202" y="-305" width="575" height="728" key="#Notifications" timestamp="1587292572307">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2281" y="92" key="#Notifications/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579841433339" />
-    <state x="2202" y="-305" key="#Notifications/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586555527560" />
+    <state x="2202" y="-305" width="575" height="728" key="#Notifications/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587292572307" />
     <state x="2112" y="92" key="#Plugins" timestamp="1586851096495">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
@@ -521,11 +596,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2510" y="101" width="796" height="763" key="#xdebugger.evaluate/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580857812043" />
-    <state x="1962" y="-509" key="CommitChangelistDialog2" timestamp="1587204200401">
+    <state x="2048" y="-330" key="CommitChangelistDialog2" timestamp="1587293124194">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2311" y="0" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1583358246831" />
-    <state x="1962" y="-509" key="CommitChangelistDialog2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587204200401" />
+    <state x="2048" y="-330" key="CommitChangelistDialog2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587293124194" />
     <state x="2013" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1582704153334">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -591,6 +666,10 @@
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2134" y="135" width="789" height="465" key="Performance.Activity.Monitor/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586851585314" />
+    <state x="2242" y="-171" key="RollbackChangesDialog" timestamp="1587292392526">
+      <screen x="1920" y="-509" width="1200" height="1920" />
+    </state>
+    <state x="2242" y="-171" key="RollbackChangesDialog/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587292392526" />
     <state x="3259" y="37" width="1223" height="827" key="SettingsEditor" timestamp="1587201605097">
       <screen x="3120" y="0" width="1536" height="864" />
     </state>
@@ -609,11 +688,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2519" y="303" key="VCS.EditChangelistDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896356809" />
-    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2" timestamp="1587204213084">
+    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2" timestamp="1587292309678">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2281" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582705535681" />
-    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587204213084" />
+    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587292309678" />
     <state x="2013" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1579896165740">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -675,11 +754,11 @@
     </state>
     <state x="2280" y="92" key="scopes/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582108952309" />
     <state x="2201" y="-305" key="scopes/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586070598768" />
-    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup" timestamp="1587291865408">
+    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup" timestamp="1587293203578">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585205589884" />
-    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587291865408" />
+    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587293203578" />
     <state x="2257" y="-261" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274542926" />
     <state x="2089" y="169" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1580854288145">
       <screen x="1920" y="0" width="1536" height="864" />

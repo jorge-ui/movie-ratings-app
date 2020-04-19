@@ -54,6 +54,7 @@ const ItemsList: FC<Props> = ({itemType}) => {
 
 	const title = itemType === "favorite" ? "Favorites" : "Watchlist";
 
+	// TODO: missing spring animation upon removed item*
 	return (
 		<div className={styles.root}>
 			<div className={styles.head}>
