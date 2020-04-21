@@ -1,4 +1,4 @@
-// Type definitions for movies.action
+// Type definitions for search.action
 // Project: movie-ratings-app
 // Definitions by: Jorge L. Rivera <jrdeveloper.me>
 import IMoviesSearchData from "../../interfaces/app-types/IMoviesSearchData";

@@ -5,6 +5,8 @@ import MovieViewActionButtons from "../movie-view-actions/movie-view-actions.com
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import appProperties from "../../appProperties";
 import styles from './list-item.module.scss';
+import { setMovieView } from "../../redux/movie-view/movie-view.actions";
+import { store } from "../../redux";
 
 const {getPosterSrcPathPrefix} = appProperties;
 
@@ -13,6 +15,10 @@ interface OwnProps {
 }
 
 const ListItem: FC<OwnProps> = ({item}) => {
+
+	const onSetMovieView = (item: IMovieResultItem) =>
+		store.dispatch(setMovieView(item))
+
     return (
 	    <div className={styles.root}>
 		    <MovieItemImage
@@ -22,7 +28,9 @@ const ListItem: FC<OwnProps> = ({item}) => {
 			    className={styles.image}
 		    />
 		    <div className={styles.info}>
-			    <h3 className={styles.movieTitle}>{item.title}</h3>
+			    <h3 className={styles.movieTitle}
+		            onClick={() => onSetMovieView(item!)}
+			    >{item.title}</h3>
 			    <div className={styles.itemActions}>
 				    <RatingProgressBar score={item.vote_average} itemView />
 				    <MovieViewActionButtons item={item} className={styles.actionButtons} />

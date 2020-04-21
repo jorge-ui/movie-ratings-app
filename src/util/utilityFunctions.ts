@@ -8,7 +8,6 @@ import ImageDataEvent from "./custom-events/ImageDataEvent";
 import SearchParamsMap from "../interfaces/app-types/SearchParamsMap";
 import CustomURLSearchParams from "./custom-objects/CustomURLSearchParams";
 import IMovieView from "../interfaces/app-types/IMovieView";
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import { UserState } from "../redux/user";
 import TokenData from '../interfaces/app-types/TokenData';
 
@@ -166,25 +165,12 @@ export function minutesToRuntimeDisplay(minutes: number) {
     return `${hours}h ${remaining}m`
 }
 
-export function setScrollLocked(lock: boolean = true) {
-    if (checkIsMobile()) return;
-    // if(lock) {
-    //     const supportPageOffset = window.pageXOffset !== undefined;
-    //     const isCSS1Compat = ((document.compatMode || "") === "CSS1Compat");
-    //     const y = supportPageOffset ? window.pageYOffset : isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
-    //     document.onscroll = () => window.scrollY && window.scrollTo(0, y);
-    // }
-    // else (document.onscroll = null)
-    if (lock)
-        disableBodyScroll(document.scrollingElement as Element, {
-            allowTouchMove: el => el.id === "movie-item-view"
-        });
-    else enableBodyScroll(document.scrollingElement as Element);
-}
-
 export function getSearchParam<Param extends keyof SearchParamsMap>(paramName: Param): SearchParamsMap[Param] | null {
     let query = window.location.hash.split("?")[1];
-    return new CustomURLSearchParams(query).get(paramName);
+    let param = new CustomURLSearchParams(query).get(paramName);
+    if (param === null) return null;
+    const paramNum = Number(param);
+    return Object.is(paramNum, NaN) ? param : paramNum as SearchParamsMap[Param];
 }
 export function setSearchParam<Param extends keyof SearchParamsMap>
     (paramName: Param, value: SearchParamsMap[Param] | null): void {

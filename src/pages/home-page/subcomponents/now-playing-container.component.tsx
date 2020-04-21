@@ -30,7 +30,6 @@ const NowPlayingContainer: FC = () => {
 
 	const mainItem = items ? items[0] : null;
 
-	console.log("rendering now-playing-container.component");
 	return (
 		<div className={styles.nowPlayingContainer}>
 			{(!isLoading && items && (

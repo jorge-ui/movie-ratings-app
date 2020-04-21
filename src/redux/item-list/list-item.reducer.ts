@@ -31,12 +31,16 @@ function createListItemReducer(itemName: ActionItemName) {
 			case ListItemsActionTypes.UNSHIFT_TO_LIST_ITEMS:
 				return {
 					...state,
-					results: state.results && unshiftToObj(state.results, action.payload)
+					results: state.results && unshiftToObj(state.results, action.payload),
+					total_pages: Math.ceil((state.total_results+1)/20),
+					total_results: state.total_results+1
 				}
 			case ListItemsActionTypes.REMOVE_FROM_LIST_ITEMS:
 				return {
 					...state,
-					results: state.results && removeFromObjById(state.results, action.payload)
+					results: state.results && removeFromObjById(state.results, action.payload),
+					total_pages: Math.ceil((state.total_results-1)/20),
+					total_results: state.total_results-1
 				}
 			case ListItemsActionTypes.FETCH_LIST_ITEMS_START:
 				return {
@@ -93,7 +97,7 @@ function removeFromObjById(obj: ResultItemsObject, id: number): ResultItemsObjec
 	}
 	if (removed)
 		delete obj[Object.keys(obj).length-1];
-	return obj;
+	return {...obj};
 }
 
 export default createListItemReducer;

@@ -2,7 +2,7 @@ import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import React, { FC, memo, MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSpring } from "react-spring";
 import { bindActionCreators, Dispatch } from "redux";
-import { IMoviesActions } from "../../redux/movies";
+import { ISearchActions } from "../../redux/search";
 import { setMovieView } from "../../redux/movie-view/movie-view.actions";
 import { connect } from "react-redux";
 import appProperties from "../../appProperties";
@@ -108,7 +108,7 @@ const MovieItemsXScrollList: FC<OwnProps> =
 	)
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<IMoviesActions>) =>
+const mapDispatchToProps = (dispatch: Dispatch<ISearchActions>) =>
 	bindActionCreators({
 		onSetMovieView: setMovieView
 	},dispatch);

@@ -12,7 +12,7 @@ function useSavedSessionParams() {
 		const hashPath = getHashPath();
 		const savedPathParams = sessionStorage.getItem(hashPath);
 
-		if (savedPathParams && !getHashQuery()) // Total pages to browse with effect to keep sync
+		if (savedPathParams && !getHashQuery())
 			window.location.hash = hashPath + "?" + savedPathParams;
 
 		window.addEventListener("hashchange", onHashChange);

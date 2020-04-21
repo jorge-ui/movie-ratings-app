@@ -1,10 +1,10 @@
-import { IMoviesActions } from "./movies";
+import { ISearchActions } from "./search";
 import { IMovieViewActions } from "./movie-view";
 import rootReducer from "./root-reducer";
 import { IListItemsActions } from "./item-list";
 
 export type AppActions =
-	| IMoviesActions
+	| ISearchActions
 	| IMovieViewActions
 	| IListItemsActions;
 

@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { AppState } from "../../redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { IMoviesActions } from "../../redux/movies";
-import { checkIfFetchMore, clearFetchedMovies, fetchMoviesAsync } from "../../redux/movies/movies.actions";
+import { ISearchActions } from "../../redux/search";
+import { checkIfFetchMore, clearFetchedMovies, fetchMoviesAsync } from "../../redux/search/search.actions";
 import { connect } from "react-redux";
 import SearchBar from "../../components/search-bar/search-bar.component";
 import PaginationControls from "../../components/pagination-controls/pagination-controls.component";
@@ -15,6 +15,7 @@ import useSearchParam from "../../util/custom-hooks/useSearchParam";
 import appProperties from "../../appProperties";
 import useSavedSessionParams from "../../util/custom-hooks/useSavedSessionParams";
 import useEffectSkipFirst from "../../util/custom-hooks/useEffectSkipFirst";
+import MoviesGrid from "../../components/movies-grid/movies-grid.component";
 
 const { perPageResultsItems } = appProperties;
 
@@ -71,7 +72,11 @@ const SearchPage: FC<Props> = props => {
 			</div>
 			{isFetching ? <LoadingSpinner delay={800} />
 				: searchError ? <ErrorMessage error={searchError}/>
-					: <MovieResultsContainer page={currentPage}/>
+					: (
+						<MovieResultsContainer page={currentPage}>
+							{page => <MoviesGrid page={page}/>}
+						</MovieResultsContainer>
+					)
 			}
 		</div>
 	), [currentPage, isFetching, searchError, totalPages, totalResults]);
@@ -79,13 +84,13 @@ const SearchPage: FC<Props> = props => {
 
 
 const mapStateToProps = (state: AppState) => ({
-	totalResults: state.movies.searchData?.total_results ?? 0,
-	searchError: state.movies.searchError,
-	isFetching: state.movies.isFetching,
-	currentResultsSearchTerm: state.movies.currentSearchTerm
+	totalResults: state.search.searchData?.total_results ?? 0,
+	searchError: state.search.searchError,
+	isFetching: state.search.isFetching,
+	currentResultsSearchTerm: state.search.currentSearchTerm
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<IMoviesActions>) =>
+const mapDispatchToProps = (dispatch: Dispatch<ISearchActions>) =>
 	bindActionCreators(
 		{
 			onFetchMoviesAsync: fetchMoviesAsync,

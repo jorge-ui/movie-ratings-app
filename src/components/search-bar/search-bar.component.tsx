@@ -8,8 +8,9 @@ import SearchBarSuggestions from "./search-bar-suggestions.component";
 interface OwnProps {
     className?: string,
 }
-let isMounted: boolean;
+
 const SearchBar: FC<OwnProps> = ({ className }) => {
+    const isMounted = useRef(false);
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [error, setError] = useState("");
@@ -20,7 +21,7 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
 
     const [isFocus, setFocus] = useState(false);
 
-    const setFocusOn = useCallback(() => isMounted && setFocus(prevState => {
+    const setFocusOn = useCallback(() => isMounted.current && setFocus(prevState => {
         if (prevState) return prevState;
         setTimeout(() => {
             inputRef.current?.focus();
@@ -29,7 +30,7 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
         return true;
     }), []);
 
-    const setFocusOff = useCallback(() => isMounted && setFocus(prevState => {
+    const setFocusOff = useCallback(() => isMounted.current && setFocus(prevState => {
         if (!prevState) return prevState;
         inputRef.current?.blur();
         setError("");
@@ -57,7 +58,7 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
     }
 
     useEffect(() => {
-        isMounted = true;
+        isMounted.current = true;
         const listener = (e: KeyboardEvent) => {
             switch (e.code) {
                 case "Slash": setTimeout(setFocusOn ,50);
@@ -69,7 +70,7 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
         };
         window.addEventListener("keydown", listener);
         return () => {
-            isMounted = false;
+            isMounted.current = false;
             window.removeEventListener("keydown", listener);
         }
     }, []);
@@ -117,4 +118,4 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
     );
 };
 
-export default React.memo(SearchBar, () => true);
+export default React.memo(SearchBar);

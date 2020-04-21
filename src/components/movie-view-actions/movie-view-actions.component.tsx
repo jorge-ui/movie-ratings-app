@@ -196,13 +196,14 @@ const MovieViewActionButtons: FC<Props> = ({item, className}) => {
             })
     }
 
-
     return (
         <ul className={`${styles.root} ${className || ''}`}>
-            <Tooltip key={"favorite"} title={"Mark as Favorite"} enterDelay={300}
+            <Tooltip key={"favorite"}
+                     title={(!state.favorite ? "Mark as" : "Remove from") + " Favorite"}
+                     enterDelay={300}
                      PopperProps={{className: styles.toolTip}}>
                 <div className={styles.iconWrapper}
-                     active-icon={String(!!state.favorite)}
+                     active-icon={String(state.favorite)}
                      action-name={"favorite"}
                      is-loading={String(state.isLoading.includes("favorite"))}
                      onClick={markFavorite}
@@ -210,10 +211,12 @@ const MovieViewActionButtons: FC<Props> = ({item, className}) => {
                     <FavoriteIcon className={styles.icon} />
                 </div>
             </Tooltip>
-            <Tooltip key={"watchlist"} title={"Add to your watchlist"} enterDelay={300}
+            <Tooltip key={"watchlist"}
+                     title={(!state.watchlist ? "Add to" : "Remove from") + " Watchlist"}
+                     enterDelay={300}
                      PopperProps={{className: styles.toolTip}}>
                 <div className={styles.iconWrapper}
-                     active-icon={String(!!state.watchlist)}
+                     active-icon={String(state.watchlist)}
                      action-name={"watchlist"}
                      is-loading={String(state.isLoading.includes("watchlist"))}
                      onClick={markWatchlist}
@@ -221,7 +224,9 @@ const MovieViewActionButtons: FC<Props> = ({item, className}) => {
                     <BookmarkIcon className={styles.icon} />
                 </div>
             </Tooltip>
-            <Tooltip key={"rated"} title={"Rate it!"} enterDelay={300}
+            <Tooltip key={"rated"}
+                     title={"Rate it!"}
+                     enterDelay={300}
                      PopperProps={{className: styles.toolTip}}>
                 <div className={styles.iconWrapper}
                      active-icon={String(!!state.rated)}

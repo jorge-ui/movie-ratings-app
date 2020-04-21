@@ -47,7 +47,7 @@ function useMovieForView(): ReturnHookState {
 
 	const selectMovieItem = useCallback((state: AppState) => {
 		if (!movieIdParam) return null;
-		const results = state.movies.searchData?.results;
+		const results = state.search.searchData?.results;
 		if (results) {
 			for (let key in results)
 				if (results[key]?.id === movieIdParam)

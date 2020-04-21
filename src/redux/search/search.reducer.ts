@@ -1,9 +1,9 @@
 import IMoviesSearchData from "../../interfaces/app-types/IMoviesSearchData";
 import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
-import { MovieActionTypes } from "./movies.actions";
-import { IFetchMoviesSuccess, IMoviesActions } from "./";
+import { SearchActionTypes } from "./search.actions";
+import { IFetchMoviesSuccess, ISearchActions } from "./";
 
-export interface MoviesState {
+export interface SearchState {
 	currentSearchTerm: string;
 	searchData: IMoviesSearchData | null;
 	searchError: IMoviesSearchError | null;
@@ -12,7 +12,7 @@ export interface MoviesState {
 	apiFetchedPages: number[];
 }
 
-const INITIAL_STATE: MoviesState = {
+const INITIAL_STATE: SearchState = {
 	currentSearchTerm: "",
 	searchData: null,
 	searchError: null,
@@ -21,19 +21,19 @@ const INITIAL_STATE: MoviesState = {
 	apiFetchedPages: [],
 };
 
-const moviesReducer = (
+const searchReducer = (
 	state = INITIAL_STATE,
-	action: IMoviesActions
-): MoviesState => {
+	action: ISearchActions
+): SearchState => {
 	switch (action.type) {
-		case MovieActionTypes.CLEAR_FETCHED_MOVIES:
+		case SearchActionTypes.CLEAR_FETCHED_MOVIES:
 			return INITIAL_STATE;
-		case MovieActionTypes.FETCH_MOVIES_START:
+		case SearchActionTypes.FETCH_MOVIES_START:
 			return {
 				...INITIAL_STATE,
 				isFetching: true,
 			};
-		case MovieActionTypes.FETCH_MOVIES_SUCCESS:
+		case SearchActionTypes.FETCH_MOVIES_SUCCESS:
 			let {data: fetchedData, searchTerm} = (action as IFetchMoviesSuccess).payload;
 
 			if (!fetchedData.total_results)
@@ -51,18 +51,18 @@ const moviesReducer = (
 				currentSearchTerm: searchTerm,
 				apiFetchedPages: [1]
 			};
-		case MovieActionTypes.FETCH_MOVIES_FAILURE:
+		case SearchActionTypes.FETCH_MOVIES_FAILURE:
 			return {
 				...INITIAL_STATE,
 				searchError: action.payload
 			};
 
-		case MovieActionTypes.FETCH_MORE_MOVIES_START:
+		case SearchActionTypes.FETCH_MORE_MOVIES_START:
 			return {
 				...state,
 				isFetchingMore: true
 			};
-		case MovieActionTypes.FETCH_MORE_MOVIES_SUCCESS:
+		case SearchActionTypes.FETCH_MORE_MOVIES_SUCCESS:
 			return {
 				...state,
 				searchData: {
@@ -76,7 +76,7 @@ const moviesReducer = (
 				apiFetchedPages: [...state.apiFetchedPages, action.payload.fetchedPage],
 				isFetchingMore: false
 			};
-		case MovieActionTypes.FETCH_MORE_MOVIES_FAILURE:
+		case SearchActionTypes.FETCH_MORE_MOVIES_FAILURE:
 			return {
 				...state,
 				searchError: action.payload,
@@ -87,4 +87,4 @@ const moviesReducer = (
 	}
 };
 
-export default moviesReducer;
+export default searchReducer;

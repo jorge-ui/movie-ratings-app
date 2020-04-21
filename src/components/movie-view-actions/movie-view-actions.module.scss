@@ -86,10 +86,11 @@ $rateActionColor: rgb(255, 241, 55);
 }
 
 .ratingModalContainer {
-
+	user-select: none;
 	.ratingModal {
 		position: absolute;
-		background-color: rgba(0, 0, 0, 0.15);
+		background-color: $appColor;
+		margin-left: 20px;
 		padding: 4px 7px;
 		top: 50%;
 		transform: translateY(-50%);
@@ -191,22 +192,28 @@ $rateActionColor: rgb(255, 241, 55);
 	}
 	.ratingModalContainer {
 		position: fixed;
+		margin-left: unset;
 		left: 0;
 		top: 0;
 		width: 100%;
 		height: 100%;
 		box-sizing: border-box;
 		z-index: 1;
-		background: linear-gradient(to top, darken($appColor, 10%), transparentize($appColor, .5));
+		background: linear-gradient(to top,
+				  darken($appColor, 20%),
+				  $appColor 40%,
+				  transparent
+		);
 		.ratingModal {
 			position: relative;
+			box-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
 			width: fit-content;
 			transform: scale(1.5);
 			margin: auto;
 			top: 60%;
 			left: unset;
 			right: unset;
-			background-color: rgba(0, 0, 0, 0.4);
+			background-color: $appColor;
 			.removeButton {
 				transform: scale(1.3);
 			}
@@ -219,7 +226,7 @@ $rateActionColor: rgb(255, 241, 55);
 			border: none;
 			font-weight: bolder;
 			position: absolute;
-			top: 120%;
+			top: 150%;
 			left: 50%;
 			transform: translateX(-50%);
 

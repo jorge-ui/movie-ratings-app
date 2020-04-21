@@ -1,14 +1,21 @@
 import { useLayoutEffect } from "react";
 
-function useLockBodyScroll() {
+function useLockBodyScroll(maxWidth?: number) {
 	useLayoutEffect(() => {
 		// Get original body overflow
-		const originalStyle = window.getComputedStyle(document.body).overflow;
+		// const originalBodyStyle = window.getComputedStyle(document.body).overflow;
+		const originalStyle = document.scrollingElement ?
+			window.getComputedStyle(document.scrollingElement).overflow : ''
 		// Prevent scrolling on mount
-		document.body.style.overflow = 'hidden';
-		// Re-enable scrolling when component unmounts
+		if (typeof maxWidth === "undefined" || window.innerWidth <= maxWidth) {
+			// document.body.style.overflow = 'hidden';
+			if (document.scrollingElement)
+				(document.scrollingElement as HTMLElement).style.overflow = 'hidden';
+		}
+		// Re-enable scrolling on component unmount
 		return () => {
-			document.body.style.overflow = originalStyle;
+			if (document.scrollingElement)
+				(document.scrollingElement as HTMLElement).style.overflow = originalStyle;
 		}
 	}, []); // Empty array ensures effect is only run on mount and unmount
 }

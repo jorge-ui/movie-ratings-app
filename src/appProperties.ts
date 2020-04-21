@@ -116,7 +116,7 @@ const appProperties = {
 
 };
 
-// /account/{account_id}/favorite/movies
-// /account/{account_id}/watchlist/movies
+// /account/{account_id}/favorite/search
+// /account/{account_id}/watchlist/search
 
 export default appProperties;

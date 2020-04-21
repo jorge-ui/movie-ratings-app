@@ -11,10 +11,26 @@ interface Props {
     setRatingModal: (state: boolean) => void
 }
 
+const valuesMap = {
+    0  : 0.0,
+    1  : 0.5,
+    2  : 1.0,
+    3  : 1.5,
+    4  : 2.0,
+    5  : 2.5,
+    6  : 3.0,
+    7  : 3.5,
+    8  : 4.0,
+    9  : 4.5,
+    10 : 5.0
+}
+
 const RatingModal: FC<Props> = ({rateItem, defaultValue = 0, setRatingModal}) => {
     const isMobile = useIsMobile();
     const [value, setValue] = useState<number | null>(defaultValue/2);
-    useLockBodyScroll();
+
+    useLockBodyScroll(600);
+
     const unRate = () => {
         if (isMobile)
             setValue(null)
@@ -25,6 +41,18 @@ const RatingModal: FC<Props> = ({rateItem, defaultValue = 0, setRatingModal}) =>
         if (screenYPercent < .55)
             setRatingModal(false);
     }
+    function onTouch(e: React.TouchEvent<HTMLSpanElement>) {
+        const {left, right} = e.currentTarget.getBoundingClientRect();
+        const maxPoint = right - left;
+        const touchPoint = e.targetTouches[0].clientX - left;
+        const pointPercent = Math.round((touchPoint / maxPoint)*100);
+        const resultPercent =
+            pointPercent > 0 ? (pointPercent <= 100 ? pointPercent : 100) : 0
+
+        const newValue = valuesMap[Math.round(resultPercent / 10) as keyof typeof valuesMap];
+        setValue(newValue);
+    }
+
     return (
         <div className={styles.ratingModalContainer} onClick={handleClickAway} >
             <div className={styles.ratingModal}>
@@ -37,9 +65,11 @@ const RatingModal: FC<Props> = ({rateItem, defaultValue = 0, setRatingModal}) =>
                     value={value}
                     onChange={(event, newValue) => {
                         if (isMobile)
-                            return setValue(newValue || 0);
+                            return;
                         else rateItem((newValue || 0) * 2);
                     }}
+                    onTouchMove={onTouch}
+                    onTouchStart={onTouch}
                     size={isMobile ? "large" : "medium"}
                 />
                 {isMobile && <button

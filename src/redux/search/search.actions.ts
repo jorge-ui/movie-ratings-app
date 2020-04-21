@@ -1,6 +1,6 @@
 import IMoviesSearchData, { ResultItemsObject } from "../../interfaces/app-types/IMoviesSearchData";
 import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
-import { IMoviesActions } from "./";
+import { ISearchActions } from "./";
 import { ThunkAction } from "redux-thunk";
 import { AppState } from "../";
 import IMoviesResponseData from "../../interfaces/app-types/IMoviesResponseData";
@@ -9,7 +9,7 @@ import appProperties from "../../appProperties";
 
 const {buildFetchMovieSearchUrl, perPageResultsItems} = appProperties;
 
-export enum MovieActionTypes {
+export enum SearchActionTypes {
     FETCH_MOVIES_START = "FETCH_MOVIES_START",
     FETCH_MOVIES_SUCCESS = "FETCH_MOVIES_SUCCESS",
     FETCH_MOVIES_FAILURE = "FETCH_MOVIES_FAILURE",
@@ -19,35 +19,35 @@ export enum MovieActionTypes {
     CLEAR_FETCHED_MOVIES = "CLEAR_FETCHED_MOVIES",
 }
 
-export const clearFetchedMovies = (): IMoviesActions => ({
-    type: MovieActionTypes.CLEAR_FETCHED_MOVIES
+export const clearFetchedMovies = (): ISearchActions => ({
+    type: SearchActionTypes.CLEAR_FETCHED_MOVIES
 })
 
-export const fetchMoviesStart = (): IMoviesActions => ({
-    type: MovieActionTypes.FETCH_MOVIES_START,
+export const fetchMoviesStart = (): ISearchActions => ({
+    type: SearchActionTypes.FETCH_MOVIES_START,
 });
 
 
 export const fetchMoviesSuccess = (
     data: IMoviesSearchData,
     searchTerm: string
-): IMoviesActions => ({
-    type: MovieActionTypes.FETCH_MOVIES_SUCCESS,
+): ISearchActions => ({
+    type: SearchActionTypes.FETCH_MOVIES_SUCCESS,
     payload: {data, searchTerm}
 });
 
 
 export const fetchMoviesFailure = (
     error: IMoviesSearchError
-): IMoviesActions => ({
-    type: MovieActionTypes.FETCH_MOVIES_FAILURE,
+): ISearchActions => ({
+    type: SearchActionTypes.FETCH_MOVIES_FAILURE,
     payload: error
 });
 
 
 export const fetchMoviesAsync = (
     searchTerm: string
-): ThunkAction<void, AppState, null, IMoviesActions> => async dispatch => {
+): ThunkAction<void, AppState, null, ISearchActions> => async dispatch => {
     // Start
     dispatch(fetchMoviesStart());
     apiNowFetchingPages.add(1);
@@ -80,31 +80,31 @@ export const fetchMoviesAsync = (
 };
 
 
-export const fetchMoreMoviesStart = (): IMoviesActions => ({
-    type: MovieActionTypes.FETCH_MORE_MOVIES_START
+export const fetchMoreMoviesStart = (): ISearchActions => ({
+    type: SearchActionTypes.FETCH_MORE_MOVIES_START
 });
 
 
 export const fetchMoreMoviesSuccess = (
     data: ResultItemsObject,
     fetchedPage: number
-): IMoviesActions => ({
-    type: MovieActionTypes.FETCH_MORE_MOVIES_SUCCESS,
+): ISearchActions => ({
+    type: SearchActionTypes.FETCH_MORE_MOVIES_SUCCESS,
     payload: {data, fetchedPage}
 });
 
 
 export const fetchMoreMoviesFailure = (
     error: IMoviesSearchError
-): IMoviesActions => ({
-    type: MovieActionTypes.FETCH_MORE_MOVIES_FAILURE,
+): ISearchActions => ({
+    type: SearchActionTypes.FETCH_MORE_MOVIES_FAILURE,
     payload: error
 });
 
 
 export const fetchMoreMoviesAsync = (
     nextPageOnApi: number, ...otherPagesOnApi: number[]
-): ThunkAction<void, AppState, null, IMoviesActions> => async (
+): ThunkAction<void, AppState, null, ISearchActions> => async (
     dispatch,
     getState
 ) => {
@@ -144,10 +144,10 @@ export const fetchMoreMoviesAsync = (
 
 export const checkIfFetchMore = (
     pageOnUi: number
-): ThunkAction<void, AppState, null, IMoviesActions> => async (dispatch, getState) => {
+): ThunkAction<void, AppState, null, ISearchActions> => async (dispatch, getState) => {
     if (!pageOnUi) return;
 
-    const { apiFetchedPages, searchData } = getState().movies;
+    const { apiFetchedPages, searchData } = getState().search;
     const total_pages = searchData?.total_pages || 0;
 
     const isFetchPage = (pageOnApi: number) => // this is a utility function

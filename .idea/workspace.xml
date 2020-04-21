@@ -25,9 +25,44 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="Add items-list.component and list-item.component, and styles.&#10;both for the watchlist and favorites pages. &#10;Minssing remove animation">
+    <list default="true" id="06971832-a873-42fd-9b7e-49787050a6bb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/movies-grid/movies-grid.component.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/movies-grid/movies-grid.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/jorge.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/jorge.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/appProperties.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/appProperties.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/items-list/items-list.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/items-list/items-list.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/items-list/items-list.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/items-list/items-list.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/items-scroll-x/items-scroll-x.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/items-scroll-x/items-scroll-x.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/list-item/list-item.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list-item/list-item.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/list-item/list-item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/list-item/list-item.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-result-item/movie-result-item.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-results-container/movie-results-container.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/movie-view-actions.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/movie-view-actions/rating-modal.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/movie-view-actions/rating-modal.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pagination-controls/pagination-controls.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/search-bar/search-bar.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/search-bar/search-bar.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/total-search-results/total-search-results.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/home-page/subcomponents/now-playing-container.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/home-page/subcomponents/now-playing-container.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/search-page/search-page.component.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/search-page/search-page.component.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/item-list/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/item-list/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/item-list/list-item.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/item-list/list-item.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movie-view/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/movie-view/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movies/index.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/search/index.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/search/search.actions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/search/search.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/movies/movies.selectors.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/root-reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/root-reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/_breakpoints.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/_breakpoints.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-hooks/useLockBodyScroll.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/useLockBodyScroll.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-hooks/useMovieForView.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/useMovieForView.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/custom-hooks/useSavedSessionParams.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/custom-hooks/useSavedSessionParams.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/utilityFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/utilityFunctions.ts" afterDir="false" />
     </list>
     <list id="de75be24-7b63-4021-ab6e-a8431e90edcf" name="Staged" comment="First app draft, components:&#10;- search-bar&#10;- movie-results-container&#10;- movie-result-item&#10;- movie-item-score&#10;Add appState with redux &amp; reselect,&#10;Add fetchMovies action." />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +93,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/redux/movies/movies.actions.ts" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/src/redux/search/search.actions.ts" root0="SKIP_INSPECTION" />
   </component>
   <component name="JsBowerSettings">
     <node-interpreter value="project" />
@@ -89,7 +124,7 @@
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="TypeScript JSX" />
     <property name="full.screen.before.presentation.mode" value="false" />
     <property name="js.last.introduce.type" value="CONST" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../Program Files/nodejs/node_modules/typescript" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/redux/search" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.jscs" value="true" />
@@ -110,29 +145,29 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="project" />
     <property name="prettierjs.PrettierConfiguration.Package" value="C:\Program Files\nodejs\node_modules\prettier" />
-    <property name="settings.editor.selected.configurable" value="settings.javascript.linters.tslint" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="settings.editor.splitter.proportion" value="0.20281456" />
     <property name="ts.external.directory.path" value="C:\Program Files\nodejs\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\components" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\util" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux\results-paging" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\components" />
-    </key>
-    <key name="es6.move.members.recent.items">
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types\AppActions.ts" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchError.ts" />
-      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchData.ts" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\components\search-bar" />
       <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux" />
       <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux\movie-view" />
       <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\redux\movies" />
       <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\util\custom-hooks" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\action-types\AppActions.ts" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchError.ts" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types\MoviesSearchData.ts" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jorge\Development\current-development\movie-ratings-app\src\components" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\util" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\interfaces\app-types" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\redux\results-paging" />
+      <recent name="D:\Development\JavaScript\WebStorm\movie-ratings-app\src\components" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -318,7 +353,10 @@
       <workItem from="1587239231129" duration="792000" />
       <workItem from="1587245084178" duration="624000" />
       <workItem from="1587265541752" duration="10195000" />
-      <workItem from="1587280171834" duration="9936000" />
+      <workItem from="1587280171834" duration="10119000" />
+      <workItem from="1587350164251" duration="21374000" />
+      <workItem from="1587443237891" duration="10798000" />
+      <workItem from="1587508216437" duration="1687000" />
     </task>
     <task id="LOCAL-00001" summary="Initial Commit">
       <created>1579841945871</created>
@@ -397,7 +435,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587292306268</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="actual commit for #f00c995 (commit message fix)&#10;Add items-list.component and list-item.component, and styles.&#10;both for the watchlist and favorites pages. &#10;Missing a removed item spring animation, &#10;and overall app metadata.">
+      <created>1587293340193</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1587293340193</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -493,7 +538,8 @@
     <MESSAGE value="Updated packages, improved movie-item-view.component transition on enter." />
     <MESSAGE value="Almost finish, watchlist and favorite sections missing." />
     <MESSAGE value="Add watchlist-page.component &amp; favorites-page.component,&#10;Create listItemsReducer creator function for shared reducer logic,&#10;Add watchlist &amp; favorites page fetch logic and pagination.&#10;-Missing styles" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add watchlist-page.component &amp; favorites-page.component,&#10;Create listItemsReducer creator function for shared reducer logic,&#10;Add watchlist &amp; favorites page fetch logic and pagination.&#10;-Missing styles" />
+    <MESSAGE value="actual commit for #f00c995 (commit message fix)&#10;Add items-list.component and list-item.component, and styles.&#10;both for the watchlist and favorites pages. &#10;Missing a removed item spring animation, &#10;and overall app metadata." />
+    <option name="LAST_COMMIT_MESSAGE" value="actual commit for #f00c995 (commit message fix)&#10;Add items-list.component and list-item.component, and styles.&#10;both for the watchlist and favorites pages. &#10;Missing a removed item spring animation, &#10;and overall app metadata." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -596,11 +642,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2510" y="101" width="796" height="763" key="#xdebugger.evaluate/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580857812043" />
-    <state x="2048" y="-330" key="CommitChangelistDialog2" timestamp="1587293124194">
+    <state x="2048" y="-330" key="CommitChangelistDialog2" timestamp="1587293339825">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2311" y="0" key="CommitChangelistDialog2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1583358246831" />
-    <state x="2048" y="-330" key="CommitChangelistDialog2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587293124194" />
+    <state x="2048" y="-330" key="CommitChangelistDialog2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587293339825" />
     <state x="2013" y="93" width="1350" height="678" key="DiffContextDialog" timestamp="1582704153334">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -609,41 +655,41 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2394" y="105" width="712" height="702" key="EditFileWatcherDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582608616234" />
-    <state x="2374" y="9" key="FileChooserDialogImpl" timestamp="1586572512546">
+    <state x="2374" y="9" key="FileChooserDialogImpl" timestamp="1587373694758">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2501" y="233" key="FileChooserDialogImpl/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582853870683" />
-    <state x="2374" y="9" key="FileChooserDialogImpl/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586572512546" />
-    <state width="1157" height="616" key="GridCell.Tab.0.bottom" timestamp="1587284065899">
+    <state x="2374" y="9" key="FileChooserDialogImpl/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587373694758" />
+    <state width="1157" height="616" key="GridCell.Tab.0.bottom" timestamp="1587474121966">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.bottom/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288110" />
     <state width="1157" height="616" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@0.0.1536.864" timestamp="1587280154509" />
-    <state width="1157" height="616" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587284065899" />
+    <state width="1157" height="616" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587474121966" />
     <state width="1493" height="382" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.bottom/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939295" />
-    <state width="1157" height="616" key="GridCell.Tab.0.center" timestamp="1587284065899">
+    <state width="1157" height="616" key="GridCell.Tab.0.center" timestamp="1587474121966">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.center/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288110" />
     <state width="1157" height="616" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@0.0.1536.864" timestamp="1587280154509" />
-    <state width="1157" height="616" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587284065899" />
+    <state width="1157" height="616" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587474121966" />
     <state width="1493" height="382" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.center/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939295" />
-    <state width="1157" height="616" key="GridCell.Tab.0.left" timestamp="1587284065899">
+    <state width="1157" height="616" key="GridCell.Tab.0.left" timestamp="1587474121966">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.left/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288109" />
     <state width="1157" height="616" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@0.0.1536.864" timestamp="1587280154509" />
-    <state width="1157" height="616" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587284065899" />
+    <state width="1157" height="616" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587474121966" />
     <state width="1493" height="382" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.left/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939294" />
-    <state width="1157" height="616" key="GridCell.Tab.0.right" timestamp="1587284065899">
+    <state width="1157" height="616" key="GridCell.Tab.0.right" timestamp="1587474121966">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="1493" height="56" key="GridCell.Tab.0.right/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211288110" />
     <state width="1157" height="616" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@0.0.1536.864" timestamp="1587280154509" />
-    <state width="1157" height="616" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587284065899" />
+    <state width="1157" height="616" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587474121966" />
     <state width="1493" height="382" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@3120.0.1536.864" timestamp="1586662731129" />
     <state width="1157" height="195" key="GridCell.Tab.0.right/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274939295" />
     <state width="1493" height="229" key="GridCell.Tab.1.bottom" timestamp="1580865504775">
@@ -670,11 +716,11 @@
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2242" y="-171" key="RollbackChangesDialog/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587292392526" />
-    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor" timestamp="1587201605097">
+    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor" timestamp="1587509903933">
       <screen x="3120" y="0" width="1536" height="864" />
     </state>
     <state x="1950" y="28" width="1238" height="836" key="SettingsEditor/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585201013840" />
-    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587201605097" />
+    <state x="3259" y="37" width="1223" height="827" key="SettingsEditor/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587509903933" />
     <state x="2303" y="-125" width="549" height="1200" key="StructurePopup" timestamp="1586753022207">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
@@ -688,11 +734,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2519" y="303" key="VCS.EditChangelistDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896356809" />
-    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2" timestamp="1587292309678">
+    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2" timestamp="1587293347992">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2281" y="148" key="Vcs.Push.Dialog.v2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582705535681" />
-    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587292309678" />
+    <state x="2202" y="-180" key="Vcs.Push.Dialog.v2/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587293347992" />
     <state x="2013" y="93" width="1350" height="678" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1579896165740">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
@@ -701,11 +747,11 @@
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2364" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582144085319" />
-    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1587269043101">
+    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1587363722830">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2339" y="95" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585207550196" />
-    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587269043101" />
+    <state x="2247" y="-298" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587363722830" />
     <state x="2371" y="258" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1586221942325">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
@@ -720,21 +766,21 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="157" y="126" width="1178" height="607" key="dock-window-2/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1580236892794" />
-    <state x="2172" y="-229" width="629" height="1358" key="find.popup" timestamp="1587265662650">
+    <state x="2172" y="-229" width="629" height="1358" key="find.popup" timestamp="1587380656256">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2437" y="15" width="631" height="831" key="find.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585200006918" />
-    <state x="2172" y="-229" width="629" height="1358" key="find.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587265662650" />
+    <state x="2172" y="-229" width="629" height="1358" key="find.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587380656256" />
     <state x="2448" y="329" key="git4idea.ui.GitStashDialog" timestamp="1579896257750">
       <screen x="1920" y="0" width="1536" height="864" />
     </state>
     <state x="2448" y="329" key="git4idea.ui.GitStashDialog/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1579896257750" />
-    <state width="300" height="195" key="javadoc.popup.new" timestamp="1587292013922">
+    <state width="300" height="195" key="javadoc.popup.new" timestamp="1587453716386">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state width="300" height="212" key="javadoc.popup.new/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585211175572" />
     <state width="384" height="88" key="javadoc.popup.new/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@0.0.1536.864" timestamp="1587281683271" />
-    <state width="300" height="195" key="javadoc.popup.new/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587292013922" />
+    <state width="300" height="195" key="javadoc.popup.new/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587453716386" />
     <state width="300" height="472" key="javadoc.popup.new/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585275205844" />
     <state x="2405" y="242" key="jetbrains.nodejs.interpreters-dialog" timestamp="1580151019367">
       <screen x="1920" y="0" width="1536" height="864" />
@@ -754,11 +800,11 @@
     </state>
     <state x="2280" y="92" key="scopes/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1582108952309" />
     <state x="2201" y="-305" key="scopes/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1586070598768" />
-    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup" timestamp="1587293203578">
+    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup" timestamp="1587508445949">
       <screen x="1920" y="-509" width="1200" height="1920" />
     </state>
     <state x="2351" y="181" width="672" height="678" key="search.everywhere.popup/0.0.1536.864/1920.0.1536.864@1920.0.1536.864" timestamp="1585205589884" />
-    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587293203578" />
+    <state x="2181" y="-176" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-509.1200.1920@1920.-509.1200.1920" timestamp="1587508445949" />
     <state x="2257" y="-261" width="672" height="1507" key="search.everywhere.popup/0.0.1536.864/3120.0.1536.864/1920.-663.1200.1920@1920.-663.1200.1920" timestamp="1585274542926" />
     <state x="2089" y="169" key="vcs.ApplyPatchDifferentiatedDialog" timestamp="1580854288145">
       <screen x="1920" y="0" width="1536" height="864" />

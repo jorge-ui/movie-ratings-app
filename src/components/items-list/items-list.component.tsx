@@ -1,5 +1,5 @@
 import { ActionItemName } from "../../redux/item-list";
-import React, { FC, useEffect, useLayoutEffect } from "react";
+import React, { FC, memo, useEffect, useLayoutEffect } from "react";
 import useSearchParam from "../../util/custom-hooks/useSearchParam";
 import useAuth from "../../util/custom-hooks/useAuth";
 import { AppActions, AppState, store } from "../../redux";
@@ -11,13 +11,17 @@ import PaginationControls from "../pagination-controls/pagination-controls.compo
 import styles from './items-list.module.scss';
 import LoadingSpinner from "../loading-spinner/loading-spinner.component";
 import ListItem from "../list-item/list-item.component";
+import MovieItemsContainer from "../movie-results-container/movie-results-container.component";
+import { animated, useTransition } from 'react-spring';
+import { easeOutQuad } from "../../util/easingFuctions";
+import { UnknownProps, UseTransitionProps } from "@react-spring/core";
 
 interface Props {
 	itemType: ActionItemName;
 }
 
 const ItemsList: FC<Props> = ({itemType}) => {
-	const [page = 0, setPage] = useSearchParam("page");
+	const [page = 1, setPage] = useSearchParam("page");
 
 	const {isAuth} = useAuth();
 
@@ -38,12 +42,6 @@ const ItemsList: FC<Props> = ({itemType}) => {
 				fetchListItemsAsync(page, itemType) as unknown as AppActions);
 	}, [page]);
 
-	const selected = useSelector<AppState, IMovieResultItem[]>(state => {
-		let listState = state[itemType];
-		if (!isAuth) return [];
-		return selectItemsFromState(listState, page);
-	}, equality);
-
 	const isLoading = useSelector<AppState, boolean>(state => {
 		return state[itemType].isLoading
 	});
@@ -54,22 +52,56 @@ const ItemsList: FC<Props> = ({itemType}) => {
 
 	const title = itemType === "favorite" ? "Favorites" : "Watchlist";
 
-	// TODO: missing spring animation upon removed item*
 	return (
 		<div className={styles.root}>
 			<div className={styles.head}>
 				<h2 className={styles.title}>{title}</h2>
-				{!!totalPages && <PaginationControls totalPages={totalPages}/>}
+				{totalPages>1 && <PaginationControls totalPages={totalPages}/>}
 			</div>
 
 			{isLoading && <LoadingSpinner darken fixed delay={750} />}
-
-			{selected.map(item => !!item && (
-				<ListItem key={item.id} item={item} />
-			))}
+			<MovieItemsContainer page={page}>
+				{(currentPage) => <ListChild page={currentPage} itemType={itemType} />}
+			</MovieItemsContainer>
 		</div>
 	);
 };
+
+interface ListChildProps {
+	page: number;
+	itemType: ActionItemName
+}
+
+const ListChild: FC<ListChildProps> = memo(({itemType, page}) => {
+
+	const selected = useSelector<AppState, IMovieResultItem[]>(state => {
+		let listState = state[itemType];
+		return selectItemsFromState(listState, page);
+	}, equality);
+
+	const transition = useTransition(selected, item => item.id, transitionConfig);
+
+	return (
+		<>
+			{
+				transition.map(({item, key, props}) => !!item && (
+					<animated.div
+						key={key}
+						style={{
+							...props,
+							transform: props.translateX.interpolate(v =>
+								v ? `translateX(${v}px)` : ''
+							)
+						}}
+					>
+						<ListItem item={item} />
+					</animated.div>
+				))
+
+			}
+		</>
+	);
+})
 
 function selectItemsFromState(itemsState: AppState["favorite" | "watchlist"], page: number) {
 	let selected: IMovieResultItem[] = [];
@@ -86,6 +118,30 @@ function selectItemsFromState(itemsState: AppState["favorite" | "watchlist"], pa
 	return selected;
 }
 
-const equality = (left: IMovieResultItem[], right: IMovieResultItem[]) => left.length === right.length
+const transitionConfig: UnknownProps & UseTransitionProps = {
+	from: {
+		opacity: 1,
+		maxHeight: 500,
+		translateX: 0,
+		paddingBottom: 20,
+	},
+	leave: () => async next => {
+		// @ts-ignore
+		next({maxHeight: 0, paddingBottom: 0, delay: 300}).catch(() => void 0)
+		// @ts-ignore
+		next({ opacity: -.2, translateX: 300 }).catch(() => void 0)
+	},
+	config: {
+		duration: 500,
+		easing: easeOutQuad
+	},
+	unique: true
+}
+
+const equality = (newS: IMovieResultItem[], oldS: IMovieResultItem[]) =>
+	((newS.length === 20) &&
+		(newS[0].id === oldS[0].id) &&
+			(newS[newS.length - 1].id === oldS[oldS.length - 1].id))
+	|| (newS.length < 20 && (newS.length === oldS.length))
 
 export default ItemsList;
