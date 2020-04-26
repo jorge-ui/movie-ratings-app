@@ -1,19 +1,19 @@
 import React, { FC, useEffect, useReducer, useRef, useState } from "react";
-import styles from './movie-view-actions.module.scss';
+import styles from "./movie-view-actions.module.scss";
 import { Tooltip } from "@material-ui/core";
 import IMovieUserState, { Rated } from "../../interfaces/app-types/IMovieUserState";
-import useAuth from "../../util/custom-hooks/useAuth";
-import { goFetch } from "../../util/utilityFunctions";
+import useAuth from "hooks/useAuth";
+import { goFetch } from "utility";
 import appProperties from "../../appProperties";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import GradeIcon from "@material-ui/icons/Grade";
 import RatingModal from "./rating-modal.component";
-import AuthPage from "../../pages/auth-page/auth-page.component";
-import { store } from "../../redux";
-import { removeFromListItems, unshiftToListItems } from "../../redux/item-list/list-item.actions";
+import AuthPage from "pages/auth-page";
+import store from "store";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
-import { ActionItemName } from "../../redux/item-list";
+import getMoviesBrowserActions from "../../store/movies-browser/movies-browser.actions";
+import { AccountItemsNames } from "../../store/movies-browser";
 
 const {buildFetchMovieViewUrl, itemActions} = appProperties;
 
@@ -79,6 +79,9 @@ const initial_state: State = {
     isLoading: [],
     id: 0
 }
+const favoriteActions =  getMoviesBrowserActions("favorite");
+const watchlistActions =  getMoviesBrowserActions("watchlist");
+
 
 const MovieViewActionButtons: FC<Props> = ({item, className}) => {
     const {id: movieId} = item;
@@ -124,8 +127,8 @@ const MovieViewActionButtons: FC<Props> = ({item, className}) => {
             itemActions.favorite(newFavValue, movieId)
                 .then(() => {
                     if (newFavValue)
-                        store.dispatch(unshiftToListItems(item, "favorite"));
-                    else store.dispatch(removeFromListItems(movieId, "favorite"));
+                        store.dispatch(favoriteActions.unshiftToFavorites(item));
+                    else store.dispatch(favoriteActions.removeFromListItems(movieId));
 
                     isMounted.current && dispatch({
                         type: 'update-favorite', payload: newFavValue
@@ -148,8 +151,8 @@ const MovieViewActionButtons: FC<Props> = ({item, className}) => {
             itemActions.watchlist(newVal, movieId)
                 .then(() => {
                     if (newVal)
-                        store.dispatch(unshiftToListItems(item, "watchlist"));
-                    else store.dispatch(removeFromListItems(movieId, "watchlist"));
+                        store.dispatch(watchlistActions.unshiftToFavorites(item));
+                    else store.dispatch(watchlistActions.removeFromListItems(movieId));
                     isMounted.current && dispatch({
                         type: 'update-watchlist', payload: newVal
                     });
@@ -258,7 +261,7 @@ const MovieViewActionButtons: FC<Props> = ({item, className}) => {
     );
 };
 
-function checkAllowToRemove(newValue: boolean, itemName: ActionItemName): boolean {
+function checkAllowToRemove(newValue: boolean, itemName: AccountItemsNames): boolean {
     if (newValue) return true;
     else return window.confirm(`Remove item from ${itemName === "favorite" ? "favorites" : itemName}?`)
 }

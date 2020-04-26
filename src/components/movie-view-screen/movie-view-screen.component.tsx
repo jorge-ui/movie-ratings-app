@@ -1,15 +1,15 @@
-import React, { FC } from 'react';
-import styles from './movie-view-screen.module.scss';
+import React, { FC } from "react";
+import styles from "./movie-view-screen.module.scss";
 import { animated, UnknownProps, useTransition, UseTransitionProps } from "react-spring";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
-import usePrevious from "../../util/custom-hooks/usePrevious";
-import MovieViewItem from "../movie-view-item/movie-view-item.component";
-import MovieViewEvent from "../../util/custom-events/MovieViewEvent";
-import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
+import usePrevious from "hooks/usePrevious";
+import MovieViewItem from "components/movie-view-item";
+import MovieViewEvent from "../../utility/custom-events/MovieViewEvent";
+import useOnMovieView from "hooks/useOnMovieView";
 import IMovieView from "../../interfaces/app-types/IMovieView";
-import LoadingSpinner from "../loading-spinner/loading-spinner.component";
-import useMovieForView from "../../util/custom-hooks/useMovieForView";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import LoadingSpinner from "components/loading-spinner";
+import useMovieForView from "hooks/useMovieForView";
+import useIsMobile from "hooks/useIsMobile";
 
 
 type ItemState = IMovieResultItem | IMovieView | null;

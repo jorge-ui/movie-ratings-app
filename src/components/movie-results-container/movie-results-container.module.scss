@@ -4,12 +4,6 @@
 .root {
   position: relative;
   transform-origin: bottom;
-  .grid {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-  }
 }
 
 @include media('<=sm') {

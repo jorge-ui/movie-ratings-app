@@ -1,27 +1,26 @@
 import React, { FC, useEffect } from "react";
-import AppBar from "./components/app-bar/app-bar.component";
+import AppBar from "./components/app-bar";
 import Container from "@material-ui/core/Container";
-import styles from './App.module.scss';
-import SearchPage from "./pages/search-page/search-page.component";
-import { goFetchUserAccount } from "./util/utilityFunctions";
-// @ts-ignore
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import { Route, Switch } from 'react-router-dom';
-import HomePage from "./pages/home-page/home-page.component";
-import MovieViewScreen from "./components/movie-view-screen/movie-view-screen.component";
-import { setUser } from "./redux/user/user.actions";
-import { store } from "./redux";
-import AuthPage from "./pages/auth-page/auth-page.component";
-import useIsMobile from "./util/custom-hooks/useIsMobile";
-import WatchlistPage from './pages/watchlist-page/watchlist-page.component';
-import FavoritesPage from "./pages/favorites-page/favorites-page.component";
+import styles from "./App.module.scss";
+import SearchPage from "pages/search-page";
+import { goFetchUserAccount } from "utility";
+import { Route, Switch } from "react-router-dom";
+import HomePage from "pages/home-page";
+import MovieViewScreen from "components/movie-view-screen";
+import { setUser } from "store/user/user.actions";
+import store from "store";
+import AuthPage from "pages/auth-page";
+import useIsMobile from "hooks/useIsMobile";
+import WatchlistPage from "pages/watchlist-page";
+import FavoritesPage from "pages/favorites-page";
+import AuthRoute from "components/auth-route";
 
 const routesChildren = (
 	<>
 		<Route exact path="/" render={() => <HomePage /> } />
 		<Route path="/search" render={() => <SearchPage /> } />
-		<Route path="/favorites" render={() => <FavoritesPage /> } />
-		<Route path="/watchlist" render={() => <WatchlistPage /> } />
+		<AuthRoute path="/favorites" render={() => <FavoritesPage /> } />
+		<AuthRoute path="/watchlist" render={() => <WatchlistPage /> } />
 		<Route path="/account" render={() => <AuthPage /> } />
 	</>
 );

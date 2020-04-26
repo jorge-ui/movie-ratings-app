@@ -1,12 +1,10 @@
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import React, { FC, memo, MutableRefObject, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useSpring } from "react-spring";
-import { bindActionCreators, Dispatch } from "redux";
-import { ISearchActions } from "../../redux/search";
-import { setMovieView } from "../../redux/movie-view/movie-view.actions";
-import { connect } from "react-redux";
+import { setMovieView } from "store/movie-view/movie-view.actions";
 import appProperties from "../../appProperties";
-import styles from './items-scroll-x.module.scss';
+import styles from "./items-scroll-x.module.scss";
+import store from "../../store";
 
 const { getPosterSrcPathPrefix } = appProperties;
 
@@ -68,15 +66,15 @@ const MovieItemsXScrollList: FC<OwnProps> =
 				if (nextState < maxScrollLeft) return nextState;
 				else return maxScrollLeft;
 			});
-	},[]);
+	},[scrollByX]);
 
 	const onDownRef = useRef(0);
 	const onUpRef = useRef(0);
 	const canClick = () => onDownRef.current === onUpRef.current;
 
 	const itemChildren = useMemo(() => items.map((movie) => (
-		<ConnectedRelatedMovieItem
-			key={movie.id}
+		<RelatedMovieItem
+			key={movie.key}
 			movie={movie}
 			canClick={canClick}
 			itemClassName={itemClassName}
@@ -97,21 +95,21 @@ const MovieItemsXScrollList: FC<OwnProps> =
 			}}
 			{...(infoTabMessage ? {"info-tab": infoTabMessage} : {})}
 		>
-			{itemChildren}
-			{noResultsFound && [...new Array(5)].map((v, i) => (
-				<ConnectedRelatedMovieItem isLoading={false} movie={null} key={i}/>
-			))}
-			{noResultsFound && (
-				<div className={styles.noMoviesFound}>No related movies found</div>
+			{noResultsFound ? (
+				<>
+					{[...new Array(5)].map((v, i) => (
+						<RelatedMovieItem isLoading={false} movie={null} key={i}/>
+					))}
+					<div className={styles.noMoviesFound}>No related movies found</div>
+				</>
+			) : (
+				<>
+					{itemChildren}
+				</>
 			)}
 		</div>
 	)
 };
-
-const mapDispatchToProps = (dispatch: Dispatch<ISearchActions>) =>
-	bindActionCreators({
-		onSetMovieView: setMovieView
-	},dispatch);
 
 interface RelatedMovieItemProps {
 	isLoading?: boolean;
@@ -120,11 +118,11 @@ interface RelatedMovieItemProps {
 	itemClassName?: string;
 }
 
-const RelatedMovieItem: FC<RelatedMovieItemProps & ReturnType<typeof mapDispatchToProps>> =
-	memo(({isLoading = false, movie, onSetMovieView, canClick = (() => false), itemClassName}) => {
+const RelatedMovieItem: FC<RelatedMovieItemProps> =
+	memo(({isLoading = false, movie, canClick = (() => false), itemClassName}) => {
 		const imgSrc = movie && movie.poster_path && `url(${getPosterSrcPathPrefix("300")}${movie.poster_path})`;
 
-		const onClickHandler = () => canClick() && onSetMovieView(movie!);
+		const onClickHandler = () => canClick() && movie && store.dispatch(setMovieView(movie));
 
 		return (
 			<div
@@ -145,7 +143,6 @@ const RelatedMovieItem: FC<RelatedMovieItemProps & ReturnType<typeof mapDispatch
 		);
 	}, (prevProps, nextProps) => prevProps.isLoading === nextProps.isLoading);
 
-const ConnectedRelatedMovieItem = connect(null, mapDispatchToProps)(RelatedMovieItem);
 
 function setClientXOnRef(ref: MutableRefObject<number>, ev: React.MouseEvent) {
 	ref.current = ev.clientX;

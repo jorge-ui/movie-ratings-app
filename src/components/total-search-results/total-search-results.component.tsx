@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import styles from './total-search-results.module.scss';
-import { formatToUSD } from "../../util/utilityFunctions";
+import React, { FC } from "react";
+import styles from "./total-search-results.module.scss";
+import { formatToUSD } from "utility";
 
 interface OwnProps {
     totalResults: number

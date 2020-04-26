@@ -95,7 +95,7 @@ $transitionBar: 300ms cubic-bezier(0, 0, 0.2, 1);
 	}
 }
 
-@include media(">sm") {
+@include media('>sm') {
 	.root {
 		width: 5rem;
 		height: 100vh;
@@ -167,7 +167,7 @@ $transitionBar: 300ms cubic-bezier(0, 0, 0.2, 1);
 	}
 }
 
-@include media("<=sm") {
+@include media('<=sm') {
 	.root {
 		width: 100vw;
 		height: 4.5rem;

@@ -3,6 +3,7 @@
 .root {
 	position: relative;
 	height: 80px;
+	box-sizing: content-box;
 	.searchHead {
 		box-sizing: border-box;
 		padding: 20px 0;
@@ -14,5 +15,8 @@
 @include media('<=sm') {
 	.root {
 		margin-top: 40px;
+		.searchHead {
+			margin-bottom: 50px;
+		}
 	}
 }

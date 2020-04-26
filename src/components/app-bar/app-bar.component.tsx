@@ -1,17 +1,18 @@
 import React, { Dispatch, FC, SetStateAction, useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import HomeIcon from '@material-ui/icons/Home';
-import SearchIcon from '@material-ui/icons/Search';
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import HomeIcon from "@material-ui/icons/Home";
+import SearchIcon from "@material-ui/icons/Search";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import styles from './app-bar.module.scss';
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import styles from "./app-bar.module.scss";
+// import styles from "./app-bar.module.scss";
 import { Link } from "react-router-dom";
-import useLocationPath from '../../util/custom-hooks/useLocationPath';
-import { INavItem } from "./index";
-import useAuth from "../../util/custom-hooks/useAuth";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import useLocationPath from "hooks/useLocationPath";
+import { INavItem } from "./index.d";
+import useAuth from "hooks/useAuth";
+import useIsMobile from "hooks/useIsMobile";
 
 
 const navItems: INavItem[] = [

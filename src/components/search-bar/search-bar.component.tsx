@@ -1,7 +1,7 @@
 import React, { FC, FormEvent, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import styles from "./search-bar.module.scss";
-import useSearchParam from "../../util/custom-hooks/useSearchParam";
+import useSearchParam from "hooks/useSearchParam";
 import SearchBarSuggestions from "./search-bar-suggestions.component";
 
 
@@ -15,23 +15,24 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
 
     const [error, setError] = useState("");
 
-    const [searchParam = '', setSearchParam] = useSearchParam("s");
+    const [searchParam = '', setSearchParam] = useSearchParam("s", newValue => {
+        !newValue && setInputTxt('')
+    });
+
     const [inputTxt, setInputTxt] = useState(searchParam);
     const [keyWord, setKeyWord] = useState('');
 
     const [isFocus, setFocus] = useState(false);
 
-    const setFocusOn = useCallback(() => isMounted.current && setFocus(prevState => {
-        if (prevState) return prevState;
+    const setFocusOn = useCallback(() => isMounted.current && setFocus(() => {
         setTimeout(() => {
             inputRef.current?.focus();
             inputRef.current?.select();
-        }, 380);
+        }, 200);
         return true;
     }), []);
 
-    const setFocusOff = useCallback(() => isMounted.current && setFocus(prevState => {
-        if (!prevState) return prevState;
+    const setFocusOff = useCallback(() => isMounted.current && setFocus(() => {
         inputRef.current?.blur();
         setError("");
         return false;
@@ -61,7 +62,8 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
         isMounted.current = true;
         const listener = (e: KeyboardEvent) => {
             switch (e.code) {
-                case "Slash": setTimeout(setFocusOn ,50);
+                case "Slash":
+                    document.activeElement !== inputRef.current && setTimeout(setFocusOn ,50);
                     break;
                 case "Escape": setFocusOff();
                     break;
@@ -73,7 +75,7 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
             isMounted.current = false;
             window.removeEventListener("keydown", listener);
         }
-    }, []);
+    }, [setFocusOff, setFocusOn]);
 
     useLayoutEffect(() => {
         setFocus(!searchParam);
@@ -101,7 +103,7 @@ const SearchBar: FC<OwnProps> = ({ className }) => {
                     }}
                     onFocus={setFocusOn}
                     inputProps={{
-                        id: "search-bar-input",
+                        id: "movies-browser-bar-input",
                         onClick: event => event.preventDefault(),
                         onKeyDown: (e) => (e.key === "ArrowUp" || e.key === "ArrowDown") && e.preventDefault()
                     }}

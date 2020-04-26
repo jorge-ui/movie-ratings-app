@@ -1,5 +1,5 @@
-import React, { FC, RefObject, useEffect, useState } from 'react';
-import styles from './search-bar.module.scss';
+import React, { FC, RefObject, useEffect, useState } from "react";
+import styles from "./search-bar.module.scss";
 import appProperties from "../../appProperties";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 
@@ -64,7 +64,7 @@ const SearchBarSuggestions: FC<OwnProps> = ({keyword,  onSubmit, inputRef}) => {
 		};
 		window.addEventListener("keydown", listener);
 		return () => window.removeEventListener("keydown", listener);
-	}, [suggestions]);
+	}, [inputRef, suggestions]);
 
 
 	const handleClickSubmit = (title: string) => {
@@ -78,6 +78,7 @@ const SearchBarSuggestions: FC<OwnProps> = ({keyword,  onSubmit, inputRef}) => {
             onMouseLeave={() => setSelected(null)}
         >
 	        {suggestions.map(({id, title}, index) => (
+		        // eslint-disable-next-line jsx-a11y/role-supports-aria-props
 	        	<li key={id} aria-selected={(index === selected)}
 		            onMouseEnter={() => setSelected(index)}
 		            onClick={handleClickSubmit.bind(null, title)}

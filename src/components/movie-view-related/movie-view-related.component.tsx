@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from "react";
 import styles from "./movie-view-related.module.scss";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import IMoviesResponseData from "../../interfaces/app-types/IMoviesResponseData";
-import { goFetch } from "../../util/utilityFunctions";
+import { goFetch } from "utility";
 import appProperties from "../../appProperties";
-import MovieItemsXScrollList from "../items-scroll-x/items-scroll-x.component";
+import MovieItemsXScrollList from "components/items-scroll-x";
 
 const {buildFetchMovieViewUrl} = appProperties;
 
@@ -26,7 +26,7 @@ const MovieViewRelated: FC<OwnProps> = ({movieId, className}) => {
 				mounted && setRelatedMovies(data.results)
 			});
 		return () => { mounted = false };
-	}, []);
+	}, [movieId]);
 
 
 	const noResultsFound = !!relatedMovies && !relatedMovies.length;

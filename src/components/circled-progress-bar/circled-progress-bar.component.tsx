@@ -1,9 +1,9 @@
 import React, { CSSProperties, FC, RefObject, useEffect, useRef } from "react";
 import styles from "./circled-progress-bar.module.scss";
-import { hslInterval, hslToHex } from "../../util/utilityFunctions";
-import { animated, useSpring } from 'react-spring';
-import { easeOutQuad } from "../../util/easingFuctions";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import { hslInterval, hslToHex } from "utility";
+import { animated, useSpring } from "react-spring";
+import { easeOutQuad } from "../../utility/easingFuctions";
+import useIsMobile from "hooks/useIsMobile";
 
 interface OwnProps {
     score: number;

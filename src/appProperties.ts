@@ -1,5 +1,5 @@
-import { easeOutQuad } from "./util/easingFuctions";
-import { ActionItemName } from "./redux/item-list";
+import { easeOutQuad } from "./utility/easingFuctions";
+import { MoviesBrowseNames } from "store/movies-browser";
 
 const {REACT_APP_API_KEY: API_KEY, NODE_ENV} = process.env;
 const BASE_API_URL = 'https://api.themoviedb.org/3'
@@ -9,20 +9,20 @@ type ImageSizes = "200" | "300" | "400" | "500";
 const REDIRECT_LOGGING = NODE_ENV === 'development' ?
     'http://192.168.1.8:3000/' : ''; //TODO: 'production' url is missing
 
-const getApiKeyQ = () => `api_key=${API_KEY}`;
-const getSessionQ = () => `session_id=${localStorage.getItem("session_id")}`;
+const getApiKeyQuery = () => `api_key=${API_KEY}`;
+const getSessionQuery = () => `session_id=${localStorage.getItem("session_id")}`;
 
 const appProperties = {
     //application properties here
-    perPageResultsItems: 9,
+    itemsPerPageUI: 9,
 
     getPosterSrcPathPrefix: (size: ImageSizes = "200") =>  `https://image.tmdb.org/t/p/w${size}`,
 
     buildFetchMovieSearchUrl: (searchTerm: string, page: number = 1) =>
-        `${BASE_API_URL}/search/movie?${getApiKeyQ()}&query=${searchTerm}&page=${page}&include_adult=false`,
+        `${BASE_API_URL}/search/movie?${getApiKeyQuery()}&query=${searchTerm}&page=${page}&include_adult=false`,
 
     buildFetchMovieViewUrl: (movieId: number, addPath?: string) => {
-        return `${BASE_API_URL}/movie/${movieId}${addPath || ''}?${getApiKeyQ()}`;
+        return `${BASE_API_URL}/movie/${movieId}${addPath || ''}?${getApiKeyQuery()}`;
     },
 
     searchPageTransitionConfig: {
@@ -30,13 +30,16 @@ const appProperties = {
         easing: easeOutQuad,
     },
 
-    newSessionUrl: `${BASE_API_URL}/authentication/session/new?${getApiKeyQ()}`,
+    getThisWeekUrl: () => `${BASE_API_URL}/trending/movie/week?${getApiKeyQuery()}`,
+    getNowPlayingUrl: () => `${BASE_API_URL}/movie/now_playing?${getApiKeyQuery()}`,
 
-    buildAccountUrl: (session_id: string) =>
-        `${BASE_API_URL}/account?${getApiKeyQ()}&session_id=${session_id}`,
+    newSessionUrl: `${BASE_API_URL}/authentication/session/new?${getApiKeyQuery()}`,
+
+    getAccountUrl: (session_id: string) =>
+        `${BASE_API_URL}/account?${getApiKeyQuery()}&session_id=${session_id}`,
 
     getLogoutConfig: (session_id: string): [string, RequestInit] => [
-        `${BASE_API_URL}/authentication/session?${getApiKeyQ()}`,
+        `${BASE_API_URL}/authentication/session?${getApiKeyQuery()}`,
         {
             method: 'DELETE',
             body: JSON.stringify({session_id}),
@@ -48,14 +51,14 @@ const appProperties = {
         }
     ],
 
-    newRequestTokenUrl: `${BASE_API_URL}/authentication/token/new?${getApiKeyQ()}`,
+    newRequestTokenUrl: `${BASE_API_URL}/authentication/token/new?${getApiKeyQuery()}`,
 
     buildLoginRedirectUrl: (request_token: string) =>
         `https://www.themoviedb.org/authenticate/${request_token}?redirect_to=${REDIRECT_LOGGING}`,
 
     itemActions: {
         favorite: async (favState: boolean, movieId: number) => {
-            const url = `${BASE_API_URL}/account/0/favorite?${getApiKeyQ()}&${getSessionQ()}`
+            const url = `${BASE_API_URL}/account/0/favorite?${getApiKeyQuery()}&${getSessionQuery()}`
             await fetch(url, {
                 body: JSON.stringify({
                     media_type: "movie",
@@ -70,7 +73,7 @@ const appProperties = {
             return true;
         },
         watchlist: async (watchState: boolean, movieId: number) => {
-            const url = `${BASE_API_URL}/account/0/watchlist?${getApiKeyQ()}&${getSessionQ()}`
+            const url = `${BASE_API_URL}/account/0/watchlist?${getApiKeyQuery()}&${getSessionQuery()}`
             await fetch(url, {
                 body: JSON.stringify({
                     media_type: "movie",
@@ -85,7 +88,7 @@ const appProperties = {
             return true;
         },
         rate: async (value: number, movieId: number) => {
-            const url = `${BASE_API_URL}/movie/${movieId}/rating?${getApiKeyQ()}&${getSessionQ()}`
+            const url = `${BASE_API_URL}/movie/${movieId}/rating?${getApiKeyQuery()}&${getSessionQuery()}`
             await fetch(url, {
                 body: JSON.stringify({
                     value
@@ -98,7 +101,7 @@ const appProperties = {
             return true;
         },
         unRate: async (movieId: number) => {
-            const url = `${BASE_API_URL}/movie/${movieId}/rating?${getApiKeyQ()}&${getSessionQ()}`
+            const url = `${BASE_API_URL}/movie/${movieId}/rating?${getApiKeyQuery()}&${getSessionQuery()}`
             await fetch(url, {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -110,13 +113,57 @@ const appProperties = {
 
     },
 
-    getItemsListUrl: (page: number = 1, name: ActionItemName) =>
-        `${BASE_API_URL}/account/0/${name}/movies?${getApiKeyQ()}&${getSessionQ()}&page=${page}&sort_by=created_at.desc`,
+    getItemsListUrl: (page: number = 1, name: "favorite" | "watchlist") =>
+        `${BASE_API_URL}/account/0/${name}/movies?${getApiKeyQuery()}&${getSessionQuery()}&page=${page}&sort_by=created_at.desc`,
 
+    getItemsBrowseUrl(name: MoviesBrowseNames, searchTerm: string = '', pageOnApi: number = 1): string {
+        let browseUrl = BASE_API_URL;
+
+        // concat path
+        switch (name) {
+            case "favorite":
+                browseUrl += "/account/0/favorite/movies";
+                break;
+            case "watchlist":
+                browseUrl += "/account/0/watchlist/movies";
+                break;
+            case "search":
+                browseUrl += "/search/movie";
+                break;
+            case "nowPlaying":
+                browseUrl += "/movie/now_playing";
+                break;
+            case "trendingWeek":
+                browseUrl += "/trending/movie/week";
+                break;
+        }
+
+        browseUrl += "?";
+
+
+        // concat query
+        switch (name) {
+            case "favorite":
+                browseUrl += getSessionQuery() + "&sort_by=created_at.desc";
+                break;
+            case "watchlist":
+                browseUrl += getSessionQuery() + "&sort_by=created_at.desc";
+                break;
+            case "search":
+                browseUrl += `query=${searchTerm}&include_adult=false`
+                break;
+            case "nowPlaying":
+                break;
+            case "trendingWeek":
+                break;
+        }
+
+        return browseUrl + "&" + getApiKeyQuery() + `&page=${pageOnApi}`;
+    }
 
 };
 
-// /account/{account_id}/favorite/search
-// /account/{account_id}/watchlist/search
+// /account/{account_id}/favorite/movies-browser
+// /account/{account_id}/watchlist/movies-browser
 
 export default appProperties;

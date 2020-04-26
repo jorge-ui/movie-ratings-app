@@ -1,16 +1,16 @@
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
-import MovieResultItem from "../movie-result-item/movie-result-item.component";
+import React, { FC, memo, useEffect, useRef, useState } from "react";
+import MovieResultItem from "components/movie-result-item";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
-import styles from './movie-view-item.module.scss';
+import styles from "./movie-view-item.module.scss";
 import IMovieView from "../../interfaces/app-types/IMovieView";
-import MovieViewInfo from "../movie-view-info/movie-view-info.component";
-import MovieViewBackground from "../movie-view-background/movie-view-background.component";
-import MovieViewRelated from "../movie-view-related/movie-view-related.component";
-import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
-import { checkIsMobile, goFetchMovieView, isMovieView, scrollToTop } from "../../util/utilityFunctions";
-import MovieViewActionButtons from "../movie-view-actions/movie-view-actions.component";
-import RatingProgressBar from "../circled-progress-bar/circled-progress-bar.component";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import MovieViewInfo from "components/movie-view-info";
+import MovieViewBackground from "components/movie-view-background";
+import MovieViewRelated from "components/movie-view-related";
+import useOnMovieView from "hooks/useOnMovieView";
+import { checkIsMobile, goFetchMovieView, isMovieView, scrollToTop } from "utility";
+import MovieViewActionButtons from "components/movie-view-actions";
+import RatingProgressBar from "components/circled-progress-bar";
+import useIsMobile from "hooks/useIsMobile";
 
 
 interface OwnProps {
@@ -27,12 +27,17 @@ const MovieViewItem: FC<OwnProps> = ({movieItem}) => {
     );
 
     useEffect(() => {
+        let ignore = false;
         if (checkIsMobile())
             scrollToTop();
 
         if (!isMovieView(movieItemRef.current))
             goFetchMovieView(movieItemRef.current as IMovieResultItem)
-                .then(movie => setMovieView(movie))
+                .then(movie => !ignore && setMovieView(movie))
+
+        return () => {
+            ignore = true
+        }
     }, []);
 
     const [ , state] = useOnMovieView(movieItem.id, false,  !isMobile ? {

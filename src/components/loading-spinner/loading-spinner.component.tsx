@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import styles from './loading-spinner.module.scss';
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import styles from "./loading-spinner.module.scss";
+import useIsMobile from "hooks/useIsMobile";
 
 
 interface OwnProps {
@@ -22,7 +22,7 @@ const LoadingSpinner: FC<OwnProps> = ({className, darken = false, delay = 0, fix
         if (!visible)
             setTimeout(() => mounted && setVisible(true), delay);
         return () => { mounted = false };
-    }, []);
+    }, [delay, visible]);
 
     return (
         <div

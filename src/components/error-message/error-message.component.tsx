@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
+import React, { FC } from "react";
 import IMoviesSearchError from "../../interfaces/app-types/IMoviesSearchError";
-import styles from './error-message.module.scss';
+import styles from "./error-message.module.scss";
 
 
 interface OwnProps {

@@ -1,13 +1,13 @@
-import React, { CSSProperties, FC, useEffect, useMemo, useRef, useState } from 'react';
-import MovieItemImgBg from "../movie-item-img-bg/movie-item-img-bg.component";
-import RatingProgressBar from "../circled-progress-bar/circled-progress-bar.component";
-import MovieViewActionButtons from "../movie-view-actions/movie-view-actions.component";
-import styles from './movie-result-item.module.scss';
+import React, { CSSProperties, FC, useEffect, useMemo, useRef, useState } from "react";
+import MovieItemImgBg from "components/movie-item-img-bg";
+import RatingProgressBar from "components/circled-progress-bar";
+import MovieViewActionButtons from "components/movie-view-actions";
+import styles from "./movie-result-item.module.scss";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import appProperties from "../../appProperties";
-import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
-import MovieItemImage from "../movie-item-image/movie-item-image.component";
+import useOnMovieView from "hooks/useOnMovieView";
+import useIsMobile from "hooks/useIsMobile";
+import MovieItemImage from "components/movie-item-image";
 
 const {getPosterSrcPathPrefix} = appProperties;
 

@@ -1,13 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 import IMovieView from "../../interfaces/app-types/IMovieView";
-import { getMovieImgObjFromSession } from "../../util/utilityFunctions";
-import styles from './movie-view-info.module.scss';
-import { fade } from '@material-ui/core';
+import { getMovieImgObjFromSession } from "utility";
+import styles from "./movie-view-info.module.scss";
+import { fade } from "@material-ui/core";
 import { animated, useSpring } from "react-spring";
-import { easeOutQuart } from "../../util/easingFuctions";
+import { easeOutQuart } from "../../utility/easingFuctions";
 import MovieViewInfoChildren from "./movie-view-info-children.component";
-import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import useOnMovieView from "hooks/useOnMovieView";
+import useIsMobile from "hooks/useIsMobile";
 
 interface OwnProps {
     movieView: IMovieView | undefined;

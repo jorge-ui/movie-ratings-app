@@ -1,8 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
-import useAuth from "../../util/custom-hooks/useAuth";
-import styles from './auth-page.module.scss';
+import React, { FC, useEffect, useState } from "react";
+import useAuth from "hooks/useAuth";
+import styles from "./auth-page.module.scss";
 import TokenData from "../../interfaces/app-types/TokenData";
-import { goFetch, isValidRequestToken } from "../../util/utilityFunctions";
+import { goFetch, isValidRequestToken } from "utility";
 import appProperties from "../../appProperties";
 
 const {newRequestTokenUrl} = appProperties;

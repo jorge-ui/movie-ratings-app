@@ -1,8 +1,8 @@
-import React, { FC, useState } from 'react';
-import Rating from '@material-ui/lab/Rating';
-import styles from './movie-view-actions.module.scss';
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
-import useLockBodyScroll from "../../util/custom-hooks/useLockBodyScroll";
+import React, { FC, useState } from "react";
+import Rating from "@material-ui/lab/Rating";
+import styles from "./movie-view-actions.module.scss";
+import useIsMobile from "hooks/useIsMobile";
+import useLockBodyScroll from "hooks/useLockBodyScroll";
 
 
 interface Props {

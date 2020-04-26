@@ -1,17 +1,19 @@
-import React, { FC } from 'react';
-import MovieItemImage from "../movie-item-image/movie-item-image.component";
-import RatingProgressBar from "../circled-progress-bar/circled-progress-bar.component";
-import MovieViewActionButtons from "../movie-view-actions/movie-view-actions.component";
+import React, { FC } from "react";
+import MovieItemImage from "components/movie-item-image";
+import RatingProgressBar from "components/circled-progress-bar";
+import MovieViewActionButtons from "components/movie-view-actions";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
 import appProperties from "../../appProperties";
-import styles from './list-item.module.scss';
-import { setMovieView } from "../../redux/movie-view/movie-view.actions";
-import { store } from "../../redux";
+import styles from "./list-item.module.scss";
+import { setMovieView } from "store/movie-view/movie-view.actions";
+import store from "store";
+import { isMovieItem, PortionItemUI } from "../../hooks/useMovieItems";
+import LoadingSpinner from "../loading-spinner";
 
 const {getPosterSrcPathPrefix} = appProperties;
 
 interface OwnProps {
-	item: IMovieResultItem
+	item: PortionItemUI
 }
 
 const ListItem: FC<OwnProps> = ({item}) => {
@@ -21,21 +23,23 @@ const ListItem: FC<OwnProps> = ({item}) => {
 
     return (
 	    <div className={styles.root}>
-		    <MovieItemImage
-			    backGroundUrl={`url(${getPosterSrcPathPrefix("300")}${item.poster_path})`}
-			    movie={item}
-			    poster_path={item.poster_path}
-			    className={styles.image}
-		    />
-		    <div className={styles.info}>
-			    <h3 className={styles.movieTitle}
-		            onClick={() => onSetMovieView(item!)}
-			    >{item.title}</h3>
-			    <div className={styles.itemActions}>
-				    <RatingProgressBar score={item.vote_average} itemView />
-				    <MovieViewActionButtons item={item} className={styles.actionButtons} />
+		    {isMovieItem(item) ? <>
+			    <MovieItemImage
+				    backGroundUrl={`url(${getPosterSrcPathPrefix("300")}${item.poster_path})`}
+				    movie={item}
+				    poster_path={item.poster_path}
+				    className={styles.image}
+			    />
+			    <div className={styles.info}>
+				    <h3 className={styles.movieTitle}
+				        onClick={() => onSetMovieView(item!)}
+				    >{item.title}</h3>
+				    <div className={styles.itemActions}>
+					    <RatingProgressBar score={item.vote_average} itemView/>
+					    <MovieViewActionButtons item={item} className={styles.actionButtons}/>
+				    </div>
 			    </div>
-		    </div>
+		    </> : <LoadingSpinner delay={100} darken />}
 	    </div>
     );
 };

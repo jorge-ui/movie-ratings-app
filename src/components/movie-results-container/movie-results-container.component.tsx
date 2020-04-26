@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styles from "./movie-results-container.module.scss";
 import { animated, useTransition, UseTransitionProps } from "react-spring";
-import usePrevious from "../../util/custom-hooks/usePrevious";
+import usePrevious from "hooks/usePrevious";
 import appProperties from "../../appProperties";
 
 let { searchPageTransitionConfig } = appProperties;

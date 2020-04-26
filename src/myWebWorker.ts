@@ -11,15 +11,12 @@ const ctx: DedicatedWorkerGlobalScope = self as any;
 
 
 ctx.onmessage = event => {
-	const URLsToFetch: ToFetchImgOnWorker[] | ToFetchImgOnWorker = getUrlsToFetch(event.data);
+	const URLsToFetch: ToFetchImgOnWorker[] = getUrlsToFetch(event.data);
 
-	if (Array.isArray(URLsToFetch))
-		URLsToFetch.forEach(obj =>
-			fetchMovieBlob(obj.url)
-				.then(blob => postMessage(blob, obj.id))
-		);
-	else fetchMovieBlob(URLsToFetch.url)
-			.then(blob => postMessage(blob, URLsToFetch.id))
+	URLsToFetch.forEach(obj =>
+		fetchMovieBlob(obj.url)
+			.then(blob => postMessage(blob, obj.id))
+	);
 };
 
 
@@ -30,16 +27,11 @@ function postMessage(blob: Blob, id: number) {
 	} as WorkerFetchedDoneEvent['data'])
 }
 
-function getUrlsToFetch(item_s_: IMovieResultItem[] | IMovieResultItem): ToFetchImgOnWorker[] | ToFetchImgOnWorker {
-	if (Array.isArray(item_s_))
-		return item_s_.map(({poster_path, id}) => ({
-			url: `${getPosterSrcPathPrefix()}${poster_path}`,
-			id
-		})) as ToFetchImgOnWorker[];
-	else return {
-		id: item_s_.id,
-		url: `${getPosterSrcPathPrefix()}${item_s_.poster_path}`
-	}
+function getUrlsToFetch(item_s_: IMovieResultItem[]): ToFetchImgOnWorker[] {
+	return item_s_.map(({poster_path, id}) => ({
+		url: `${getPosterSrcPathPrefix()}${poster_path}`,
+		id
+	})) as ToFetchImgOnWorker[];
 }
 
 function fetchMovieBlob(url: string): Promise<Blob> {

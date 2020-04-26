@@ -1,12 +1,12 @@
-import React, { FC, memo, useEffect } from "react";
+import React, { FC, memo, useCallback, useEffect } from "react";
 import MobileStepper from "@material-ui/core/MobileStepper";
 import Button from "@material-ui/core/Button";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import styles from "./pagination-controls.module.scss";
-import useSearchParam from "../../util/custom-hooks/useSearchParam";
-import { scrollToTop } from "../../util/utilityFunctions";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import useSearchParam from "hooks/useSearchParam";
+import { scrollToTop } from "utility";
+import useIsMobile from "hooks/useIsMobile";
 
 interface OwnProps {
     className?: string,
@@ -20,26 +20,26 @@ const PaginationControls: FC<Props> = ({className, totalPages}) => {
     const [currentPage = 0, setCurrentPage] = useSearchParam("page");
     const [movieIdParam] = useSearchParam("movieId");
 
-    const goToNextPage = () => setCurrentPage(page => {
+    const goToNextPage = useCallback(() => setCurrentPage(page => {
         if (page && page < totalPages) {
             isMobile && scrollToTop();
             return page + 1;
         }
-        return currentPage;
-    });
+        return page || 0;
+    }), [isMobile, setCurrentPage, totalPages]);
 
-    const goToPreviousPage = () => setCurrentPage(page => {
+    const goToPreviousPage = useCallback(() => setCurrentPage(page => {
         if (page && page > 1) {
             isMobile && scrollToTop();
             return page - 1;
         }
-        return currentPage;
-    });
+        return page || 0;
+    }), [isMobile, setCurrentPage]);
 
     useEffect(() => {
         const keydownListener = ({code, altKey, ctrlKey, shiftKey}: KeyboardEvent) => {
             if (altKey || ctrlKey || shiftKey) return ;
-            if (document.activeElement?.id === "search-bar-input") return;
+            if (document.activeElement?.id === "movies-browser-bar-input") return;
             if (totalPages)
                 switch (code) {
                     case "ArrowRight": return goToNextPage();
@@ -51,7 +51,7 @@ const PaginationControls: FC<Props> = ({className, totalPages}) => {
             window.addEventListener("keydown", keydownListener);
 
         return () => window.removeEventListener("keydown", keydownListener)
-    }, [totalPages, currentPage, movieIdParam]);
+    }, [totalPages, currentPage, movieIdParam, goToNextPage, goToPreviousPage]);
 
 
     return totalPages ? (

@@ -1,0 +1,18 @@
+@import 'styles/breakpoints';
+
+.root {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+
+@include media('<=sm') {
+	.root {
+		&:after {
+			content: '';
+			min-height: 250px;
+			width: 100%;
+		}
+	}
+}

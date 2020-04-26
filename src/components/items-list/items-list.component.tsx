@@ -1,54 +1,29 @@
-import { ActionItemName } from "../../redux/item-list";
-import React, { FC, memo, useEffect, useLayoutEffect } from "react";
-import useSearchParam from "../../util/custom-hooks/useSearchParam";
-import useAuth from "../../util/custom-hooks/useAuth";
-import { AppActions, AppState, store } from "../../redux";
-import { fetchListItemsAsync } from "../../redux/item-list/list-item.actions";
-import useEffectSkipFirst from "../../util/custom-hooks/useEffectSkipFirst";
-import { useSelector } from "react-redux";
-import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
-import PaginationControls from "../pagination-controls/pagination-controls.component";
-import styles from './items-list.module.scss';
-import LoadingSpinner from "../loading-spinner/loading-spinner.component";
-import ListItem from "../list-item/list-item.component";
-import MovieItemsContainer from "../movie-results-container/movie-results-container.component";
-import { animated, useTransition } from 'react-spring';
-import { easeOutQuad } from "../../util/easingFuctions";
+import React, { CSSProperties, FC, memo, useEffect } from "react";
+import PaginationControls from "components/pagination-controls";
+import styles from "./items-list.module.scss";
+import LoadingSpinner from "components/loading-spinner";
+import ListItem from "components/list-item";
+import MovieItemsContainer from "components/movie-results-container";
+import { animated, useTransition } from "react-spring";
+import { easeOutQuad } from "../../utility/easingFuctions";
 import { UnknownProps, UseTransitionProps } from "@react-spring/core";
+import useMovieItems, { ItemsPortionUI } from "../../hooks/useMovieItems";
+import useSearchParam from "../../hooks/useSearchParam";
+import { AccountItemsNames } from "../../store/movies-browser";
 
 interface Props {
-	itemType: ActionItemName;
+	itemType: AccountItemsNames;
 }
 
 const ItemsList: FC<Props> = ({itemType}) => {
-	const [page = 1, setPage] = useSearchParam("page");
 
-	const {isAuth} = useAuth();
+	const {items, totalPagesUI, pageUI, isLoading} = useMovieItems({name: itemType});
+
+	const [, setPage] = useSearchParam("page");
 
 	useEffect(() => {
-		if (!store.getState()[itemType].results && isAuth)
-			store.dispatch(
-				fetchListItemsAsync(1, itemType) as unknown as AppActions);
-	}, [isAuth]);
-
-	useLayoutEffect(() => {
-		setPage(page => page === null ? 1 : page)
-	}, []);
-
-	useEffectSkipFirst(() => {
-		let {isLoading, apiFetchedPages} = store.getState()[itemType];
-		if (!isLoading && !apiFetchedPages.includes(page))
-			store.dispatch(
-				fetchListItemsAsync(page, itemType) as unknown as AppActions);
-	}, [page]);
-
-	const isLoading = useSelector<AppState, boolean>(state => {
-		return state[itemType].isLoading
-	});
-
-	const totalPages = useSelector<AppState, number>(state => {
-		return state[itemType].total_pages;
-	})
+		setPage(currentValue => currentValue ? currentValue : 1)
+	}, [setPage]);
 
 	const title = itemType === "favorite" ? "Favorites" : "Watchlist";
 
@@ -56,30 +31,24 @@ const ItemsList: FC<Props> = ({itemType}) => {
 		<div className={styles.root}>
 			<div className={styles.head}>
 				<h2 className={styles.title}>{title}</h2>
-				{totalPages>1 && <PaginationControls totalPages={totalPages}/>}
+				{totalPagesUI>1 && <PaginationControls totalPages={totalPagesUI}/>}
 			</div>
 
 			{isLoading && <LoadingSpinner darken fixed delay={750} />}
-			<MovieItemsContainer page={page}>
-				{(currentPage) => <ListChild page={currentPage} itemType={itemType} />}
+			<MovieItemsContainer page={pageUI}>
+				{() => <ListChild items={items} />}
 			</MovieItemsContainer>
 		</div>
 	);
 };
 
 interface ListChildProps {
-	page: number;
-	itemType: ActionItemName
+	items: ItemsPortionUI
 }
 
-const ListChild: FC<ListChildProps> = memo(({itemType, page}) => {
+const ListChild: FC<ListChildProps> = memo(({items}) => {
 
-	const selected = useSelector<AppState, IMovieResultItem[]>(state => {
-		let listState = state[itemType];
-		return selectItemsFromState(listState, page);
-	}, equality);
-
-	const transition = useTransition(selected, item => item.id, transitionConfig);
+	const transition = useTransition(items, item => item.key, transitionConfig);
 
 	return (
 		<>
@@ -103,28 +72,16 @@ const ListChild: FC<ListChildProps> = memo(({itemType, page}) => {
 	);
 })
 
-function selectItemsFromState(itemsState: AppState["favorite" | "watchlist"], page: number) {
-	let selected: IMovieResultItem[] = [];
-	if (itemsState.isLoading || !itemsState.results || !page) return selected;
-
-	else if (itemsState.apiFetchedPages.includes(page))
-		for (let i = 0; i < 20; i++) {
-			let index = (page - 1) * 20 + i;
-			let item = itemsState.results[index];
-			if (item) selected[i] = item;
-			else break;
-		}
-
-	return selected;
-}
+const initialStyles: CSSProperties & UnknownProps = {
+	opacity: 1,
+	maxHeight: 500,
+	translateX: 0,
+	paddingBottom: 20,
+};
 
 const transitionConfig: UnknownProps & UseTransitionProps = {
-	from: {
-		opacity: 1,
-		maxHeight: 500,
-		translateX: 0,
-		paddingBottom: 20,
-	},
+	from: initialStyles,
+	enter: initialStyles,
 	leave: () => async next => {
 		// @ts-ignore
 		next({maxHeight: 0, paddingBottom: 0, delay: 300}).catch(() => void 0)
@@ -137,11 +94,5 @@ const transitionConfig: UnknownProps & UseTransitionProps = {
 	},
 	unique: true
 }
-
-const equality = (newS: IMovieResultItem[], oldS: IMovieResultItem[]) =>
-	((newS.length === 20) &&
-		(newS[0].id === oldS[0].id) &&
-			(newS[newS.length - 1].id === oldS[oldS.length - 1].id))
-	|| (newS.length < 20 && (newS.length === oldS.length))
 
 export default ItemsList;

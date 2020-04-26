@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC } from "react";
 import IMovieResultItem from "../../interfaces/app-types/IMovieResultItem";
-import { store } from "../../redux";
-import { setMovieView } from "../../redux/movie-view/movie-view.actions";
+import store from "store";
+import { setMovieView } from "store/movie-view/movie-view.actions";
 import ImageIcon from "@material-ui/icons/Image";
-import styles from './movie-item-image.module.scss';
+import styles from "./movie-item-image.module.scss";
 
 
 interface OwnProps {

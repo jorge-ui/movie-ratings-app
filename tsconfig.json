@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "target": "ES6",
     "lib": [
       "dom",
@@ -25,6 +26,11 @@
     "importHelpers": true
   },
   "include": [
-    "src"
+    "src",
+    "src/components",
+    "src/pages",
+    "src/store",
+    "src/utility",
+    "src/hooks"
   ]
 }

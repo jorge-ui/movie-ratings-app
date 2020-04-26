@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
-import styles from './movie-item-img-bg.module.scss';
+import React, { FC, useEffect, useState } from "react";
+import styles from "./movie-item-img-bg.module.scss";
 import { animated, useSpring } from "react-spring";
-import { easeOutCubic } from "../../util/easingFuctions";
-import { useSessionAvgColor } from "../../util/custom-hooks/useSessionAvgColor";
-import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
-import useIsMobile from "../../util/custom-hooks/useIsMobile";
+import { easeOutCubic } from "../../utility/easingFuctions";
+import { useSessionAvgColor } from "hooks/useSessionAvgColor";
+import useOnMovieView from "hooks/useOnMovieView";
+import useIsMobile from "hooks/useIsMobile";
 
 
 interface OwnProps {
@@ -31,7 +31,7 @@ const MovieItemImgBg: FC<Props> = ({className, movieId, itemView = false}) => {
             }, 450);
         }
         return () => { mounted = false };
-    }, []);
+    }, [itemView]);
 
     const [opacityOnMovView, eventState] = useOnMovieView(movieId, opacityReveal, {
         ...(itemView ? {

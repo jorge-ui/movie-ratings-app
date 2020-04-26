@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import useSavedSessionParams from "../../util/custom-hooks/useSavedSessionParams";
-import ItemsList from "../../components/items-list/items-list.component";
+import React, { FC } from "react";
+import useSavedSessionParams from "hooks/useSavedSessionParams";
+import ItemsList from "components/items-list";
 
 const WatchlistPage: FC = () => {
 

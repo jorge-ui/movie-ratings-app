@@ -1,10 +1,5 @@
-import React, { FC } from 'react';
-import styles from './movie-result-skeleton.module.scss';
-
-interface OwnProps {
-}
-
-type Props = OwnProps;
+import React, { FC } from "react";
+import styles from "./movie-result-skeleton.module.scss";
 
 const viewBoxSize = 60;
 const strokeWidth = viewBoxSize / 15;
@@ -13,7 +8,7 @@ const circleRadius = viewBoxSize / 2 - strokeWidth;
 const backFill = "rgba(0, 0, 0, .25)";
 const backStroke = "#5d5d5d";
 
-const MovieResultSkeleton: FC<Props> = () => (
+const MovieResultSkeleton: FC = () => (
     <div className={`${styles.root}`}>
         <div className={styles.imageWrapper}>
             <div className={styles.image}/>

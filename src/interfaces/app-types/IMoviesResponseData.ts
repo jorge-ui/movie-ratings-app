@@ -1,4 +1,4 @@
-// Movie search API on success fetch
+// Movie movies-browser API on success fetch
 import IMovieResultItem from "./IMovieResultItem";
 
 export default interface IMoviesResponseData {

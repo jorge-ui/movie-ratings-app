@@ -1,8 +1,8 @@
-import React, { CSSProperties, FC } from 'react';
-import styles from './movie-view-background.module.scss';
+import React, { CSSProperties, FC } from "react";
+import styles from "./movie-view-background.module.scss";
 import { fade } from "@material-ui/core";
-import { useSessionAvgColor } from "../../util/custom-hooks/useSessionAvgColor";
-import useOnMovieView from "../../util/custom-hooks/useOnMovieView";
+import { useSessionAvgColor } from "hooks/useSessionAvgColor";
+import useOnMovieView from "hooks/useOnMovieView";
 
 
 interface OwnProps {

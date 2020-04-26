@@ -1,9 +1,9 @@
-import React, { FC, ReactText } from 'react';
+import React, { FC, ReactText } from "react";
 import styles from "./movie-view-info.module.scss";
-import { formatToUSD, getReadableDate, minutesToRuntimeDisplay } from "../../util/utilityFunctions";
+import { formatToUSD, getReadableDate, minutesToRuntimeDisplay } from "utility";
 import IMovieView from "../../interfaces/app-types/IMovieView";
 import { animated, useTransition } from "react-spring";
-import { easeOutQuart } from "../../util/easingFuctions";
+import { easeOutQuart } from "../../utility/easingFuctions";
 
 
 interface OwnProps {
