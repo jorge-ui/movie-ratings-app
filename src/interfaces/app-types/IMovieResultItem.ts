@@ -13,6 +13,5 @@ export default interface IMovieResultItem {
     vote_average: number;
     overview: string;
     release_date: string;
-    key: number
 }
 

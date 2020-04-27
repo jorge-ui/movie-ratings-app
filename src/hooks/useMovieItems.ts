@@ -13,11 +13,11 @@ import IMoviesSearchError from "../interfaces/app-types/IMoviesSearchError";
 const {itemsPerPageUI} = appProperties;
 
 type MoviesBrowseActions = ReturnType<typeof getMoviesBrowserActions>;
-export type PortionItemUI = IMovieResultItem | Pick<IMovieResultItem, "key">;
+export type PortionItemUI = IMovieResultItem | Pick<IMovieResultItem, "id">;
 export type ItemsPortionUI = PortionItemUI[];
 
 export function isMovieItem(item: PortionItemUI): item is IMovieResultItem {
-	return 'id' in item;
+	return 'title' in item;
 }
 
 interface useMovieItemsHook {
@@ -110,7 +110,7 @@ function selectItemsUIPortion(browseState: MoviesBrowseState, pageUI: number = 1
 	for (let i = 0; i < itemsPerPageUI; i++) {
 		let grabIndex = fromIndex + i;
 		let item = browseState.searchData.results[grabIndex];
-		selected[i] = item || {key: grabIndex};
+		selected[i] = item || {id: grabIndex}; // provisional key
 		if (grabIndex+1 === browseState.searchData.total_results) break; // break if last item
 	}
 

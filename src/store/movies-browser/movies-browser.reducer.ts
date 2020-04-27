@@ -116,13 +116,17 @@ function makeMoviesBrowserReducer(name: MoviesBrowseNames): Reducer<MoviesBrowse
 }
 
 function unshiftToObj(obj: ResultItemsObject, newItem: IMovieResultItem): ResultItemsObject {
-	let tempOut = newItem;
+
+	let temp = newItem;
+
 	for (let key in obj) {
 		let tempHold = obj[key]!;
-		obj[key] = tempOut;
-		tempOut = tempHold;
+		obj[key] = temp;
+		temp = tempHold;
 	}
-	obj[Object.keys(obj).length] = tempOut;
+
+	obj[Object.keys(obj).length] = temp;
+
 	return obj;
 }
 
@@ -131,9 +135,10 @@ function removeFromObjById(obj: ResultItemsObject, id: number): ResultItemsObjec
 	for (let key in obj) {
 		let numKey = Number(key)
 		if (obj[numKey]?.id !== id && !removed) continue;
-		if (removed)
-			obj[numKey-1] = obj[numKey];
-		else {
+
+		if (removed) {
+			obj[numKey - 1] = obj[numKey]!;
+		} else {
 			obj[numKey] = undefined;
 			removed = true;
 		}

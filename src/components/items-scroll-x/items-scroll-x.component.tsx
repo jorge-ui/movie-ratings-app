@@ -74,7 +74,7 @@ const MovieItemsXScrollList: FC<OwnProps> =
 
 	const itemChildren = useMemo(() => items.map((movie) => (
 		<RelatedMovieItem
-			key={movie.key}
+			key={movie.id}
 			movie={movie}
 			canClick={canClick}
 			itemClassName={itemClassName}
@@ -107,6 +107,9 @@ const MovieItemsXScrollList: FC<OwnProps> =
 					{itemChildren}
 				</>
 			)}
+			{isLoading && [...new Array(5)].map((v, i) => (
+				<RelatedMovieItem isLoading movie={null} key={i}/>
+			))}
 		</div>
 	)
 };

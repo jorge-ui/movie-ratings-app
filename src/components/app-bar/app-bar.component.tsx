@@ -10,12 +10,16 @@ import styles from "./app-bar.module.scss";
 // import styles from "./app-bar.module.scss";
 import { Link } from "react-router-dom";
 import useLocationPath from "hooks/useLocationPath";
-import { INavItem } from "./index.d";
 import useAuth from "hooks/useAuth";
 import useIsMobile from "hooks/useIsMobile";
+import { OverridableComponent } from "@material-ui/core/OverridableComponent";
+import { SvgIconTypeMap } from "@material-ui/core";
+import store from "../../store";
+import getMoviesBrowserActions from "../../store/movies-browser/movies-browser.actions";
 
+const searchActions = getMoviesBrowserActions("search");
 
-const navItems: INavItem[] = [
+const navItems = [
 	{
 		icon: HomeIcon,
 		text: "Home",
@@ -36,8 +40,16 @@ const navItems: INavItem[] = [
 		text: "Watchlist",
 		to: "/watchlist"
 	},
-];
+] as const;
 
+
+type NavPaths = (typeof navItems[number])["to"] | "/account"
+
+interface INavItem {
+	icon:  OverridableComponent<SvgIconTypeMap>
+	text: string,
+	to: NavPaths
+}
 
 const AppBar = () => {
 	const [isOpen, setOpen] = useState(false);
@@ -85,6 +97,9 @@ const NavItem: FC<NavItemProps> = ({icon: Icon, text, to, setOpen, active, usern
 		if (e.currentTarget === e.target)
 			return e.preventDefault();
 		!isMobile && setOpen(false);
+
+		if (to === "/search" && active)
+			store.dispatch(searchActions.clearFetchedMovies())
 	}
 
 	return (

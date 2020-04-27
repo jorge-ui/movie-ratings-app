@@ -19,11 +19,11 @@ const ItemsList: FC<Props> = ({itemType}) => {
 
 	const {items, totalPagesUI, pageUI, isLoading} = useMovieItems({name: itemType});
 
-	const [, setPage] = useSearchParam("page");
+	const [page, setPage] = useSearchParam("page");
 
 	useEffect(() => {
-		setPage(currentValue => currentValue ? currentValue : 1)
-	}, [setPage]);
+		!page && setPage(1)
+	}, [setPage, page]);
 
 	const title = itemType === "favorite" ? "Favorites" : "Watchlist";
 
@@ -48,7 +48,7 @@ interface ListChildProps {
 
 const ListChild: FC<ListChildProps> = memo(({items}) => {
 
-	const transition = useTransition(items, item => item.key, transitionConfig);
+	const transition = useTransition(items, item => item.id, transitionConfig);
 
 	return (
 		<>

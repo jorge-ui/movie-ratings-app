@@ -20,12 +20,12 @@ const MovieViewRelated: FC<OwnProps> = ({movieId, className}) => {
 	);
 
 	useEffect(() => {
-		let mounted = true;
+		let ignore = false;
 		goFetch<IMoviesResponseData>(buildFetchMovieViewUrl(movieId, "/similar"))
 			.then(data => {
-				mounted && setRelatedMovies(data.results)
+				!ignore && setRelatedMovies(data.results)
 			});
-		return () => { mounted = false };
+		return () => { ignore = true };
 	}, [movieId]);
 
 

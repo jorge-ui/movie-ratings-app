@@ -10,10 +10,7 @@ import useSearchParam from "hooks/useSearchParam";
 import useSavedSessionParams from "hooks/useSavedSessionParams";
 import MoviesGrid from "components/movies-grid";
 import useMovieItems from "hooks/useMovieItems";
-import getMoviesBrowserActions from "../../store/movies-browser/movies-browser.actions";
-import store from "../../store";
 
-const searchActions = getMoviesBrowserActions("search");
 
 const SearchPage: FC = () => {
 
@@ -21,18 +18,10 @@ const SearchPage: FC = () => {
 
 
 	const [searchQuery = ''] = useSearchParam("s");
-	const [page = 0] = useSearchParam("page");
 
 	const {items, isLoading, pageUI, totalPagesUI, totalResults, goToPage, error } =
 		useMovieItems({name: "search", searchQuery});
 
-	// Effect to clear searchPage component upon empty parameters or sync state with searchParams
-	useEffect(() => {
-		if (!page && !searchQuery && totalResults)
-			store.dispatch(searchActions.clearFetchedMovies());
-		else if (searchQuery && totalResults && !page)
-			goToPage(1)
-	}, [page, searchQuery, totalResults, goToPage]);
 
 
 
@@ -42,6 +31,7 @@ const SearchPage: FC = () => {
 			goToPage(totalPagesUI);
 	}, [goToPage, pageUI, totalPagesUI]);
 
+	console.log("items", items);
 	return (
 		<div className={styles.root}>
 			<div className={styles.searchHead}>

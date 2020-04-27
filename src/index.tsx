@@ -20,14 +20,15 @@ window.worker.onmessage = onWorkerFetchedDoneEvent;
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-
+const rootPath =
+    process.env.NODE_ENV === 'development' ? '/' : '/movie-ratings-app/';
 
 const render = () => {
     const App = require('./App').default
 
     ReactDOM.render(
         <Provider store={store}>
-            <HashRouter>
+            <HashRouter basename={rootPath}>
                 <StylesProvider injectFirst>
                     <App />
                 </StylesProvider>

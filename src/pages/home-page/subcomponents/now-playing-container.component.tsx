@@ -6,7 +6,7 @@ import store from "store";
 import LoadingSpinner from "components/loading-spinner";
 import MovieItemsXScrollList from "components/items-scroll-x";
 import IMovieResultItem from "../../../interfaces/app-types/IMovieResultItem";
-import useMovieItems from "../../../hooks/useMovieItems";
+import useMovieItems from "hooks/useMovieItems";
 
 let {getPosterSrcPathPrefix} = appProperties;
 

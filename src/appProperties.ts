@@ -7,7 +7,7 @@ const BASE_API_URL = 'https://api.themoviedb.org/3'
 type ImageSizes = "200" | "300" | "400" | "500";
 
 const REDIRECT_LOGGING = NODE_ENV === 'development' ?
-    'http://192.168.1.8:3000/' : ''; //TODO: 'production' url is missing
+    'http://192.168.1.8:3000/' : 'http://jrdeveloper.me/movie-ratings-app/';
 
 const getApiKeyQuery = () => `api_key=${API_KEY}`;
 const getSessionQuery = () => `session_id=${localStorage.getItem("session_id")}`;
@@ -29,9 +29,6 @@ const appProperties = {
         duration: 400,
         easing: easeOutQuad,
     },
-
-    getThisWeekUrl: () => `${BASE_API_URL}/trending/movie/week?${getApiKeyQuery()}`,
-    getNowPlayingUrl: () => `${BASE_API_URL}/movie/now_playing?${getApiKeyQuery()}`,
 
     newSessionUrl: `${BASE_API_URL}/authentication/session/new?${getApiKeyQuery()}`,
 
@@ -113,9 +110,6 @@ const appProperties = {
 
     },
 
-    getItemsListUrl: (page: number = 1, name: "favorite" | "watchlist") =>
-        `${BASE_API_URL}/account/0/${name}/movies?${getApiKeyQuery()}&${getSessionQuery()}&page=${page}&sort_by=created_at.desc`,
-
     getItemsBrowseUrl(name: MoviesBrowseNames, searchTerm: string = '', pageOnApi: number = 1): string {
         let browseUrl = BASE_API_URL;
 
@@ -162,8 +156,5 @@ const appProperties = {
     }
 
 };
-
-// /account/{account_id}/favorite/movies-browser
-// /account/{account_id}/watchlist/movies-browser
 
 export default appProperties;

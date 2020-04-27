@@ -94,7 +94,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 					{!(isMobile && itemView) && (
 						<div className={styles.info}>
 							<div><RatingProgressBar score={vote_average} itemView={itemView}/></div>
-							<div style={onMovieProps}><MovieViewActionButtons item={movie} /></div>
+							{itemView && <div style={onMovieProps}><MovieViewActionButtons item={movie}/></div>}
 						</div>
 					)}
 				</div>

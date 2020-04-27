@@ -19,7 +19,7 @@ const ThisWeekContainer: FC = () => {
 		<div className={styles.gridContainer}>
 			{items.map((movie, i) => (
 				<ThisWeekItem
-					key={movie.key}
+					key={movie.id}
 					item={movie}
 					backgroundImage={`url(${getPosterSrcPathPrefix(i === 2 ? "500" : "400")}${movie.backdrop_path!})`}
 					gridArea={`item${i + 1}`}

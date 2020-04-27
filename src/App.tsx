@@ -30,6 +30,7 @@ const App: FC = () => {
 	const isMobile = useIsMobile();
 
 	useEffect(() => {
+		console.log("loaded movie-ratings-app v1.0");
 		sessionStorage.clear();
 		goFetchUserAccount()
 			.then(user => store.dispatch(setUser(user)))

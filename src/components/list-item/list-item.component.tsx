@@ -15,7 +15,6 @@ const {getPosterSrcPathPrefix} = appProperties;
 interface OwnProps {
 	item: PortionItemUI
 }
-
 const ListItem: FC<OwnProps> = ({item}) => {
 
 	const onSetMovieView = (item: IMovieResultItem) =>
