@@ -1,28 +1,28 @@
 {
   "files": {
     "main.css": "/movie-ratings-app/static/css/main.fe4e1b1a.chunk.css",
-    "main.js": "/movie-ratings-app/static/js/main.8bb51222.chunk.js",
-    "main.js.map": "/movie-ratings-app/static/js/main.8bb51222.chunk.js.map",
+    "main.js": "/movie-ratings-app/static/js/main.f9498dc7.chunk.js",
+    "main.js.map": "/movie-ratings-app/static/js/main.f9498dc7.chunk.js.map",
     "runtime-main.js": "/movie-ratings-app/static/js/runtime-main.db0e6ee7.js",
     "runtime-main.js.map": "/movie-ratings-app/static/js/runtime-main.db0e6ee7.js.map",
     "static/css/2.0cd55f12.chunk.css": "/movie-ratings-app/static/css/2.0cd55f12.chunk.css",
-    "static/js/2.b104e7b2.chunk.js": "/movie-ratings-app/static/js/2.b104e7b2.chunk.js",
-    "static/js/2.b104e7b2.chunk.js.map": "/movie-ratings-app/static/js/2.b104e7b2.chunk.js.map",
-    "415103c3d8bc69bd7422.worker.js": "/movie-ratings-app/415103c3d8bc69bd7422.worker.js",
-    "415103c3d8bc69bd7422.worker.js.map": "/movie-ratings-app/415103c3d8bc69bd7422.worker.js.map",
+    "static/js/2.c0c1e329.chunk.js": "/movie-ratings-app/static/js/2.c0c1e329.chunk.js",
+    "static/js/2.c0c1e329.chunk.js.map": "/movie-ratings-app/static/js/2.c0c1e329.chunk.js.map",
+    "61e5ac1b1711edde28bd.worker.js": "/movie-ratings-app/61e5ac1b1711edde28bd.worker.js",
+    "61e5ac1b1711edde28bd.worker.js.map": "/movie-ratings-app/61e5ac1b1711edde28bd.worker.js.map",
     "index.html": "/movie-ratings-app/index.html",
-    "precache-manifest.6acd24f535c038c02e7b0f6b304cd63f.js": "/movie-ratings-app/precache-manifest.6acd24f535c038c02e7b0f6b304cd63f.js",
+    "precache-manifest.c54b54e669c2d7768135887b644094b4.js": "/movie-ratings-app/precache-manifest.c54b54e669c2d7768135887b644094b4.js",
     "service-worker.js": "/movie-ratings-app/service-worker.js",
     "static/css/2.0cd55f12.chunk.css.map": "/movie-ratings-app/static/css/2.0cd55f12.chunk.css.map",
     "static/css/main.fe4e1b1a.chunk.css.map": "/movie-ratings-app/static/css/main.fe4e1b1a.chunk.css.map",
-    "static/js/2.b104e7b2.chunk.js.LICENSE.txt": "/movie-ratings-app/static/js/2.b104e7b2.chunk.js.LICENSE.txt",
+    "static/js/2.c0c1e329.chunk.js.LICENSE.txt": "/movie-ratings-app/static/js/2.c0c1e329.chunk.js.LICENSE.txt",
     "static/media/index.css": "/movie-ratings-app/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
     "static/js/runtime-main.db0e6ee7.js",
     "static/css/2.0cd55f12.chunk.css",
-    "static/js/2.b104e7b2.chunk.js",
+    "static/js/2.c0c1e329.chunk.js",
     "static/css/main.fe4e1b1a.chunk.css",
-    "static/js/main.8bb51222.chunk.js"
+    "static/js/main.f9498dc7.chunk.js"
   ]
 }
