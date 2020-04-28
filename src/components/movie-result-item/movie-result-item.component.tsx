@@ -62,7 +62,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 	}, [visibilityState]);
 	
 	
-	const memoizedBackgroundImage = useMemo(() =>
+	const memoizedItemImage = useMemo(() =>
 		<MovieItemImage
 			backGroundUrl={poster_path ? `url("${imgSrcPath}")` : ''}
 			poster_path={poster_path}
@@ -79,7 +79,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 		     style={{visibility}}
 		>
 			{!(isMobile && itemView) && <MovieItemImgBg movieId={movie.id} itemView={itemView}/>}
-			{memoizedBackgroundImage}
+			{memoizedItemImage}
 			<div className={styles.content}>
 				<div className={styles.wrapper}>
 					<div className={styles.header}>

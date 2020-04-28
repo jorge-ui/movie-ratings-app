@@ -16,14 +16,10 @@ const SearchPage: FC = () => {
 
 	useSavedSessionParams();
 
-
 	const [searchQuery = ''] = useSearchParam("s");
 
 	const {items, isLoading, pageUI, totalPagesUI, totalResults, goToPage, error } =
 		useMovieItems({name: "search", searchQuery});
-
-
-
 
 	// This effect is to keep the paging declared on searchParams in sync totalPages max
 	useEffect(() => {
@@ -31,7 +27,6 @@ const SearchPage: FC = () => {
 			goToPage(totalPagesUI);
 	}, [goToPage, pageUI, totalPagesUI]);
 
-	console.log("items", items);
 	return (
 		<div className={styles.root}>
 			<div className={styles.searchHead}>
@@ -41,7 +36,7 @@ const SearchPage: FC = () => {
 			</div>
 			{isLoading ? <LoadingSpinner delay={800} fixed />
 				: error ? <ErrorMessage error={error}/>
-					: (
+					: ( !!totalResults &&
 						<MovieResultsContainer page={pageUI}>
 							{() => <MoviesGrid items={items}/>}
 						</MovieResultsContainer>

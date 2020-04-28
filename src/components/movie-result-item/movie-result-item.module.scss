@@ -92,7 +92,7 @@ $itemRootBgColor: adjust-color($movieCardBgColor, $alpha: -.55, $lightness: -8%)
 	}
 }
 
-@include media('>lg') {
+@include media('>md') {
 	.root {
 		&:after {
 			content: '';

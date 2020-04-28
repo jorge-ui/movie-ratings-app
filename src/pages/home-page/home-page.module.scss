@@ -94,14 +94,13 @@ $shadowBox: 0 0 15px black;
 	flex-direction: column;
 
 	.mainMovieItem {
-		height: 60%;
+		flex: 1;
 		box-sizing: border-box;
 		margin-bottom: 5px;
 		box-shadow: $shadowBox;
 	}
 
 	.subMovieItemContainerWrapper {
-		height: 40%;
 		position: relative;
 	}
 }
@@ -194,6 +193,11 @@ $customEaseOut: cubic-bezier(0, 0, 0.2, 1);
 
 		.content {
 			flex-direction: column;
+			&:after {
+				content: '';
+				width: 100%;
+				height: 50px;
+			}
 		}
 	}
 
