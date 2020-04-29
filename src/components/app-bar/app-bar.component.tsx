@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction, useState } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
 import HomeIcon from "@material-ui/icons/Home";
@@ -16,6 +16,7 @@ import { OverridableComponent } from "@material-ui/core/OverridableComponent";
 import { SvgIconTypeMap } from "@material-ui/core";
 import store from "../../store";
 import getMoviesBrowserActions from "../../store/movies-browser/movies-browser.actions";
+import { scrollToTop } from "../../utility";
 
 const searchActions = getMoviesBrowserActions("search");
 
@@ -52,8 +53,13 @@ interface INavItem {
 }
 
 const AppBar = () => {
+	const isMobile = useIsMobile();
 	const [isOpen, setOpen] = useState(false);
 	const pathname = useLocationPath();
+
+	useEffect(() => {
+		isMobile && scrollToTop();
+	}, [isMobile, pathname]);
 
 	const { user } = useAuth();
 

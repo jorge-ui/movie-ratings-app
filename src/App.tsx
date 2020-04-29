@@ -14,6 +14,7 @@ import useIsMobile from "hooks/useIsMobile";
 import WatchlistPage from "pages/watchlist-page";
 import FavoritesPage from "pages/favorites-page";
 import AuthRoute from "components/auth-route";
+import ApiLogo from "./components/api-logo/api-logo.component";
 
 const routesChildren = (
 	<>
@@ -30,36 +31,39 @@ const App: FC = () => {
 	const isMobile = useIsMobile();
 
 	useEffect(() => {
-		console.log("loaded movie-ratings-app v1.0");
+		console.log("loaded movie-ratings-app v1.1");
 		sessionStorage.clear();
 		goFetchUserAccount()
 			.then(user => store.dispatch(setUser(user)))
 			.catch(console.error)
 	}, []);
 
-	return (<div className={styles.root}>
-		<AppBar/>
-		<main className={styles.main} id="main-container">
-			<Container>
-				{!isMobile ? (
-					<Switch>
-						{routesChildren}
-					</Switch>
-					) : (
-					<Route render={ ({location}) => {
-						if (!location.search.includes('movieId'))
-							return (
-								<Switch location={location}>
-									{routesChildren}
-								</Switch>
-							);
-						else return <MovieViewScreen/>
-					}}/>
-				)}
-			</Container>
-			{!isMobile && <MovieViewScreen/>}
-		</main>
-	</div>);
+	return (
+		<div className={styles.root}>
+			<AppBar/>
+			<main className={styles.main} id="main-container">
+				<Container>
+					{!isMobile ? (
+						<Switch>
+							{routesChildren}
+						</Switch>
+						) : (
+						<Route render={ ({location}) => {
+							if (!location.search.includes('movieId'))
+								return (
+									<Switch location={location}>
+										{routesChildren}
+									</Switch>
+								);
+							else return <MovieViewScreen/>
+						}}/>
+					)}
+				</Container>
+				{!isMobile && <MovieViewScreen/>}
+			</main>
+			<ApiLogo />
+		</div>
+	);
 };
 
 

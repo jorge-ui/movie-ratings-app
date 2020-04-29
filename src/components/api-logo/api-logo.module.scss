@@ -1,0 +1,21 @@
+.root {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: fit-content;
+	display: block;
+	font-size: 1rem;
+	background-color: rgba(0, 0, 0, 0.7);
+	border-bottom-left-radius: 10px;
+	padding: 3px 7px;
+	cursor: default;
+	user-select: none;
+	svg {
+		height: .75rem;
+
+		&:hover {
+			filter: brightness(140%);
+			cursor: pointer;
+		}
+	}
+}
