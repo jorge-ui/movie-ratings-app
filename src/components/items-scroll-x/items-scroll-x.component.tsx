@@ -126,6 +126,12 @@ const RelatedMovieItem: FC<RelatedMovieItemProps> =
 		const imgSrc = movie && movie.poster_path && `url(${getPosterSrcPathPrefix("300")}${movie.poster_path})`;
 
 		const onClickHandler = () => canClick() && movie && store.dispatch(setMovieView(movie));
+		// const
+
+		if (isLoading)
+			return <div className={`${styles.relatedMovieItemWrapper} ${itemClassName || ''}`}>
+						<div className={`${styles.isLoadingItem} ${styles.relatedMovieItem}`}/>
+					</div>
 
 		return (
 			<div
@@ -135,13 +141,15 @@ const RelatedMovieItem: FC<RelatedMovieItemProps> =
 				<div className={`
 						${styles.relatedMovieItem}
 						${isLoading ? styles.isLoadingItem : ''}
-						${(!imgSrc && !isLoading) ? styles.noPoster : ''}
+						${!imgSrc ? styles.noPoster : ''}
 					`}
 				     title={movie?.title}
 				     style={{backgroundImage: imgSrc || undefined}}
 				     onDragStart={preventDefault as any}
 				     onClick={movie ? onClickHandler : undefined}
-				>{!imgSrc && movie ? movie.title : null}</div>
+				>
+					{!imgSrc && movie ? <span>{movie.title}</span> : null}
+				</div>
 			</div>
 		);
 	}, (prevProps, nextProps) => prevProps.isLoading === nextProps.isLoading);

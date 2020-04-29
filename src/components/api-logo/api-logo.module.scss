@@ -4,12 +4,13 @@
 	right: 0;
 	width: fit-content;
 	display: block;
-	font-size: 1rem;
+	font-size: .8rem;
 	background-color: rgba(0, 0, 0, 0.7);
 	border-bottom-left-radius: 10px;
-	padding: 3px 7px;
+	padding: 3px 7px 2px;
 	cursor: default;
 	user-select: none;
+	z-index: 100;
 	svg {
 		height: .75rem;
 
