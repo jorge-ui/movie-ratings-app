@@ -4,32 +4,36 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/movie-ratings-app/61e5ac1b1711edde28bd.worker.js"
   },
   {
-    "revision": "d4843de4777e991914e61154b69f0b91",
+    "revision": "9b258ac371f13a77f5f306b79725a51f",
     "url": "/movie-ratings-app/index.html"
   },
   {
-    "revision": "93ac0b5c6ffc01b580ed",
+    "revision": "b5a3c8603aab810175c6",
     "url": "/movie-ratings-app/static/css/2.0cd55f12.chunk.css"
   },
   {
-    "revision": "b4fe28952dfce77bd556",
-    "url": "/movie-ratings-app/static/css/main.65239c6b.chunk.css"
+    "revision": "96965fc08026a1956ade",
+    "url": "/movie-ratings-app/static/css/main.028c0d18.chunk.css"
   },
   {
-    "revision": "93ac0b5c6ffc01b580ed",
-    "url": "/movie-ratings-app/static/js/2.c0c1e329.chunk.js"
+    "revision": "b5a3c8603aab810175c6",
+    "url": "/movie-ratings-app/static/js/2.05eb817f.chunk.js"
   },
   {
     "revision": "9c04abda40226cf1e9546f90f209d3e0",
-    "url": "/movie-ratings-app/static/js/2.c0c1e329.chunk.js.LICENSE.txt"
+    "url": "/movie-ratings-app/static/js/2.05eb817f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b4fe28952dfce77bd556",
-    "url": "/movie-ratings-app/static/js/main.f049d798.chunk.js"
+    "revision": "96965fc08026a1956ade",
+    "url": "/movie-ratings-app/static/js/main.4e94fa6d.chunk.js"
   },
   {
     "revision": "abd1a0e649cfcdda3587",
     "url": "/movie-ratings-app/static/js/runtime-main.db0e6ee7.js"
+  },
+  {
+    "revision": "fb0541f715c9667ada527420aa9e9fc5",
+    "url": "/movie-ratings-app/static/media/logo.fb0541f7.svg"
   },
   {
     "revision": "5cb7edfceb233100075dc9a1e12e8da3",
