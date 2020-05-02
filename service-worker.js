@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/movie-ratings-app/precache-manifest.af1e103a18f73ce8d0d0e442b984840f.js"
+  "/movie-ratings-app/precache-manifest.820cca77868b62368ce3e8db7b493a6e.js"
 );
 
 self.addEventListener('message', (event) => {
