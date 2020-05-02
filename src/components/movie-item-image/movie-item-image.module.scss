@@ -64,3 +64,14 @@ $imageWidth: .3;
 		}
 	}
 }
+
+@include media('<=sm') {
+	.root {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: -1;
+		mask: linear-gradient(to bottom, white 0%, transparent 60%);
+	}
+}

@@ -25,7 +25,6 @@ const ListItem: FC<OwnProps> = ({item}) => {
 		    {isMovieItem(item) ? <>
 			    <MovieItemImage
 				    backGroundUrl={`url(${getPosterSrcPathPrefix("300")}${item.poster_path})`}
-				    movie={item}
 				    poster_path={item.poster_path}
 				    className={styles.image}
 			    />

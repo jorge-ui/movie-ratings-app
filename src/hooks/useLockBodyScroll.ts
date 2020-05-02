@@ -5,7 +5,7 @@ function useLockBodyScroll(maxWidth?: number) {
 	useLayoutEffect(() => {
 		// Get original body overflow
 		// const originalBodyStyle = window.getComputedStyle(document.body).overflow;
-		const originalStyle = document.scrollingElement ?
+		const originalStyle = !!document.scrollingElement ?
 			window.getComputedStyle(document.scrollingElement).overflow : ''
 		// Prevent scrolling on mount
 		if (typeof maxWidthRef.current === "undefined" || window.innerWidth <= maxWidthRef.current) {

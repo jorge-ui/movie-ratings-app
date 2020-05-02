@@ -33,6 +33,7 @@
 		flex-direction: column;
 		user-select: none;
 		margin-top: 50px;
+		position: unset;
 
 		.mainInfo {
 			width: 100%;
@@ -45,7 +46,7 @@
 			.mobileOverview {
 				font-size: 1.1rem;
 				padding: 0;
-				text-align: justify;
+				//text-align: center;
 				margin-top: 50px;
 			}
 			.mobileRateActions {

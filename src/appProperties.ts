@@ -7,7 +7,7 @@ const BASE_API_URL = 'https://api.themoviedb.org/3'
 type ImageSizes = "200" | "300" | "400" | "500";
 
 const REDIRECT_LOGGING = NODE_ENV === 'development' ?
-    'http://192.168.1.8:3000/' : 'http://jrdeveloper.me/movie-ratings-app/';
+    'http://192.168.1.4:3000/' : 'https://jorge-ui.tech/movie-ratings-app';
 
 const getApiKeyQuery = () => `api_key=${API_KEY}`;
 const getSessionQuery = () => `session_id=${localStorage.getItem("session_id")}`;

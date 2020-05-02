@@ -8,6 +8,8 @@ import appProperties from "../../appProperties";
 import useOnMovieView from "hooks/useOnMovieView";
 import useIsMobile from "hooks/useIsMobile";
 import MovieItemImage from "components/movie-item-image";
+import store from "../../store";
+import { setMovieView } from "../../store/movie-view/movie-view.actions";
 
 const {getPosterSrcPathPrefix} = appProperties;
 
@@ -22,25 +24,14 @@ type OnViewConfigGeneric = "hidden" | "visible";
 const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => {
 	const isMobile = useIsMobile();
 	const itemRef = useRef<HTMLDivElement>(null);
-	let {poster_path, title, vote_average, release_date, overview} = movie;
+	const {poster_path, title, vote_average, release_date, overview} = movie;
 
-	const [imgSrcPath, setImgSrcPath] = useState(() => `${getPosterSrcPathPrefix()}${poster_path}`);
-
-	const initialOnViewProps: CSSProperties = {opacity: 0, visibility: "hidden"};
-	const [onMovieProps, propsState] = useOnMovieView<CSSProperties>(movie.id, initialOnViewProps, {
-		...(itemView ? {
-			onEnter: initialOnViewProps,
-			onView: {opacity: 1, transition: "opacity 650ms ease"},
-			onClose: {opacity: 0, transition: "opacity 450ms ease"}
-		} : {})
+	const [imgSrcPath, setImgSrcPath] = useState(() => {
+		const size = isMobile ? "500" : undefined;
+		return `${getPosterSrcPathPrefix(size)}${poster_path}`;
 	});
 
-	const titleStyle: CSSProperties = {
-		fontSize: (propsState === "view" || propsState === "enter" || isMobile) ?
-			(itemView ? (isMobile ? "1.4rem" : "1.9rem") : undefined) : undefined
-	};
-
-	const [visibility, visibilityState] = useOnMovieView<OnViewConfigGeneric>
+	const [visibility, propsState] = useOnMovieView<OnViewConfigGeneric>
 	(movie.id, "visible", !itemView ? onViewConfigNotItemView : {
 		onView: () => {
 			if (itemView && poster_path) { // this is to make image look better (higher quality)
@@ -51,22 +42,28 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 				image.src = newSrc;
 			}
 			return "visible";
-		}
+		},
+		onClose: "visible",
+		onEnter: "visible"
 	});
 
+	const titleStyle: CSSProperties = {
+		fontSize: (propsState === "view" || propsState === "enter" || isMobile) ?
+			(itemView ? (isMobile ? "1.4rem" : "1.9rem") : undefined) : undefined
+	};
+
 	useEffect(() => {
-		if (visibilityState === "leave") {
+		if (propsState === "leave") {
 			void itemRef.current!.offsetWidth; // this trick will trigger animation play/replay
 			itemRef.current!.classList.add(styles.runAnimation);
 		} else itemRef.current!.classList.remove(styles.runAnimation);
-	}, [visibilityState]);
+	}, [propsState]);
 	
 	
 	const memoizedItemImage = useMemo(() =>
 		<MovieItemImage
 			backGroundUrl={poster_path ? `url("${imgSrcPath}")` : ''}
 			poster_path={poster_path}
-			movie={movie}
 			itemView={itemView}
 		/>, [imgSrcPath, poster_path]
 	)
@@ -77,6 +74,7 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 		     id={!itemView ? String(movie.id) : ''}
 		     ref={itemRef}
 		     style={{visibility}}
+		     onClick={() => !itemView && store.dispatch(setMovieView(movie))}
 		>
 			{!(isMobile && itemView) && <MovieItemImgBg movieId={movie.id} itemView={itemView}/>}
 			{memoizedItemImage}
@@ -87,14 +85,14 @@ const MovieResultItem: FC<OwnProps> = ({movie, className, itemView = false}) => 
 						{release_date && (
 							<div className={styles.year}>{release_date.substr(0, 4)}</div>
 						)}
-						{itemView && !isMobile && (
-							<p className={styles.overViewSection} style={onMovieProps}>{overview}</p>
+						{itemView && !isMobile && propsState === "view" && (
+							<p className={styles.overViewSection}>{overview}</p>
 						)}
 					</div>
 					{!(isMobile && itemView) && (
 						<div className={styles.info}>
 							<div><RatingProgressBar score={vote_average} itemView={itemView}/></div>
-							{itemView && <div style={onMovieProps}><MovieViewActionButtons item={movie}/></div>}
+							{itemView && propsState === "view" && <MovieViewActionButtons item={movie}/>}
 						</div>
 					)}
 				</div>

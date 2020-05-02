@@ -46,4 +46,4 @@ const SearchPage: FC = () => {
 	);
 };
 
-export default SearchPage;
+export default React.memo(SearchPage, () => true);

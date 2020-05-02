@@ -2,7 +2,7 @@
   "name": "movie-ratings-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jrdeveloper71.github.io/movie-ratings-app",
+  "homepage": "https://jorge-ui.github.io/movie-ratings-app",
   "dependencies": {
     "@material-ui/core": "^4.9.11",
     "@material-ui/icons": "4.9.1",

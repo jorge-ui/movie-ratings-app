@@ -33,6 +33,22 @@ $itemRootBgColor: adjust-color($movieCardBgColor, $alpha: -.55, $lightness: -8%)
 	color: whitesmoke;
 	overflow: hidden;
 
+	&[item-view=false]:hover {
+		filter: brightness(110%);
+		cursor: pointer;
+		&:before {
+			border-radius: 12px;
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			box-sizing: border-box;
+			border: 1.5px solid $appColor;
+		}
+	}
+
 	.content {
 		flex: 1;
 		position: relative;
@@ -60,7 +76,6 @@ $itemRootBgColor: adjust-color($movieCardBgColor, $alpha: -.55, $lightness: -8%)
 				font-weight: normal;
 				font-size: 1.13rem;
 				opacity: .82;
-				cursor: default;
 
 				.title {
 					width: 100%;
@@ -134,8 +149,13 @@ $itemRootBgColor: adjust-color($movieCardBgColor, $alpha: -.55, $lightness: -8%)
 @include media('<=sm') {
 	.root {
 		&[item-view=true] {
-			background-color: unset;
+			margin-top: 30px;
+			position: unset;
 			padding: 20px 0;
+			background-color: rgba(0, 0, 0, 0.5);
+			.content {
+				height: 100px;
+			}
 		}
 	}
 }

@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import IMovieView from "../../interfaces/app-types/IMovieView";
-import { getMovieImgObjFromSession } from "utility";
 import styles from "./movie-view-info.module.scss";
 import { fade } from "@material-ui/core";
 import { animated, useSpring } from "react-spring";
@@ -8,6 +7,7 @@ import { easeOutQuart } from "../../utility/easingFuctions";
 import MovieViewInfoChildren from "./movie-view-info-children.component";
 import useOnMovieView from "hooks/useOnMovieView";
 import useIsMobile from "hooks/useIsMobile";
+import { useSessionAvgColor } from "../../hooks/useSessionAvgColor";
 
 interface OwnProps {
     movieView: IMovieView | undefined;
@@ -35,7 +35,7 @@ const MovieViewInfo: FC<Props> = ({movieView, movieId}) => {
         }
     });
 
-    let colorSessionObj = getMovieImgObjFromSession(movieId);
+    let colorSessionObj = useSessionAvgColor(movieId);
 
     let backgroundColor = colorSessionObj ? fade(colorSessionObj.averageColor, .2) : defaultBgColor;
 
@@ -45,7 +45,8 @@ const MovieViewInfo: FC<Props> = ({movieView, movieId}) => {
             backgroundColor,
             opacity
         }}>
-            {movieView && <MovieViewInfoChildren movieView={(movieView as IMovieView)} />}
+            {((movieView && propsState === "view") || isMobile)
+            && <MovieViewInfoChildren movieView={(movieView as IMovieView)} />}
         </animated.div>
     );
 };
